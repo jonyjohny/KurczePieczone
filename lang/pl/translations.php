@@ -39,4 +39,6 @@ return [
         'Aviary' => 'Woliera',
         'Users' => 'Użytkownicy',
     ],
+    'yes' => 'Tak',
+    'no' => 'Nie',
 ];

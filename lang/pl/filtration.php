@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'clear_filtr' => 'Wyczyść filtr'
+    'clear_filtr' => 'Wyczyść filtr',
+    'filters' => 'Filtry'
 ];

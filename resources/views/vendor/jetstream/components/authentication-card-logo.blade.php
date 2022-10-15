@@ -1,4 +1,4 @@
-<img src="logo.png" height="100px" width="100px">
+<img src="{{ asset('/images/logo.png') }}" height="100px" width="100px">
 
 {{-- <a href="/">
     <svg class="w-16 h-16" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">

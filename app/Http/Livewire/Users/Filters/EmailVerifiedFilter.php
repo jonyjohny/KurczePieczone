@@ -11,6 +11,7 @@ class EmailVerifiedFilter extends Filter
 
     public function __construct()
     {
+        parent::__construct();
         $this->title = __('users.attributes.email_verified_at');
     }
 

@@ -33,7 +33,7 @@
                     </x-jet-nav-link>
                     @endcan
                     @can('log-viewer')
-                    <x-jet-nav-link href="{{ route('log-viewer::dashboard') }}" :active="request()->routeIs('log-viewer::dashboard')">
+                    <x-jet-nav-link href="{{ route('log-viewer::dashboard') }}" :active="request()->routeIs('log-viewer::dashboard')" target="_blank">
                         {{ __('translations.navigation.log-viewer') }}
                     </x-jet-nav-link>
                     @endcan

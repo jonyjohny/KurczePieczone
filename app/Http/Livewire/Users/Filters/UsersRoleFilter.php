@@ -12,13 +12,14 @@ class UsersRoleFilter extends Filter
 
     public function __construct()
     {
+        parent::__construct();
         $this->title = __('users.attributes.roles');
     }
 
     public function apply(Builder $query, $value, $request): Builder
     {
         return $query->whereHas('roles', function(Builder $query) use ($value) {
-            $query->where('id','=', $value);
+            $query->where('id', '=', $value);
         });
     }
 

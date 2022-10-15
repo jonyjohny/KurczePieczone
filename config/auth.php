@@ -108,4 +108,10 @@ return [
 
     'password_timeout' => 10800,
 
+    'roles' => [
+        'admin' => env('ROLE_ADMIN', 'admin'),
+        'boss' => env('ROLE_BOSS', 'boss'),
+        'supervisor' => env('ROLE_SUPERVISOR', 'supervisor'),
+        'worker' => env('ROLE_WORKER', 'worker'),
+    ],
 ];

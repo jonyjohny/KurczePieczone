@@ -23,12 +23,14 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'users.store']);
         Permission::create(['name' => 'users.destroy']);
         Permission::create(['name' => 'users.change_role']);
+        Permission::create(['name' => 'log-viewer']);
 
         $adminRole = Role::findByName(config('auth.roles.admin'));
         $adminRole->givePermissionTo('users.index');
         $adminRole->givePermissionTo('users.store');
         $adminRole->givePermissionTo('users.destroy');
         $adminRole->givePermissionTo('users.change_role');
+        $adminRole->givePermissionTo('log-viewer');
 
         $bossRole = Role::findByName(config('auth.roles.boss'));
         $bossRole->givePermissionTo('users.index');

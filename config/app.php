@@ -202,6 +202,10 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
 
+        /*
+         * Log Viewer
+         */
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
     ],
 
     /*

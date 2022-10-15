@@ -15,5 +15,9 @@ return [
 
     'previous' => '&laquo; Poprzedni',
     'next' => 'Następny &raquo;',
-
+    'showing' => 'Pokazano elementy od',
+    'to' => 'do',
+    'of' => 'z',
+    'results' => 'dostępnych',
+    'go_to_page' => 'Przejdz do strony :page',
 ];

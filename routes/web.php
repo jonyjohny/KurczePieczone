@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
     //dd(config('auth.roles.boss'));
+});
+
+Route::name('users.')->prefix('users')->group(function () {
+    Route::get('',[UserController::class, 'index'])
+        ->name('index');
+        //->middleware(['permission:users.index']);
 });
 
 Route::middleware([

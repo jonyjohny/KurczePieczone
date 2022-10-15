@@ -15,6 +15,7 @@
 
         <!-- Styles -->
         @livewireStyles
+        @laravelViewsStyles('laravel-views')
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -40,5 +41,6 @@
         @stack('modals')
 
         @livewireScripts
+        @laravelViewsScripts('laravel-views')
     </body>
 </html>

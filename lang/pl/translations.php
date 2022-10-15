@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'attributes' => [
+        'created_at' => 'Utworzono',
+        'upadted_at' => 'Zmieniono',
+        'deleted_at' => 'Usunięto',
+    ],
     'menu' => [
         'dictionaries' => 'Słowniki',
         'administration' => 'Administracja',

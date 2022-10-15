@@ -28,7 +28,7 @@
                         {{ __('translations.navigation.Aviary') }}
                     </x-jet-nav-link>
                     @can('users.index')
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                         {{ __('translations.navigation.Users') }}
                     </x-jet-nav-link>
                     @endcan

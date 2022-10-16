@@ -49,7 +49,7 @@ class UsersTableView extends TableView
         return [
             $model->name,
             $model->email,
-            $model->roles->implode('name', ','),
+            $model->roles->implode('name', ', '),
             $model->created_at,
         ];
     }

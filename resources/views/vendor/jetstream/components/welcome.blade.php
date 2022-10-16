@@ -4,8 +4,16 @@
     </div>
 
     <div class="mt-8 text-2xl">
-        Dbaj o każdego kurczaka, bo nie wiesz, który z nich zostanie twoim nugettsem!
+        @php
+        if(count(__('something.goldenthoughts')) > 0){
+            echo __("something.goldenthoughts.".rand(1, count(__('something.goldenthoughts'))));
+        } else {
+            echo "Strona głowna";
+        };
+        @endphp
     </div>
+     
+    
 {{-- 
     <div class="mt-6 text-gray-500">
         Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed

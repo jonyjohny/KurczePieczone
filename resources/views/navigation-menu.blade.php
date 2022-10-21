@@ -15,7 +15,7 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('translations.navigation.Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('reproductions.index') }}" :active="request()->routeIs('reproductions.index')">
                         {{ __('translations.navigation.Reproduction') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -162,7 +162,7 @@
             <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('translations.navigation.Dashboard') }}
             </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-jet-nav-link href="{{ route('reproductions.index') }}" :active="request()->routeIs('reproductions.index')">
                 {{ __('translations.navigation.Reproduction') }}
             </x-jet-nav-link>
             <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">

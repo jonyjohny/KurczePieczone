@@ -3,11 +3,14 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Reproduction;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Support\Facades\Hash;
 use Database\Seeders\PermissionSeeder;
+use Database\Seeders\ReproductionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,5 +33,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('testtest'),
         ]);
 
+        $this->call(ReproductionSeeder::class);
     }
 }

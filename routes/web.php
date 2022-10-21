@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReproductionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -24,6 +25,8 @@ Route::name('users.')->prefix('users')->group(function () {
         ->name('index')
         ->middleware(['permission:users.index']);
 });
+
+Route::resource('reproductions', ReproductionController::class);
 
 Route::middleware([
     'auth:sanctum',

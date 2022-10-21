@@ -5,6 +5,10 @@ return [
         'created_at' => 'Utworzono',
         'upadted_at' => 'Zmieniono',
         'deleted_at' => 'Usunięto',
+        'name' => 'Nazwa',
+        'remarks' => 'Opis',
+        'closed' => 'Zamknięte',
+        'archived' => 'Zarchiwizowane',
     ],
     'menu' => [
         'dictionaries' => 'Słowniki',

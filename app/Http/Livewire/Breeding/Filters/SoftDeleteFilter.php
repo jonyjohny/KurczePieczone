@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Users\Filters;
+namespace App\Http\Livewire\Breeding\Filters;
 
 use LaravelViews\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;

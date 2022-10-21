@@ -159,30 +159,30 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('translations.navigation.Dashboard') }}
-            </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('reproductions.index') }}" :active="request()->routeIs('reproductions.index')">
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('reproductions.index') }}" :active="request()->routeIs('reproductions.index')">
                 {{ __('translations.navigation.Reproduction') }}
-            </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('incubations.index') }}" :active="request()->routeIs('incubations.index')">
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('incubations.index') }}" :active="request()->routeIs('incubations.index')">
                 {{ __('translations.navigation.Incubation') }}
-            </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('breeding.index') }}" :active="request()->routeIs('breeding.index')">
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('breeding.index') }}" :active="request()->routeIs('breeding.index')">
                 {{ __('translations.navigation.Breeding') }}
-            </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('aviaries.index') }}" :active="request()->routeIs('aviaries.index')">
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('aviaries.index') }}" :active="request()->routeIs('aviaries.index')">
                 {{ __('translations.navigation.Aviary') }}
-            </x-jet-nav-link>
+            </x-jet-responsive-nav-link>
             @can('users.index')
-            <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('translations.navigation.Users') }}
-            </x-jet-nav-link>
+            </x-jet-responsive-nav-link>
             @endcan
             @can('log-viewer')
-            <x-jet-nav-link href="{{ route('log-viewer::dashboard') }}" :active="request()->routeIs('log-viewer::dashboard')">
+            <x-jet-responsive-nav-link href="{{ route('log-viewer::dashboard') }}" :active="request()->routeIs('log-viewer::dashboard')">
                 {{ __('translations.navigation.log-viewer') }}
-            </x-jet-nav-link>
+            </x-jet-responsive-nav-link>
             @endcan
         </div>
 

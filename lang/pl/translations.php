@@ -46,4 +46,16 @@ return [
     ],
     'yes' => 'Tak',
     'no' => 'Nie',
+    'messages' => [
+        'successes' => [
+        'stored_title' => 'Utworzono',
+        'updated_title' => 'Zaktualizowano',
+        ],
+    ],
+    'cancel' => 'Anuluj',
+    'store' => 'Utwórz',
+    'update' => 'Aktualizuj',
+    'save' => 'Zapisz',
+    'back' => 'Wstecz',
+    'enter' => 'Wprowadź wartość',
 ];

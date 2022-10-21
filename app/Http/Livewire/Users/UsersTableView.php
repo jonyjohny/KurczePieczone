@@ -8,9 +8,11 @@ use LaravelViews\Views\TableView;
 use App\Http\Livewire\Users\Filters\UsersRoleFilter;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
+use WireUi\Traits\Actions;
 
 class UsersTableView extends TableView
 {
+    use Actions;
     /**
      * Sets a model class to get the initial data
      */

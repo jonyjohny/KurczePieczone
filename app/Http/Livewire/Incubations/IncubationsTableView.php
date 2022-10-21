@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Incubations;
 
 use App\Models\Incubation;
+use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -10,6 +11,7 @@ use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 
 class IncubationsTableView extends TableView
 {
+    use Actions;
     /**
      * Sets a model class to get the initial data
      */

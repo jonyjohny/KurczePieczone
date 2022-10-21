@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Reproductions;
 
+use WireUi\Traits\Actions;
 use App\Models\Reproduction;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
@@ -10,6 +11,7 @@ use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 
 class ReproductionsTableView extends TableView
 {
+    use Actions;
     /**
      * Sets a model class to get the initial data
      */

@@ -6,6 +6,7 @@ use App\Models\Aviary;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 
 class AviariesTableView extends TableView
 {
@@ -62,6 +63,13 @@ class AviariesTableView extends TableView
             $model->created_at,
             $model->updated_at,
             $model->deleted_at,
+        ];
+    }
+        
+    protected function filters()
+    {
+        return [
+            new SoftDeleteFilter,
         ];
     }
 }

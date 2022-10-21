@@ -6,6 +6,7 @@ use App\Models\User;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use App\Http\Livewire\Users\Filters\UsersRoleFilter;
+use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
 
 class UsersTableView extends TableView
@@ -59,6 +60,7 @@ class UsersTableView extends TableView
         return [
             new UsersRoleFilter,
             new EmailVerifiedFilter,
+            new SoftDeleteFilter,
         ];
     }
 }

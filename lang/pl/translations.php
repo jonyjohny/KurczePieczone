@@ -9,6 +9,7 @@ return [
         'remarks' => 'Opis',
         'closed' => 'Zamknięte',
         'archived' => 'Zarchiwizowane',
+        'softdeletefiltr' => 'Usunięte',
     ],
     'menu' => [
         'dictionaries' => 'Słowniki',

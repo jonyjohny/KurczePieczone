@@ -4,8 +4,9 @@ namespace App\Http\Livewire\Reproductions;
 
 use App\Models\Reproduction;
 use LaravelViews\Facades\Header;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use LaravelViews\Views\TableView;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 
 class ReproductionsTableView extends TableView
 {
@@ -62,6 +63,13 @@ class ReproductionsTableView extends TableView
             $model->created_at,
             $model->updated_at,
             $model->deleted_at,
+        ];
+    }
+        
+    protected function filters()
+    {
+        return [
+            new SoftDeleteFilter,
         ];
     }
 }

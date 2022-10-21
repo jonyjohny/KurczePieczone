@@ -8,7 +8,10 @@ use App\Models\Reproduction;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\AviarySeeder;
+use Database\Seeders\BreedingSeeder;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\IncubationSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\ReproductionSeeder;
 
@@ -34,5 +37,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(ReproductionSeeder::class);
+        $this->call(IncubationSeeder::class);
+        $this->call(BreedingSeeder::class);
+        $this->call(AviarySeeder::class);
     }
 }

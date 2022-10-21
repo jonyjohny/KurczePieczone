@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\ReproductionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AviaryController;
+use App\Http\Controllers\BreedingController;
+use App\Http\Controllers\IncubationController;
+use App\Http\Controllers\ReproductionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +30,9 @@ Route::name('users.')->prefix('users')->group(function () {
 });
 
 Route::resource('reproductions', ReproductionController::class);
+Route::resource('incubations', IncubationController::class);
+Route::resource('breeding', BreedingController::class);
+Route::resource('aviaries', AviaryController::class);
 
 Route::middleware([
     'auth:sanctum',

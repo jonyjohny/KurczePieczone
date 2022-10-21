@@ -18,13 +18,13 @@
                     <x-jet-nav-link href="{{ route('reproductions.index') }}" :active="request()->routeIs('reproductions.index')">
                         {{ __('translations.navigation.Reproduction') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('incubations.index') }}" :active="request()->routeIs('incubations.index')">
                         {{ __('translations.navigation.Incubation') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('translations.navigation.Raising') }}
+                    <x-jet-nav-link href="{{ route('breeding.index') }}" :active="request()->routeIs('breeding.index')">
+                        {{ __('translations.navigation.Breeding') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('aviaries.index') }}" :active="request()->routeIs('aviaries.index')">
                         {{ __('translations.navigation.Aviary') }}
                     </x-jet-nav-link>
                     @can('users.index')
@@ -165,13 +165,13 @@
             <x-jet-nav-link href="{{ route('reproductions.index') }}" :active="request()->routeIs('reproductions.index')">
                 {{ __('translations.navigation.Reproduction') }}
             </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-jet-nav-link href="{{ route('incubations.index') }}" :active="request()->routeIs('incubations.index')">
                 {{ __('translations.navigation.Incubation') }}
             </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('translations.navigation.Raising') }}
+            <x-jet-nav-link href="{{ route('breeding.index') }}" :active="request()->routeIs('breeding.index')">
+                {{ __('translations.navigation.Breeding') }}
             </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-jet-nav-link href="{{ route('aviaries.index') }}" :active="request()->routeIs('aviaries.index')">
                 {{ __('translations.navigation.Aviary') }}
             </x-jet-nav-link>
             @can('users.index')

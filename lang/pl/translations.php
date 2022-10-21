@@ -3,7 +3,7 @@
 return [
     'attributes' => [
         'created_at' => 'Utworzono',
-        'upadted_at' => 'Zmieniono',
+        'updated_at' => 'Zmieniono',
         'deleted_at' => 'Usunięto',
         'name' => 'Nazwa',
         'remarks' => 'Opis',
@@ -35,11 +35,11 @@ return [
         'deleted_at' => 'usunięto'
     ],
     'navigation' => [
-        'Dashboard' => 'Głowna',
+        'Dashboard' => 'Odchów',
         'log-viewer' => 'Logi',
         'Reproduction' => 'Reprodukcja',
         'Incubation' => 'Inkubacja',
-        'Raising' => 'Odchów',
+        'Breeding' => 'Odchów',
         'Aviary' => 'Woliera',
         'Users' => 'Użytkownicy',
     ],

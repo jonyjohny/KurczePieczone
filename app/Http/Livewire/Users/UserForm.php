@@ -6,10 +6,12 @@ use App\Models\User;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserForm extends Component
 {
     use Actions;
+    use AuthorizesRequests;
 
     public User $user;
     public Bool $editMode;
@@ -24,7 +26,6 @@ class UserForm extends Component
             ],
             'user.email' => [
                 'required',
-                'email:rfc,dns',
                 'unique:users,email' . 
                 ($this->editMode ? (',' . $this->user->id) : ''),
             ],
@@ -59,6 +60,11 @@ class UserForm extends Component
 
     public function save()
     {
+        if($this->editMode){
+            $this->authorize('update', $this->user);
+        } else {
+            $this->authorize('create', User::class);
+        }
         $this->validate();
         $this->user->save();
         $this->notification()->success(

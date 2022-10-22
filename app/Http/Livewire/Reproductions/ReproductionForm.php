@@ -2,14 +2,16 @@
 
 namespace App\Http\Livewire\Reproductions;
 
-use App\Models\Reproduction;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use App\Models\Reproduction;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ReproductionForm extends Component
 {
     use Actions;
+    use AuthorizesRequests;
 
     public Reproduction $reproduction;
     public Bool $editMode;
@@ -61,6 +63,11 @@ class ReproductionForm extends Component
 
     public function save()
     {
+        if($this->editMode){
+            $this->authorize('update', $this->reproduction);
+        } else {
+            $this->authorize('create', Reproduction::class);
+        }
         $this->validate();
         $this->reproduction->save();
         $this->notification()->success(

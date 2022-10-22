@@ -6,10 +6,11 @@ use App\Models\User;
 use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Actions\EditUserAction;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\UsersRoleFilter;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Users\Actions\RestoreUserAction;
 use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
 use App\Http\Livewire\Users\Actions\SoftDeleteUserAction;
 
@@ -84,7 +85,8 @@ class UsersTableView extends TableView
     {
         return [
             new EditUserAction('users.edit', __('translations.actions.edit')),
-            new SoftDeleteUserAction()
+            new SoftDeleteUserAction(),
+            new RestoreUserAction()
         ];
     }
 
@@ -98,5 +100,17 @@ class UsersTableView extends TableView
                 'name' => $user->name
             ])
             );
+    }
+
+    public function restore(int $id)
+    {
+        $user = User::withTrashed()->find($id);
+        $user->restore();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.restore_title'),
+            $description = __('users.messages.successes.restore', [
+                'name' => $user->name
+            ])
+        );
     }
 }

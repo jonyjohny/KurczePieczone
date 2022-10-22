@@ -9,6 +9,7 @@ use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Breeding\Actions\EditBreedingAction;
+use App\Http\Livewire\Breeding\Actions\RestoreBreedingAction;
 use App\Http\Livewire\Breeding\Actions\SoftDeleteBreedingAction;
 
 class BreedingTableView extends TableView
@@ -81,7 +82,8 @@ class BreedingTableView extends TableView
     {
         return [
             new EditBreedingAction('breeding.edit', __('translations.actions.edit')),
-            new SoftDeleteBreedingAction()
+            new SoftDeleteBreedingAction(),
+            new RestoreBreedingAction()
         ];
     }
 
@@ -95,5 +97,17 @@ class BreedingTableView extends TableView
                 'name' => $breeding->name
             ])
             );
+    }
+
+    public function restore(int $id)
+    {
+        $breeding = Breeding::withTrashed()->find($id);
+        $breeding->restore();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.restore_title'),
+            $description = __('breeding.messages.successes.restore', [
+                'name' => $breeding->name
+            ])
+        );
     }
 }

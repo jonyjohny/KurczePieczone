@@ -65,10 +65,14 @@ return [
             'stored' => 'Utworzono element :name',
             'updated' => 'Zaktualizowano element :name',
             'destroy_title' => 'Usunięto',
+            'restore' => 'Przywróć',
+            'restore_title' => 'Przywrócono',
         ],
     ],
     'actions' => [
         'edit' => 'Edytuj',
         'destroy' => 'Usuń',
+        'restore' => 'Przywróć',
+        'create' => 'Stwórz',
     ],
 ];

@@ -9,6 +9,7 @@ use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Aviaries\Actions\EditAviaryAction;
+use App\Http\Livewire\Aviaries\Actions\RestoreAviaryAction;
 use App\Http\Livewire\Aviaries\Actions\SoftDeleteAviaryAction;
 
 class AviariesTableView extends TableView
@@ -81,7 +82,8 @@ class AviariesTableView extends TableView
     {
         return [
             new EditAviaryAction('aviaries.edit', __('translations.actions.edit')),
-            new SoftDeleteAviaryAction()
+            new SoftDeleteAviaryAction(),
+            new RestoreAviaryAction()
         ];
     }
 
@@ -94,6 +96,18 @@ class AviariesTableView extends TableView
             $description = __('aviaries.messages.successes.destroy', [
                 'name' => $aviary->name
             ])
-            );
+        );
+    }
+
+    public function restore(int $id)
+    {
+        $aviary = Aviary::withTrashed()->find($id);
+        $aviary->restore();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.restore_title'),
+            $description = __('aviaries.messages.successes.restore', [
+                'name' => $aviary->name
+            ])
+        );
     }
 }

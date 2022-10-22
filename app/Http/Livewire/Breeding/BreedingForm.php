@@ -2,14 +2,16 @@
 
 namespace App\Http\Livewire\Breeding;
 
-use App\Models\Breeding;
 use Livewire\Component;
+use App\Models\Breeding;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class BreedingForm extends Component
 {
     use Actions;
+    use AuthorizesRequests;
 
     public Breeding $breeding;
     public Bool $editMode;
@@ -61,6 +63,11 @@ class BreedingForm extends Component
 
     public function save()
     {
+        if($this->editMode){
+            $this->authorize('update', $this->breeding);
+        } else {
+            $this->authorize('create', Breeding::class);
+        }
         $this->validate();
         $this->breeding->save();
         $this->notification()->success(

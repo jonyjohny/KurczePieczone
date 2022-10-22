@@ -24,17 +24,9 @@ Route::get('/', function () {
 });
 
 
-Route::name('users.')->prefix('users')->group(function () {
-    Route::get('',[UserController::class, 'index'])
-        ->name('index')
-        ->middleware(['permission:users.index']);
-        Route::get('create',[UserController::class, 'create'])
-        ->name('create')
-        ->middleware(['permission:users.index']);
-        Route::get('edit',[UserController::class, 'edit'])
-        ->name('edit')
-        ->middleware(['permission:users.index']);
-});
+Route::resource('users', UserController::class)->only([
+    'index', 'create', 'edit'
+]);
 
 Route::resource('reproductions', ReproductionController::class)->only([
     'index', 'create', 'edit'

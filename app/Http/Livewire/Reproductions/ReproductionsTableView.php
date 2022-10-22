@@ -9,6 +9,7 @@ use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Reproductions\Actions\EditReproductionAction;
+use App\Http\Livewire\Reproductions\Actions\RestoreReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\SoftDeleteReproductionAction;
 
 class ReproductionsTableView extends TableView
@@ -81,7 +82,8 @@ class ReproductionsTableView extends TableView
     {
         return [
             new EditReproductionAction('reproductions.edit', __('translations.actions.edit')),
-            new SoftDeleteReproductionAction()
+            new SoftDeleteReproductionAction(),
+            new RestoreReproductionAction()
         ];
     }
 
@@ -95,5 +97,17 @@ class ReproductionsTableView extends TableView
                 'name' => $reproduction->name
             ])
             );
+    }
+
+    public function restore(int $id)
+    {
+        $reproduction = Reproduction::withTrashed()->find($id);
+        $reproduction->restore();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.restore_title'),
+            $description = __('reproductions.messages.successes.restore', [
+                'name' => $reproduction->name
+            ])
+        );
     }
 }

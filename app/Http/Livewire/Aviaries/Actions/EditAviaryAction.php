@@ -14,7 +14,7 @@ class EditAviaryAction extends RedirectAction
 
     public function renderIf($model, View $view)
     {
-        return $model->deleted_at == null;
+        return request()->user()->can('update', $model);
     }
 
 

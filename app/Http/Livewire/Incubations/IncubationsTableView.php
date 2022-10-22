@@ -9,6 +9,7 @@ use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Incubations\Actions\EditIncubationAction;
+use App\Http\Livewire\Incubations\Actions\RestoreIncubationAction;
 use App\Http\Livewire\Incubations\Actions\SoftDeleteIncubationAction;
 
 class IncubationsTableView extends TableView
@@ -81,7 +82,8 @@ class IncubationsTableView extends TableView
     {
         return [
             new EditIncubationAction('incubations.edit', __('translations.actions.edit')),
-            new SoftDeleteIncubationAction()
+            new SoftDeleteIncubationAction(),
+            new RestoreIncubationAction()
         ];
     }
 
@@ -95,5 +97,17 @@ class IncubationsTableView extends TableView
                 'name' => $incubation->name
             ])
             );
+    }
+
+    public function restore(int $id)
+    {
+        $incubation = Incubation::withTrashed()->find($id);
+        $incubation->restore();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.restore_title'),
+            $description = __('incubations.messages.successes.restore', [
+                'name' => $incubation->name
+            ])
+        );
     }
 }

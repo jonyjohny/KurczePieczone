@@ -12,12 +12,17 @@ return [
             'destroy' => 'Usunięto inkubator :name',
             'update_title' => 'Zaktualizowano inkubator',
             'stored_title' => 'Utworzono inkubator',
+            'restore' => 'Przywrócono inkubator :name',
         ],
     ],
     'dialogs' => [
         'soft_delete' => [
             'title' => 'Czy chcesz usunać inkubator?',
             'description' => 'Czy chcesz usunać inkubator :name?',
+        ],
+        'restore' => [
+            'title' => 'Czy chcesz przywrócić inkubator?',
+            'description' => 'Czy chcesz przywrócić inkubator :name?',
         ],
     ],
 ];

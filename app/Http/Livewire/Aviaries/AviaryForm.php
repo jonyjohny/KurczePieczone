@@ -2,14 +2,16 @@
 
 namespace App\Http\Livewire\Aviaries;
 
-use App\Models\aviary;
+use App\Models\Aviary;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class aviaryForm extends Component
 {
     use Actions;
+    use AuthorizesRequests;
 
     public Aviary $aviary;
     public Bool $editMode;
@@ -61,6 +63,11 @@ class aviaryForm extends Component
 
     public function save()
     {
+        if($this->editMode){
+            $this->authorize('update', $this->aviary);
+        } else {
+            $this->authorize('create', Aviary::class);
+        }
         $this->validate();
         $this->aviary->save();
         $this->notification()->success(

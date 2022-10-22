@@ -12,12 +12,17 @@ return [
             'destroy' => 'Usunięto stado :name',
             'update_title' => 'Zaktualizowano stado',
             'stored_title' => 'Utworzono stado',
+            'restore' => 'Przywrócono stado :name',
         ],
     ],
     'dialogs' => [
         'soft_delete' => [
             'title' => 'Czy chcesz usunać stado?',
             'description' => 'Czy chcesz usunać stado :name?',
+        ],
+        'restore' => [
+            'title' => 'Czy chcesz przywrócić stado?',
+            'description' => 'Czy chcesz przywrócić stado :name?',
         ],
     ],
 ];

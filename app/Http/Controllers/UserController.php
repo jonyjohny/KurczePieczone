@@ -9,6 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', User::class);
         return view(
             'users.index',
             [
@@ -19,6 +20,7 @@ class UserController extends Controller
 
     public function create()
     {
+        $this->authorize('create', User::class);
         return view(
             'users.form'
         );
@@ -26,6 +28,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         return view(
             'users.form',
             [

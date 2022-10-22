@@ -2,14 +2,16 @@
 
 namespace App\Http\Livewire\Incubations;
 
-use App\Models\Incubation;
 use Livewire\Component;
+use App\Models\Incubation;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class IncubationForm extends Component
 {
     use Actions;
+    use AuthorizesRequests;
 
     public Incubation $incubation;
     public Bool $editMode;
@@ -61,6 +63,11 @@ class IncubationForm extends Component
 
     public function save()
     {
+        if($this->editMode){
+            $this->authorize('update', $this->incubation);
+        } else {
+            $this->authorize('create', Incubation::class);
+        }
         $this->validate();
         $this->incubation->save();
         $this->notification()->success(

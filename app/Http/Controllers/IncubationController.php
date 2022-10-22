@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Incubation;
 use Illuminate\Http\Request;
 
 class IncubationController extends Controller
@@ -25,7 +26,9 @@ class IncubationController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+            'incubations.form'
+        );
     }
 
     /**
@@ -56,9 +59,14 @@ class IncubationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Incubation $incubation)
     {
-        //
+        return view(
+            'incubations.form',
+            [
+                'incubation' => $incubation,
+            ],
+            );
     }
 
     /**

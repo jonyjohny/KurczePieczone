@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Breeding;
 use Illuminate\Http\Request;
 
 class BreedingController extends Controller
@@ -56,9 +57,14 @@ class BreedingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Breeding $breeding)
     {
-        //
+        return view(
+            'breeding.form',
+            [
+                'breeding' => $breeding,
+            ],
+            );
     }
 
     /**

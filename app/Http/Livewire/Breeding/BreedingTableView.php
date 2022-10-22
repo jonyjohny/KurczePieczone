@@ -8,6 +8,8 @@ use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Breeding\Actions\EditBreedingAction;
+use App\Http\Livewire\Breeding\Actions\SoftDeleteBreedingAction;
 
 class BreedingTableView extends TableView
 {
@@ -73,5 +75,25 @@ class BreedingTableView extends TableView
         return [
             new SoftDeleteFilter,
         ];
+    }
+
+    protected function actionsByRow()
+    {
+        return [
+            new EditBreedingAction('breeding.edit', __('translations.actions.edit')),
+            new SoftDeleteBreedingAction()
+        ];
+    }
+
+    public function softDelete(int $id)
+    {
+        $breeding = Breeding::find($id);
+        $breeding->delete();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.destroy_title'),
+            $description = __('breeding.messages.successes.destroy', [
+                'name' => $breeding->name
+            ])
+            );
     }
 }

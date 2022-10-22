@@ -8,6 +8,8 @@ use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Incubations\Actions\EditIncubationAction;
+use App\Http\Livewire\Incubations\Actions\SoftDeleteIncubationAction;
 
 class IncubationsTableView extends TableView
 {
@@ -73,5 +75,25 @@ class IncubationsTableView extends TableView
         return [
             new SoftDeleteFilter,
         ];
+    }
+
+    protected function actionsByRow()
+    {
+        return [
+            new EditIncubationAction('incubations.edit', __('translations.actions.edit')),
+            new SoftDeleteIncubationAction()
+        ];
+    }
+
+    public function softDelete(int $id)
+    {
+        $incubation = Incubation::find($id);
+        $incubation->delete();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.destroy_title'),
+            $description = __('incubations.messages.successes.destroy', [
+                'name' => $incubation->name
+            ])
+            );
     }
 }

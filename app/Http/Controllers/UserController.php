@@ -16,4 +16,22 @@ class UserController extends Controller
             ]
         );
     }
+
+    public function create()
+    {
+        return view(
+            'users.form'
+        );
+    }
+
+    public function edit(User $user)
+    {
+        return view(
+            'users.form',
+            [
+                'user' => $user,
+            ],
+            );
+    }
+
 }

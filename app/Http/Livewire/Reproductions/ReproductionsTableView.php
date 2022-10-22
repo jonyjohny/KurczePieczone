@@ -8,6 +8,8 @@ use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Reproductions\Actions\EditReproductionAction;
+use App\Http\Livewire\Reproductions\Actions\SoftDeleteReproductionAction;
 
 class ReproductionsTableView extends TableView
 {
@@ -73,5 +75,25 @@ class ReproductionsTableView extends TableView
         return [
             new SoftDeleteFilter,
         ];
+    }
+
+    protected function actionsByRow()
+    {
+        return [
+            new EditReproductionAction('reproductions.edit', __('translations.actions.edit')),
+            new SoftDeleteReproductionAction()
+        ];
+    }
+
+    public function softDelete(int $id)
+    {
+        $reproduction = Reproduction::find($id);
+        $reproduction->delete();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.destroy_title'),
+            $description = __('reproductions.messages.successes.destroy', [
+                'name' => $reproduction->name
+            ])
+            );
     }
 }

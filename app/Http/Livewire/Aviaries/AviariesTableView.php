@@ -8,6 +8,8 @@ use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Aviaries\Actions\EditAviaryAction;
+use App\Http\Livewire\Aviaries\Actions\SoftDeleteAviaryAction;
 
 class AviariesTableView extends TableView
 {
@@ -73,5 +75,25 @@ class AviariesTableView extends TableView
         return [
             new SoftDeleteFilter,
         ];
+    }
+
+    protected function actionsByRow()
+    {
+        return [
+            new EditAviaryAction('aviaries.edit', __('translations.actions.edit')),
+            new SoftDeleteAviaryAction()
+        ];
+    }
+
+    public function softDelete(int $id)
+    {
+        $aviary = Aviary::find($id);
+        $aviary->delete();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.destroy_title'),
+            $description = __('aviaries.messages.successes.destroy', [
+                'name' => $aviary->name
+            ])
+            );
     }
 }

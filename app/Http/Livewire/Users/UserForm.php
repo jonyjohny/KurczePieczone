@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Livewire\Users;
+
+use App\Models\User;
+use Livewire\Component;
+use WireUi\Traits\Actions;
+use Illuminate\Support\Str;
+
+class UserForm extends Component
+{
+    use Actions;
+
+    public User $user;
+    public Bool $editMode;
+
+    public function rules()
+    {
+        return [
+            'user.name' => [
+                'required',
+                'string',
+                'min:3'
+            ],
+            'user.email' => [
+                'required',
+                'email:rfc,dns',
+                'unique:users,email' . 
+                ($this->editMode ? (',' . $this->user->id) : ''),
+            ],
+            'user.password' => [
+                'required',
+            ]
+        ];
+    }
+
+    public function validationAttributes(){
+        return [
+            'name' => Str::lower(__('users.attributes.name')),
+            'email' => Str::lower(__('users.attributes.email')),
+            'password' => Str::lower(__('users.attributes.password'))
+        ];
+    }
+
+    public function mount(User $user, Bool $editMode)
+    {
+        $this->user = $user;
+        $this->editMode = $editMode;
+    }
+
+    public function render()
+    {
+        return view('livewire.users.user-form');
+    }
+
+    public function update($propertyName){
+        $this->validateOnly($propertyName);
+    }
+
+    public function save()
+    {
+        $this->validate();
+        $this->user->save();
+        $this->notification()->success(
+            $title = $this->editMode
+            ? __('users.messages.successes.update_title')
+            : __('users.messages.successes.stored_title'),
+            $description = $this->editMode
+            ? __('users.messages.successes.updated', ['name' => $this->user->name])
+            :__('users.messages.successes.stored', ['name' => $this->user->name]),
+        );
+        $this->editMode = true;
+    }
+}

@@ -23,16 +23,34 @@ Route::get('/', function () {
     //dd(config('auth.roles.boss'));
 });
 
+
 Route::name('users.')->prefix('users')->group(function () {
     Route::get('',[UserController::class, 'index'])
         ->name('index')
         ->middleware(['permission:users.index']);
+        Route::get('create',[UserController::class, 'create'])
+        ->name('create')
+        ->middleware(['permission:users.index']);
+        Route::get('edit',[UserController::class, 'edit'])
+        ->name('edit')
+        ->middleware(['permission:users.index']);
 });
 
-Route::resource('reproductions', ReproductionController::class);
-Route::resource('incubations', IncubationController::class);
-Route::resource('breeding', BreedingController::class);
-Route::resource('aviaries', AviaryController::class);
+Route::resource('reproductions', ReproductionController::class)->only([
+    'index', 'create', 'edit'
+]);
+
+Route::resource('incubations', IncubationController::class)->only([
+    'index', 'create', 'edit'
+]);
+
+Route::resource('breeding', BreedingController::class)->only([
+    'index', 'create', 'edit'
+]);
+
+Route::resource('aviaries', AviaryController::class)->only([
+    'index', 'create', 'edit'
+]);
 
 Route::middleware([
     'auth:sanctum',

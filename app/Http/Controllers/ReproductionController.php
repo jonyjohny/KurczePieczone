@@ -26,7 +26,9 @@ class ReproductionController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+            'reproductions.form'
+        );
     }
 
     /**
@@ -57,9 +59,14 @@ class ReproductionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Reproduction $reproduction)
     {
-        //
+        return view(
+            'reproductions.form',
+            [
+                'reproduction' => $reproduction,
+            ],
+            );
     }
 
     /**

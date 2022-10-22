@@ -58,4 +58,17 @@ return [
     'save' => 'Zapisz',
     'back' => 'Wstecz',
     'enter' => 'Wprowadź wartość',
+    'messages' => [
+        'successes' => [
+            'update_title' => 'Zaktualizowano',
+            'stored_title' => 'Utworzono',
+            'stored' => 'Utworzono element :name',
+            'updated' => 'Zaktualizowano element :name',
+            'destroy_title' => 'Usunięto',
+        ],
+    ],
+    'actions' => [
+        'edit' => 'Edytuj',
+        'destroy' => 'Usuń',
+    ],
 ];

@@ -3,12 +3,15 @@
 namespace App\Http\Livewire\Users;
 
 use App\Models\User;
+use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Livewire\Users\Actions\EditUserAction;
 use App\Http\Livewire\Users\Filters\UsersRoleFilter;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
-use WireUi\Traits\Actions;
+use App\Http\Livewire\Users\Actions\SoftDeleteUserAction;
 
 class UsersTableView extends TableView
 {
@@ -23,7 +26,14 @@ class UsersTableView extends TableView
         'email',
         'roles.name',
         'created_at',
+        'updated_at',
+        'deleted_at',
     ];
+
+    public function repository(): Builder
+    {
+        return User::query()->withTrashed();
+    }
 
     protected $paginate = 15;
 
@@ -39,6 +49,8 @@ class UsersTableView extends TableView
             Header::title(__('users.attributes.email'))->sortBy('email'),
             __('users.attributes.roles'),
             Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
+            Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
+            Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
         ];
     }
 
@@ -54,6 +66,8 @@ class UsersTableView extends TableView
             $model->email,
             $model->roles->implode('name', ', '),
             $model->created_at,
+            $model->updated_at,
+            $model->deleted_at,
         ];
     }
 
@@ -64,5 +78,25 @@ class UsersTableView extends TableView
             new EmailVerifiedFilter,
             new SoftDeleteFilter,
         ];
+    }
+
+    protected function actionsByRow()
+    {
+        return [
+            new EditUserAction('users.edit', __('translations.actions.edit')),
+            new SoftDeleteUserAction()
+        ];
+    }
+
+    public function softDelete(int $id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.destroy_title'),
+            $description = __('users.messages.successes.destroy', [
+                'name' => $user->name
+            ])
+            );
     }
 }

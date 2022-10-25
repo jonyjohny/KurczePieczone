@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AviaryController;
@@ -20,9 +21,7 @@ use App\Http\Controllers\ReproductionController;
 
 Route::get('/', function () {
     return view('welcome');
-    //dd(config('auth.roles.boss'));
 });
-
 
 Route::resource('users', UserController::class)->only([
     'index', 'create', 'edit'

@@ -21,6 +21,11 @@ class AviaryPolicy
         return $user->can('aviaries.index');
     }
 
+    public function viewAnyDeleted(User $user)
+    {
+        return $user->can('aviaries.destroy');
+    }
+    
     /**
      * Determine whether the user can view the model.
      *

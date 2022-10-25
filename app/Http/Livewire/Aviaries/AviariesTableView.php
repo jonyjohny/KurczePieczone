@@ -32,7 +32,11 @@ class AviariesTableView extends TableView
 
     public function repository(): Builder
     {
-        return Aviary::query()->withTrashed();
+        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+            return Aviary::query()->withTrashed();
+        }
+        return Aviary::query();
+
     }
 
     /**

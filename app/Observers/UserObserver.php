@@ -14,7 +14,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->assignRole(config('auth.roles.worker'));
+        //$user->assignRole(config('auth.roles.worker'));
     }
 
     /**

@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Breedingplace;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class BreedingplacePolicy
 {
     use HandlesAuthorization;
 
@@ -17,24 +18,24 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('users.index');
+        return $user->can('breeding.index');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Breedingplace  $breedingplace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user, Breedingplace $breedingplace)
     {
-        return $user->can('users.index');
+        return $user->can('breeding.index');
     }
 
     public function viewAnyDeleted(User $user)
     {
-        return $user->can('users.destroy');
+        return $user->can('breeding.destroy');
     }
 
     /**
@@ -45,56 +46,53 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->can('users.store');
+        return $user->can('breeding.store');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Breedingplace  $breedingplace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, User $model)
+    public function update(User $user, Breedingplace $breedingplace)
     {
-        return $model->deleted_at === null 
-            && $user->can('users.store');
+        return $user->can('breeding.store');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Breedingplace  $breedingplace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, Breedingplace $breedingplace)
     {
-        return $model->deleted_at === null 
-            && $user->can('users.destroy');
+        return $user->can('breeding.destroy');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Breedingplace  $breedingplace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, Breedingplace $breedingplace)
     {
-        return $model->deleted_at !== null 
-            && $user->can('users.destroy');
+        return $user->can('breeding.destroy');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Breedingplace  $breedingplace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, Breedingplace $breedingplace)
     {
         //
     }

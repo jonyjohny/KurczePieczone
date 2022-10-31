@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\AviaryPlace;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class AviaryplacePolicy
 {
     use HandlesAuthorization;
 
@@ -17,24 +18,24 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('users.index');
+        return $user->can('aviaries.index');
+    }
+
+    public function viewAnyDeleted(User $user)
+    {
+        return $user->can('aviaries.destroy');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AviaryPlace  $aviaryPlace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user, AviaryPlace $aviaryPlace)
     {
-        return $user->can('users.index');
-    }
-
-    public function viewAnyDeleted(User $user)
-    {
-        return $user->can('users.destroy');
+        return $user->can('aviaries.index');
     }
 
     /**
@@ -45,56 +46,53 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->can('users.store');
+        return $user->can('aviaries.store');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AviaryPlace  $aviaryPlace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, User $model)
+    public function update(User $user, AviaryPlace $aviaryPlace)
     {
-        return $model->deleted_at === null 
-            && $user->can('users.store');
+        return $user->can('aviaries.store');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AviaryPlace  $aviaryPlace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, AviaryPlace $aviaryPlace)
     {
-        return $model->deleted_at === null 
-            && $user->can('users.destroy');
+        return $user->can('aviaries.destroy');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AviaryPlace  $aviaryPlace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, AviaryPlace $aviaryPlace)
     {
-        return $model->deleted_at !== null 
-            && $user->can('users.destroy');
+        return $user->can('aviaries.destroy');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\AviaryPlace  $aviaryPlace
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, AviaryPlace $aviaryPlace)
     {
         //
     }

@@ -32,7 +32,10 @@ class IncubationsTableView extends TableView
 
     public function repository(): Builder
     {
-        return Incubation::query()->withTrashed();
+        if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
+            return Incubation::query()->withTrashed();
+        }
+        return Incubation::query();
     }
 
     /**
@@ -42,6 +45,17 @@ class IncubationsTableView extends TableView
      */
     public function headers(): array
     {
+        if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
+            return [
+                Header::title(__('translations.attributes.name'))->sortBy('name'),
+                Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
+                Header::title(__('translations.attributes.closed'))->sortBy('closed'),
+                Header::title(__('translations.attributes.archived'))->sortBy('archived'),
+                Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
+                Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
+                Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
+            ];
+        }
         return [
             Header::title(__('translations.attributes.name'))->sortBy('name'),
             Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
@@ -49,7 +63,6 @@ class IncubationsTableView extends TableView
             Header::title(__('translations.attributes.archived'))->sortBy('archived'),
             Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
-            Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
         ];
     }
 
@@ -60,6 +73,17 @@ class IncubationsTableView extends TableView
      */
     public function row($model): array
     {
+        if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
+            return [
+                $model->name,
+                $model->remarks,
+                $model->closed,
+                $model->archived,
+                $model->created_at,
+                $model->updated_at,
+                $model->deleted_at,
+            ];
+        }
         return [
             $model->name,
             $model->remarks,
@@ -67,23 +91,32 @@ class IncubationsTableView extends TableView
             $model->archived,
             $model->created_at,
             $model->updated_at,
-            $model->deleted_at,
         ];
     }
-    
+
     protected function filters()
     {
+        if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
+            return [
+                new SoftDeleteFilter,
+            ];
+        }
         return [
-            new SoftDeleteFilter,
+            //
         ];
     }
 
     protected function actionsByRow()
     {
+        if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
+            return [
+                new EditIncubationAction('incubations.edit', __('translations.actions.edit')),
+                new SoftDeleteIncubationAction(),
+                new RestoreIncubationAction()
+            ];
+        }
         return [
             new EditIncubationAction('incubations.edit', __('translations.actions.edit')),
-            new SoftDeleteIncubationAction(),
-            new RestoreIncubationAction()
         ];
     }
 
@@ -96,7 +129,7 @@ class IncubationsTableView extends TableView
             $description = __('incubations.messages.successes.destroy', [
                 'name' => $incubation->name
             ])
-            );
+        );
     }
 
     public function restore(int $id)

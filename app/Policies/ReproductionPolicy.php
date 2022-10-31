@@ -33,6 +33,11 @@ class ReproductionPolicy
         return $user->can('reproductions.index');
     }
 
+    public function viewAnyDeleted(User $user)
+    {
+        return $user->can('reproductions.destroy');
+    }
+
     /**
      * Determine whether the user can create models.
      *

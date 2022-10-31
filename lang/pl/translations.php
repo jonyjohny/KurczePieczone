@@ -41,8 +41,13 @@ return [
         'Reproduction' => 'Reprodukcja',
         'Incubation' => 'Inkubacja',
         'Breeding' => 'Odchów',
-        'Aviary' => 'Woliera',
+        'Aviary' => 'Hodowla',
         'Users' => 'Użytkownicy',
+        'Reproductionrow' => 'Rzędy reprodukcyjne',
+        'Incubationincubators' => 'Inkubatory',
+        'Breedingplace' => 'Miejsca odchowu',
+        'Aviaryplaces' => 'Woliery',
+
     ],
     'yes' => 'Tak',
     'no' => 'Nie',
@@ -74,5 +79,6 @@ return [
         'destroy' => 'Usuń',
         'restore' => 'Przywróć',
         'create' => 'Stwórz',
+        'open' => 'Otwórz',
     ],
 ];

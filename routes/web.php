@@ -6,7 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AviaryController;
 use App\Http\Controllers\BreedingController;
 use App\Http\Controllers\IncubationController;
+use App\Http\Controllers\AviaryplaceController;
 use App\Http\Controllers\ReproductionController;
+use App\Http\Controllers\BreedingplaceController;
+use App\Http\Controllers\ReproductionrowController;
+use App\Http\Controllers\IncubationincubatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +44,22 @@ Route::resource('breeding', BreedingController::class)->only([
 ]);
 
 Route::resource('aviaries', AviaryController::class)->only([
+    'index', 'create', 'edit'
+]);
+
+Route::resource('reproductionrows', ReproductionrowController::class)->only([
+    'index', 'create', 'edit'
+]);
+
+Route::resource('incubationincubators', IncubationincubatorController::class)->only([
+    'index', 'create', 'edit'
+]);
+
+Route::resource('breedingplaces', BreedingplaceController::class)->only([
+    'index', 'create', 'edit'
+]);
+
+Route::resource('aviaryplaces', AviaryplaceController::class)->only([
     'index', 'create', 'edit'
 ]);
 

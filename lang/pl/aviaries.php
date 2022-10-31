@@ -2,27 +2,27 @@
 
 return [
     'labels' => [
-        'edit_form_title' => 'Edycja woliery',
-        'create_form_title' => 'Tworzenie nowej woliery',
+        'edit_form_title' => 'Edycja stada do hodowli',
+        'create_form_title' => 'Tworzenie nowego stada do hodowli',
     ],
     'messages' => [ 
         'successes' => [ 
-            'stored' => 'Dodano woliere :name',
-            'updated' => 'Zaktualizowano woliere :name',
-            'destroy' => 'Usunięto woliere :name',
-            'update_title' => 'Zaktualizowano woliere',
-            'stored_title' => 'Utworzono woliere',
-            'restore' => 'Przywrócono woliere :name',
+            'stored' => 'Dodano stado :name',
+            'updated' => 'Zaktualizowano stado :name',
+            'destroy' => 'Usunięto stado :name',
+            'update_title' => 'Zaktualizowano stado',
+            'stored_title' => 'Utworzono stado',
+            'restore' => 'Przywrócono stado :name',
         ],
     ],
     'dialogs' => [
         'soft_delete' => [
-            'title' => 'Czy chcesz usunać woliere?',
-            'description' => 'Czy chcesz usunać woliere :name?',
+            'title' => 'Czy chcesz usunać stado?',
+            'description' => 'Czy chcesz usunać stado :name?',
         ],
         'restore' => [
-            'title' => 'Czy chcesz przywrócić woliere?',
-            'description' => 'Czy chcesz przywrócić woliere :name?',
+            'title' => 'Czy chcesz przywrócić stado?',
+            'description' => 'Czy chcesz przywrócić stado :name?',
         ],
     ],
 ];

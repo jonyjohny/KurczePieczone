@@ -40,5 +40,9 @@ class DatabaseSeeder extends Seeder
         $this->call(IncubationSeeder::class);
         $this->call(BreedingSeeder::class);
         $this->call(AviarySeeder::class);
+        $this->call(ReproductionrowSeeder::class);
+        $this->call(IncubationincubatorSeeder::class);
+        $this->call(BreedingplaceSeeder::class);
+        $this->call(AviaryPlaceSeeder::class);
     }
 }

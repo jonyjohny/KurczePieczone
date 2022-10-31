@@ -33,7 +33,10 @@ class UsersTableView extends TableView
 
     public function repository(): Builder
     {
-        return User::query()->withTrashed();
+        if(request()->user()->can('viewAnyDeleted', User::class )){
+            return User::query()->withTrashed();
+        }
+        return User::query();
     }
 
     protected $paginate = 15;
@@ -45,13 +48,22 @@ class UsersTableView extends TableView
      */
     public function headers(): array
     {
+        if(request()->user()->can('viewAnyDeleted', User::class )){
+            return [
+                Header::title(__('users.attributes.name'))->sortBy('name'),
+                Header::title(__('users.attributes.email'))->sortBy('email'),
+                __('users.attributes.roles'),
+                Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
+                Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
+                Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
+            ];
+        }
         return [
             Header::title(__('users.attributes.name'))->sortBy('name'),
             Header::title(__('users.attributes.email'))->sortBy('email'),
             __('users.attributes.roles'),
             Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
-            Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
         ];
     }
 
@@ -62,31 +74,55 @@ class UsersTableView extends TableView
      */
     public function row($model): array
     {
+        if(request()->user()->can('viewAnyDeleted', User::class )){
+            return [
+                $model->name,
+                
+                $model->email,
+                $model->roles->implode('name', ', '),
+                $model->created_at,
+                $model->updated_at,
+                $model->deleted_at,
+            ];
+        }
+        return User::query();
         return [
             $model->name,
             $model->email,
             $model->roles->implode('name', ', '),
             $model->created_at,
             $model->updated_at,
-            $model->deleted_at,
         ];
     }
 
     protected function filters()
     {
+        if(request()->user()->can('viewAnyDeleted', User::class )){
+            return [
+                new UsersRoleFilter,
+                new EmailVerifiedFilter,
+                new SoftDeleteFilter,
+            ];
+        }
+        return User::query();
         return [
             new UsersRoleFilter,
             new EmailVerifiedFilter,
-            new SoftDeleteFilter,
         ];
     }
 
     protected function actionsByRow()
     {
+        if(request()->user()->can('viewAnyDeleted', User::class )){
+            return [
+                new EditUserAction('users.edit', __('translations.actions.edit')),
+                new SoftDeleteUserAction(),
+                new RestoreUserAction()
+            ];
+        }
+        return User::query();
         return [
             new EditUserAction('users.edit', __('translations.actions.edit')),
-            new SoftDeleteUserAction(),
-            new RestoreUserAction()
         ];
     }
 

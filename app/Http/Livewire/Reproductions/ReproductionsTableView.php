@@ -9,6 +9,7 @@ use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Reproductions\Actions\EditReproductionAction;
+use App\Http\Livewire\Reproductions\Actions\OpenReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\RestoreReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\SoftDeleteReproductionAction;
 
@@ -32,7 +33,10 @@ class ReproductionsTableView extends TableView
 
     public function repository(): Builder
     {
-        return Reproduction::query()->withTrashed();
+        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+            return Reproduction::query()->withTrashed();
+        }
+        return Reproduction::query();
     }
 
     /**
@@ -42,6 +46,17 @@ class ReproductionsTableView extends TableView
      */
     public function headers(): array
     {
+        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+            return [
+                Header::title(__('translations.attributes.name'))->sortBy('name'),
+                Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
+                Header::title(__('translations.attributes.closed'))->sortBy('closed'),
+                Header::title(__('translations.attributes.archived'))->sortBy('archived'),
+                Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
+                Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
+                Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
+            ];
+        }
         return [
             Header::title(__('translations.attributes.name'))->sortBy('name'),
             Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
@@ -49,7 +64,6 @@ class ReproductionsTableView extends TableView
             Header::title(__('translations.attributes.archived'))->sortBy('archived'),
             Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
-            Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
         ];
     }
 
@@ -60,6 +74,17 @@ class ReproductionsTableView extends TableView
      */
     public function row($model): array
     {
+        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+            return [
+                $model->name,
+                $model->remarks,
+                $model->closed,
+                $model->archived,
+                $model->created_at,
+                $model->updated_at,
+                $model->deleted_at,
+            ];
+        }
         return [
             $model->name,
             $model->remarks,
@@ -67,23 +92,34 @@ class ReproductionsTableView extends TableView
             $model->archived,
             $model->created_at,
             $model->updated_at,
-            $model->deleted_at,
         ];
     }
         
     protected function filters()
     {
+        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+            return [
+                new SoftDeleteFilter,            
+            ];
+        }
         return [
-            new SoftDeleteFilter,
+            //
         ];
     }
 
     protected function actionsByRow()
     {
+        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+            return [
+                new OpenReproductionAction(),
+                new EditReproductionAction('reproductions.edit', __('translations.actions.edit')),
+                new SoftDeleteReproductionAction(),
+                new RestoreReproductionAction(),
+            ];        
+        }
         return [
+            new OpenReproductionAction(),
             new EditReproductionAction('reproductions.edit', __('translations.actions.edit')),
-            new SoftDeleteReproductionAction(),
-            new RestoreReproductionAction()
         ];
     }
 

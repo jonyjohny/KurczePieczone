@@ -33,6 +33,11 @@ class BreedingPolicy
         return $user->can('breeding.index');
     }
 
+    public function viewAnyDeleted(User $user)
+    {
+        return $user->can('breeding.destroy');
+    }
+
     /**
      * Determine whether the user can create models.
      *

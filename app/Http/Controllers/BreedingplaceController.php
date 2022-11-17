@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Breeding;
 use App\Models\Breedingplace;
 use App\Http\Requests\StoreBreedingplaceRequest;
 use App\Http\Requests\UpdateBreedingplaceRequest;
@@ -13,9 +14,14 @@ class BreedingplaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Breeding $breeding)
     {
-        //
+        $this->authorize('viewAny', Breedingplace::class);
+        return view(
+            'breedingplaces.index'
+        , [
+            'breeding' => $breeding
+        ]);
     }
 
     /**
@@ -23,9 +29,14 @@ class BreedingplaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Breeding $breeding)
     {
-        //
+        $this->authorize('create', Breedingplace::class);
+        return view(
+            'breedingplaces.form'
+            , [
+                'breeding' => $breeding
+            ]);
     }
 
     /**
@@ -58,7 +69,13 @@ class BreedingplaceController extends Controller
      */
     public function edit(Breedingplace $breedingplace)
     {
-        //
+        $this->authorize('update', $breedingplace);
+        return view(
+            'breedingplaces.form',
+            [
+                'breedingplace' => $breedingplace
+            ],
+            );
     }
 
     /**

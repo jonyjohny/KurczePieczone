@@ -10,6 +10,7 @@ return [
         'closed' => 'Zamknięte',
         'archived' => 'Zarchiwizowane',
         'softdeletefiltr' => 'Usunięte',
+        'patroness' => 'Opiekun',
     ],
     'menu' => [
         'dictionaries' => 'Słowniki',
@@ -36,12 +37,16 @@ return [
         'deleted_at' => 'usunięto'
     ],
     'navigation' => [
-        'Dashboard' => 'Odchów',
+        'Dashboard' => 'Główna',
         'log-viewer' => 'Logi',
         'Reproduction' => 'Reprodukcja',
         'Incubation' => 'Inkubacja',
         'Breeding' => 'Odchów',
         'Aviary' => 'Hodowla',
+        'ReproductionT' => 'Stada reprodukcyjne',
+        'IncubationT' => 'Miejsca inkubacji',
+        'BreedingT' => 'Stada do odchowu',
+        'AviaryT' => 'Stada do hodowli',
         'Users' => 'Użytkownicy',
         'Reproductionrow' => 'Rzędy reprodukcyjne',
         'Incubationincubators' => 'Inkubatory',

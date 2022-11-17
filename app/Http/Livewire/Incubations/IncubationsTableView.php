@@ -7,8 +7,9 @@ use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Incubations\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Incubations\Actions\EditIncubationAction;
+use App\Http\Livewire\Incubations\Actions\OpenIncubationAction;
 use App\Http\Livewire\Incubations\Actions\RestoreIncubationAction;
 use App\Http\Livewire\Incubations\Actions\SoftDeleteIncubationAction;
 
@@ -18,7 +19,6 @@ class IncubationsTableView extends TableView
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = User::class;
 
     public $searchBy = [
         'name',
@@ -110,6 +110,7 @@ class IncubationsTableView extends TableView
     {
         if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
             return [
+                new OpenIncubationAction('incubationincubators.index',__('translations.actions.open')),
                 new EditIncubationAction('incubations.edit', __('translations.actions.edit')),
                 new SoftDeleteIncubationAction(),
                 new RestoreIncubationAction()

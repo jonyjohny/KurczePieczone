@@ -20,7 +20,6 @@ class UsersTableView extends TableView
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = User::class;
 
     public $searchBy = [
         'name',

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Reproduction;
 use App\Models\Reproductionrow;
+use Illuminate\Http\Request;
 
 class ReproductionrowController extends Controller
 {
@@ -12,12 +13,14 @@ class ReproductionrowController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Reproduction $reproduction)
     {
         $this->authorize('viewAny', Reproductionrow::class);
         return view(
             'reproductionrows.index'
-        );
+        , [
+            'reproduction' => $reproduction
+        ]);
     }
 
     /**
@@ -25,12 +28,14 @@ class ReproductionrowController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Reproduction $reproduction)
     {
         $this->authorize('create', Reproductionrow::class);
         return view(
             'reproductionrows.form'
-        );
+            , [
+                'reproduction' => $reproduction
+            ]);
     }
 
     /**
@@ -67,7 +72,7 @@ class ReproductionrowController extends Controller
         return view(
             'reproductionrows.form',
             [
-                'reproductionrow' => $reproductionrow,
+                'reproductionrow' => $reproductionrow
             ],
             );
     }

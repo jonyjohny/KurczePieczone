@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AviaryPlace;
+use App\Models\Aviary;
+use App\Models\Aviaryplace;
 use App\Http\Requests\StoreAviaryPlaceRequest;
 use App\Http\Requests\UpdateAviaryPlaceRequest;
 
@@ -13,9 +14,14 @@ class AviaryplaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Aviary $aviary)
     {
-        //
+        $this->authorize('viewAny', Aviaryplace::class);
+        return view(
+            'aviaryplaces.index'
+        , [
+            'aviary' => $aviary
+        ]);
     }
 
     /**
@@ -23,9 +29,14 @@ class AviaryplaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Aviary $aviary)
     {
-        //
+        $this->authorize('create', Aviaryplace::class);
+        return view(
+            'aviaryplaces.form'
+            , [
+                'aviary' => $aviary
+            ]);
     }
 
     /**
@@ -56,9 +67,15 @@ class AviaryplaceController extends Controller
      * @param  \App\Models\AviaryPlace  $aviaryPlace
      * @return \Illuminate\Http\Response
      */
-    public function edit(AviaryPlace $aviaryPlace)
+    public function edit(Aviaryplace $aviaryplace)
     {
-        //
+        $this->authorize('update', $aviaryplace);
+        return view(
+            'aviaryplaces.form',
+            [
+                'aviaryplace' => $aviaryplace
+            ],
+            );
     }
 
     /**

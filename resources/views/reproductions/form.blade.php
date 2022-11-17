@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-samibold text-xl text-gray-800 leading-tight">
-            {{ __('translations.navigation.Reproduction') }}
+            {{ __('translations.navigation.ReproductionT') }}
         </h2>
     </x-slot>
     <div class="py-12">

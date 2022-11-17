@@ -16,4 +16,14 @@ class Breedingplace extends Model
         'name',
         'remarks'
     ];
+    
+    public function reproductions()
+    {
+        return $this->belongsTo(Breeding::class, 'id_breeding');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

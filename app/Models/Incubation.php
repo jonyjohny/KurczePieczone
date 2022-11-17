@@ -15,4 +15,8 @@ class Incubation extends Model
         'name',
         'remarks'
     ];
+    
+    public function reporductionRows() {
+        return $this->hasMany(Incubationincubator::class,'id_incubation');
+    }
 }

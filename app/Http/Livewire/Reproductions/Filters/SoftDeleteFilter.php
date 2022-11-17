@@ -20,7 +20,7 @@ class SoftDeleteFilter extends Filter
         if($value == 1) {
             return $query->whereNotNull('deleted_at');
         }
-        return$query->whereNull('deleted_at');
+        return $query->whereNull('deleted_at');
     }
 
     public function options(): array

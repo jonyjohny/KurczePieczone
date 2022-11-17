@@ -4,18 +4,18 @@ namespace App\Http\Livewire\Reproductions\Actions;
 
 use LaravelViews\Views\View;
 use LaravelViews\Actions\Action;
+use LaravelViews\Actions\RedirectAction;
 
 
-class OpenReproductionAction extends Action
+class OpenReproductionAction extends RedirectAction
 {
-    public $to = 'reproductionrows.index';
-    public $title = '';
-    public $icon = 'log-in';
-
-    public function __construct()
+    public function __construct(string $to, string $title, string $icon = 'log-in')
     {
-        parent::__construct();
-        $this->title = __('translations.actions.open');
+        parent::__construct($to, $title, $icon);
     }
 
+    public function renderIf($model, View $view)
+    {
+        return request()->user()->can('update', $model);
+    }
 }

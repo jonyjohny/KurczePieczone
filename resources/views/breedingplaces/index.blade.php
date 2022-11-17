@@ -9,10 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg" id="table-view-wrapper">
                 <div class="grid justify-items-stretch pt-2 pr-2">
-                    @can('create', App\Models\Breedingplace::class)
                     <x-button primary label="{{ __('translations.actions.create')}}"
-                        href="{{ route('breedingplaces.create')}}"  class="justify-self-end" />
-                        @endcan
+                        href="{{ route('breedingplaces.create', [$breeding])}}"  class="justify-self-end" />
                     </div>
                 <livewire:breedingplaces.breedingplaces-table-view />
             </div>

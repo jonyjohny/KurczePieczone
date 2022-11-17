@@ -7,7 +7,7 @@ use App\Models\Reproduction;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Reproductions\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Reproductions\Actions\EditReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\OpenReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\RestoreReproductionAction;
@@ -19,7 +19,6 @@ class ReproductionsTableView extends TableView
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = User::class;
 
     public $searchBy = [
         'name',
@@ -111,14 +110,14 @@ class ReproductionsTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
             return [
-                new OpenReproductionAction(),
+                new OpenReproductionAction('reproductionrows.index',__('translations.actions.open')),
                 new EditReproductionAction('reproductions.edit', __('translations.actions.edit')),
                 new SoftDeleteReproductionAction(),
                 new RestoreReproductionAction(),
             ];        
         }
         return [
-            new OpenReproductionAction(),
+            new OpenReproductionAction('reproductionrows.index',__('translations.actions.open')),
             new EditReproductionAction('reproductions.edit', __('translations.actions.edit')),
         ];
     }

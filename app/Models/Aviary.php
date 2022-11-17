@@ -15,4 +15,9 @@ class Aviary extends Model
         'name',
         'remarks'
     ];
+
+    public function reporductionRows() 
+    {
+        return $this->hasMany(Aviaryplace::class,'id_aviary');
+    }
 }

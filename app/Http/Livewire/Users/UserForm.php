@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserForm extends Component
@@ -15,6 +16,7 @@ class UserForm extends Component
 
     public User $user;
     public Bool $editMode;
+    public $editModeSecurity;
 
     public function rules()
     {
@@ -46,6 +48,7 @@ class UserForm extends Component
     public function mount(User $user, Bool $editMode)
     {
         $this->user = $user;
+        $this->editModeSecurity = $user->password;
         $this->editMode = $editMode;
     }
 
@@ -65,7 +68,9 @@ class UserForm extends Component
         } else {
             $this->authorize('create', User::class);
         }
-        $this->validate();
+        if ($this->editModeSecurity!=$this->user->password){
+            $this->user->password = Hash::make($this->user->password);
+        }
         $this->user->save();
         $this->notification()->success(
             $title = $this->editMode

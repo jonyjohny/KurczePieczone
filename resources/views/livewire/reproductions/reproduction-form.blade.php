@@ -25,13 +25,13 @@
                 <label for="closed">{{ __('translations.attributes.closed') }}</label>
             </div>
             <div class="">
-                <x-input placeholder="{{ __('translations.enter') }}" wire:model="reproduction.closed" />
+                <x-toggle lg wire:model.defer="reproduction.closed"/>
             </div>
             <div class="">
                 <label for="archived">{{ __('translations.attributes.archived') }}</label>
             </div>
             <div class="">
-                <x-input placeholder="{{ __('translations.enter') }}" wire:model="reproduction.archived" />
+                <x-toggle lg wire:model.defer="reproduction.archived"/>
             </div>
         </div>
         <hr class="my-2">

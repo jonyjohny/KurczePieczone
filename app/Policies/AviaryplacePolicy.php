@@ -70,7 +70,8 @@ class AviaryplacePolicy
      */
     public function delete(User $user, AviaryPlace $aviaryPlace)
     {
-        return $user->can('aviaries.destroy');
+        return $aviaryPlace->deleted_at === null 
+        && $user->can('aviaries.destroy');
     }
 
     /**
@@ -82,7 +83,8 @@ class AviaryplacePolicy
      */
     public function restore(User $user, AviaryPlace $aviaryPlace)
     {
-        return $user->can('aviaries.destroy');
+        return $aviaryPlace->deleted_at !== null 
+        && $user->can('aviaries.destroy');
     }
 
     /**

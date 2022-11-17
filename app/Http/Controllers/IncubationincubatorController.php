@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Incubationincubator;
+use App\Models\Incubation;
 use Illuminate\Http\Request;
+use App\Models\Incubationincubator;
 
 class IncubationincubatorController extends Controller
 {
@@ -12,19 +13,30 @@ class IncubationincubatorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Incubation $incubation)
     {
-        //
+        $this->authorize('viewAny', Incubationincubator::class);
+        return view(
+            'incubationincubators.index'
+        , [
+            'incubation' => $incubation
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Incubation $incubation)
     {
-        //
+        $this->authorize('create', Incubationincubator::class);
+        return view(
+            'incubationincubators.form'
+            , [
+                'incubation' => $incubation
+            ]);
     }
 
     /**
@@ -57,7 +69,13 @@ class IncubationincubatorController extends Controller
      */
     public function edit(Incubationincubator $incubationincubator)
     {
-        //
+        $this->authorize('update', $incubationincubator);
+        return view(
+            'incubationincubators.form',
+            [
+                'incubationincubator' => $incubationincubator
+            ],
+        );
     }
 
     /**

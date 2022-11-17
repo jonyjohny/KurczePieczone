@@ -7,8 +7,9 @@ use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Aviaries\Actions\OpenAviaryAction;
 use App\Http\Livewire\Aviaries\Actions\EditAviaryAction;
+use App\Http\Livewire\Aviaries\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Aviaries\Actions\RestoreAviaryAction;
 use App\Http\Livewire\Aviaries\Actions\SoftDeleteAviaryAction;
 
@@ -18,7 +19,6 @@ class AviariesTableView extends TableView
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = User::class;
 
     public $searchBy = [
         'name',
@@ -111,12 +111,14 @@ class AviariesTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Aviary::class )){
             return [
+                new OpenAviaryAction('aviaryplaces.index',__('translations.actions.open')),
                 new EditAviaryAction('aviaries.edit', __('translations.actions.edit')),
                 new SoftDeleteAviaryAction(),
                 new RestoreAviaryAction()
             ]; 
         }
         return [
+            new OpenAviaryAction('aviaryplaces.index',__('translations.actions.open')),
             new EditAviaryAction('aviaries.edit', __('translations.actions.edit')),
         ];
     }

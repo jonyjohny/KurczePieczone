@@ -2,15 +2,45 @@
 
 namespace App\Http\Livewire\Reproductionrows;
 
-use App\Models\User;
+use WireUi\Traits\Actions;
+use App\Models\Reproductionrow;
+use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Livewire\Reproductionrows\Actions\EditReproductionrowAction;
+use App\Http\Livewire\Reproductionrows\Actions\RestoreReproductionrowAction;
+use App\Http\Livewire\Reproductionrows\Actions\SoftDeleteReproductionrowAction;
 
 class ReproductionrowsTableView extends TableView
 {
+    use Actions;
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = User::class;
+    public $reproduction;
+
+    public $searchBy = [
+        'name',
+        'users.name',
+        'remarks',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    public function repository()
+    {   
+        if (!$this->reproduction) {
+            $this->reproduction = request()->route('reproduction.id');
+        }
+
+        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+            return Reproductionrow::where('id_reproduction', $this->reproduction)->withTrashed();
+        }
+
+        return Reproductionrow::where('id_reproduction', $this->reproduction);
+    }
+
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -19,7 +49,23 @@ class ReproductionrowsTableView extends TableView
      */
     public function headers(): array
     {
-        return [];
+        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+            return [
+                Header::title(__('translations.attributes.name'))->sortBy('name'),
+                __('translations.attributes.patroness'),
+                Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
+                Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
+                Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
+                Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
+            ];
+        }
+        return [
+            Header::title(__('translations.attributes.name'))->sortBy('name'),
+            __('translations.attributes.patroness'),
+            Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
+            Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
+            Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
+        ];
     }
 
     /**
@@ -29,6 +75,56 @@ class ReproductionrowsTableView extends TableView
      */
     public function row($model): array
     {
-        return [];
+        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+            return [
+                $model->name,
+                $model->users->name,
+                $model->remarks,
+                $model->created_at,
+                $model->updated_at,
+                $model->deleted_at,
+            ];
+        }
+        return [
+        ];
+    }
+
+    protected function actionsByRow()
+    {
+        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+            return [
+                new EditReproductionrowAction('reproductionrows.edit', __('translations.actions.edit')),
+                new SoftDeleteReproductionrowAction(),
+                new RestoreReproductionrowAction(),
+            ];        
+        }
+        return [
+            new EditReproductionrowAction('reproductionrows.edit', __('translations.actions.edit')),
+            new SoftDeleteReproductionrowAction(),
+        ];
+    }
+
+    public function softDelete(int $id)
+    {
+        $reproductionrow = Reproductionrow::find($id);
+        $reproductionrow->delete();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.destroy_title'),
+            $description = __('reproductionrows.messages.successes.destroy', [
+                'name' => $reproductionrow->name
+            ])
+            );
+    }
+
+    public function restore(int $id)
+    {
+        $reproductionrow = Reproductionrow::withTrashed()->find($id);
+        $reproductionrow->restore();
+        $this->notification()->success(
+            $title = __('translations.messages.successes.restore_title'),
+            $description = __('reproductionrows.messages.successes.restore', [
+                'name' => $reproductionrow->name
+            ])
+        );
     }
 }

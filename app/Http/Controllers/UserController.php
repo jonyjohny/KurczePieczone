@@ -37,4 +37,11 @@ class UserController extends Controller
             );
     }
 
+    public function allOpen()
+    {
+        return User::all()->map(function ($value){
+            return ['name'=> $value->name, 'id' => $value->id];
+        })->toArray();
+    }
+
 }

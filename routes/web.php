@@ -27,6 +27,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/users/allOpen', [UserController::class, 'allOpen'])->name('users.allOpen');
+
 Route::resource('users', UserController::class)->only([
     'index', 'create', 'edit'
 ]);
@@ -47,21 +49,37 @@ Route::resource('aviaries', AviaryController::class)->only([
     'index', 'create', 'edit'
 ]);
 
+Route::get('/reproductionrows/create/{reproduction}', [ReproductionrowController::class, 'create'])->name('reproductionrows.create');
+
 Route::resource('reproductionrows', ReproductionrowController::class)->only([
-    'index', 'create', 'edit'
+    'edit'
 ]);
+
+Route::get('/reproductionrows/{reproduction}', [ReproductionrowController::class, 'index'])->name('reproductionrows.index');
+
+Route::get('/incubationincubators/create/{incubation}', [IncubationincubatorController::class, 'create'])->name('incubationincubators.create');
 
 Route::resource('incubationincubators', IncubationincubatorController::class)->only([
-    'index', 'create', 'edit'
+    'edit'
 ]);
+
+Route::get('/incubationincubators/{incubation}', [IncubationincubatorController::class, 'index'])->name('incubationincubators.index');
+
+Route::get('/breedingplaces/create/{breeding}', [BreedingplaceController::class, 'create'])->name('breedingplaces.create');
 
 Route::resource('breedingplaces', BreedingplaceController::class)->only([
-    'index', 'create', 'edit'
+    'edit'
 ]);
 
+Route::get('/breedingplaces/{breeding}', [BreedingplaceController::class, 'index'])->name('breedingplaces.index');
+
+Route::get('/aviaryplaces/create/{aviary}', [AviaryplaceController::class, 'create'])->name('aviaryplaces.create');
+
 Route::resource('aviaryplaces', AviaryplaceController::class)->only([
-    'index', 'create', 'edit'
+    'edit'
 ]);
+
+Route::get('/aviaryplaces/{aviary}', [AviaryplaceController::class, 'index'])->name('aviaryplaces.index');
 
 Route::middleware([
     'auth:sanctum',

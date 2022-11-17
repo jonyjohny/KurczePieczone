@@ -70,7 +70,8 @@ class BreedingplacePolicy
      */
     public function delete(User $user, Breedingplace $breedingplace)
     {
-        return $user->can('breeding.destroy');
+        return $breedingplace->deleted_at === null 
+        && $user->can('breeding.destroy');
     }
 
     /**
@@ -82,7 +83,8 @@ class BreedingplacePolicy
      */
     public function restore(User $user, Breedingplace $breedingplace)
     {
-        return $user->can('breeding.destroy');
+        return $breedingplace->deleted_at !== null 
+        && $user->can('breeding.destroy');
     }
 
     /**

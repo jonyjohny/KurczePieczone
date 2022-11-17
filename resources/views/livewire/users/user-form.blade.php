@@ -25,7 +25,7 @@
                 <label for="password">{{ __('users.attributes.password') }}</label>
             </div>
             <div class="">
-                <x-input placeholder="{{ __('translations.enter') }}" wire:model="user.password" />
+                <x-inputs.password placeholder="{{ __('translations.enter') }}" wire:model="user.password" />
             </div>
         </div>
         <hr class="my-2">

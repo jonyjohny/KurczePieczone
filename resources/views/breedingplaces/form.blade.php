@@ -10,7 +10,7 @@
                 @if (isset($breedingplace))
                     <livewire:breedingplaces.breedingplace-form :breedingplace="$breedingplace" :editMode="true" />
                 @else
-                    <livewire:breedingplaces.breedingplace-form :editMode="false" />
+                    <livewire:breedingplaces.breedingplace-form :breeding="$breeding" :editMode="false" />
                 @endif
             </div>
         </div>

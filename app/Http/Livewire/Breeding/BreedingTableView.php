@@ -7,8 +7,9 @@ use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Breeding\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Breeding\Actions\EditBreedingAction;
+use App\Http\Livewire\Breeding\Actions\OpenBreedingAction;
 use App\Http\Livewire\Breeding\Actions\RestoreBreedingAction;
 use App\Http\Livewire\Breeding\Actions\SoftDeleteBreedingAction;
 
@@ -18,7 +19,6 @@ class BreedingTableView extends TableView
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = User::class;
 
     public $searchBy = [
         'name',
@@ -110,12 +110,14 @@ class BreedingTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Breeding::class )){
             return [
+                new OpenBreedingAction('breedingplaces.index',__('translations.actions.open')),
                 new EditBreedingAction('breeding.edit', __('translations.actions.edit')),
                 new SoftDeleteBreedingAction(),
                 new RestoreBreedingAction()
             ]; 
         }
         return [
+            new OpenBreedingAction('breedingplaces.index',__('translations.actions.open')),
             new EditBreedingAction('breeding.edit', __('translations.actions.edit')),
         ];
     }

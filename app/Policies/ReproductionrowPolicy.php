@@ -37,12 +37,14 @@ class ReproductionrowPolicy
 
     public function delete(User $user, Reproductionrow $reproductionrow)
     {
-        return $user->can('reproductions.destroy');
+        return $reproductionrow->deleted_at === null 
+            && $user->can('reproductions.destroy');
     }
 
     public function restore(User $user, Reproductionrow $reproductionrow)
     {
-        return $user->can('reproductions.destroy');
+        return $reproductionrow->deleted_at !== null 
+            && $user->can('reproductions.destroy');
     }
 
     public function forceDelete(User $user, Reproductionrow $reproductionrow)

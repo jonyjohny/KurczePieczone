@@ -37,12 +37,14 @@ class IncubationincubatorPolicy
 
     public function delete(User $user, Incubationincubator $incubationincubator)
     {
-        return $user->can('incubations.destroy');
+        return $incubationincubator->deleted_at === null 
+        && $user->can('incubations.destroy');
     }
 
     public function restore(User $user, Incubationincubator $incubationincubator)
     {
-        return $user->can('incubations.destroy');
+        return $incubationincubator->deleted_at !== null 
+        && $user->can('incubations.destroy');
     }
 
     public function forceDelete(User $user, Incubationincubator $incubationincubator)

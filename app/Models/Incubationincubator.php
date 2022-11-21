@@ -17,7 +17,7 @@ class Incubationincubator extends Model
         'remarks'
     ];
 
-    public function reproductions()
+    public function incubation()
     {
         return $this->belongsTo(Incubation::class, 'id_incubation');
     }

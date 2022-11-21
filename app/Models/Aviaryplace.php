@@ -17,7 +17,7 @@ class Aviaryplace extends Model
         'remarks'
     ];
 
-    public function reproductions()
+    public function aviary()
     {
         return $this->belongsTo(Aviary::class, 'id_aviary');
     }

@@ -27,6 +27,7 @@
             <div class="">
                 <x-select
                 name="breedingplace.users"
+                placeholder="{{ __('translations.select') }}"
                 wire:model.defer="breedingplace.id_user"
                 :async-data="route('users.allOpen')"
                 option-label="name"

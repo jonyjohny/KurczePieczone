@@ -44,8 +44,13 @@ class BreedingplaceForm extends Component
         ];
     }
 
-    public function mount(Breedingplace $breedingplace, Bool $editMode)
+    public function mount(Breeding $breeding, Breedingplace $breedingplace, Bool $editMode)
     {
+        if($breeding->id!=null){
+            $this->breeding=$breeding;
+        }else{
+            $this->breeding=$breedingplace->breeding;
+        }
         $this->breedingplace = $breedingplace;
         $this->editMode = $editMode;
     }
@@ -67,7 +72,7 @@ class BreedingplaceForm extends Component
             $this->authorize('create', Breedingplace::class);
         }
         $this->validate();
-        $this->breedingplace->save();
+        $this->breeding->breedingplace()->save($this->breedingplace);
         $this->notification()->success(
             $title = $this->editMode
             ? __('breedingplaces.messages.successes.update_title')

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class UserController extends Controller
 {
@@ -39,9 +42,29 @@ class UserController extends Controller
 
     public function allOpen()
     {
-        return User::all()->map(function ($value){
-            return ['name'=> $value->name, 'id' => $value->id];
-        })->toArray();
+        return User::with("roles")->whereHas("roles", function($q) {
+            $q->whereIn("name", ["worker"]);
+        })->get();
     }
 
+public function allRoles(Request $request): Collection
+{
+    return Role::query()
+        ->select('id', 'name')
+        ->orderBy('name')
+        ->when(
+            $request->search,
+            fn (Builder $query) => $query
+                ->where('name', 'like', "%{$request->search}%")
+        )
+        ->when(
+            $request->exists('selected'),
+            fn (Builder $query) => $query->whereIn('id', $request->input('selected', [])),
+            fn (Builder $query) => $query->limit(10)
+        )
+        ->get()
+        ->map(function (Role $roles) {
+            return $roles;
+        });
+}
 }

@@ -29,6 +29,8 @@ Route::get('/', function () {
 
 Route::get('/users/allOpen', [UserController::class, 'allOpen'])->name('users.allOpen');
 
+Route::get('/users/allRoles', [UserController::class, 'allRoles'])->name('users.allRoles');
+
 Route::resource('users', UserController::class)->only([
     'index', 'create', 'edit'
 ]);

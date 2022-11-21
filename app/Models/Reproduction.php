@@ -16,7 +16,7 @@ class Reproduction extends Model
         'remarks'
     ];
 
-    public function reporductionRows() {
+    public function reporductionRow() {
         return $this->hasMany(ReproductionRow::class,'id_reproduction');
     }
 }

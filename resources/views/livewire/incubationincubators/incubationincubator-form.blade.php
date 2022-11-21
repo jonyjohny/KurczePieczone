@@ -27,6 +27,7 @@
             <div class="">
                 <x-select
                 name="incubationincubator.users"
+                placeholder="{{ __('translations.select') }}"
                 wire:model.defer="incubationincubator.id_user"
                 :async-data="route('users.allOpen')"
                 option-label="name"

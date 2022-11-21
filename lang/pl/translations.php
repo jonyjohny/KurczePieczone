@@ -68,6 +68,7 @@ return [
     'save' => 'Zapisz',
     'back' => 'Wstecz',
     'enter' => 'Wprowadź wartość',
+    'select' => 'Wybierz wartość',
     'messages' => [
         'successes' => [
             'update_title' => 'Zaktualizowano',

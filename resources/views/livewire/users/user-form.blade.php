@@ -27,6 +27,17 @@
             <div class="">
                 <x-inputs.password placeholder="{{ __('translations.enter') }}" wire:model="user.password" />
             </div>
+            <div class="">
+                <label for="password">{{ __('users.attributes.roles') }}</label>
+            </div>
+            <x-select
+            multiselect
+            placeholder="{{ __('translations.select') }}"
+            :async-data="route('users.allRoles')"
+            option-label="name"
+            option-value="id"
+            wire:model.defer="rolesId"
+            />
         </div>
         <hr class="my-2">
         <div class="flex justify-end pt-2">

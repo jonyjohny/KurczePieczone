@@ -7,6 +7,7 @@ use Livewire\Component;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserForm extends Component
@@ -17,6 +18,7 @@ class UserForm extends Component
     public User $user;
     public Bool $editMode;
     public $editModeSecurity;
+    public $rolesId;
 
     public function rules()
     {
@@ -33,6 +35,9 @@ class UserForm extends Component
             ],
             'user.password' => [
                 'required',
+            ],
+            'rolesId' => [
+                'required',
             ]
         ];
     }
@@ -41,15 +46,16 @@ class UserForm extends Component
         return [
             'name' => Str::lower(__('users.attributes.name')),
             'email' => Str::lower(__('users.attributes.email')),
-            'password' => Str::lower(__('users.attributes.password'))
+            'password' => Str::lower(__('users.attributes.password')),
         ];
-    }
+    } 
 
-    public function mount(User $user, Bool $editMode)
+    public function mount(User $user, Bool $editMode)  
     {
         $this->user = $user;
         $this->editModeSecurity = $user->password;
         $this->editMode = $editMode;
+        $this->rolesId = $this->user->roles->pluck("id")->toArray();
     }
 
     public function render()
@@ -71,6 +77,7 @@ class UserForm extends Component
         if ($this->editModeSecurity!=$this->user->password){
             $this->user->password = Hash::make($this->user->password);
         }
+        $this->user->syncRoles($this->rolesId);
         $this->user->save();
         $this->notification()->success(
             $title = $this->editMode

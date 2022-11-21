@@ -18,7 +18,7 @@ class Reproductionrow extends Model
         'remarks'
     ];
 
-    public function reproductions()
+    public function reproduction()
     {
         return $this->belongsTo(Reproduction::class, 'id_reproduction');
     }

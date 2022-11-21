@@ -17,7 +17,7 @@ class Breedingplace extends Model
         'remarks'
     ];
     
-    public function reproductions()
+    public function breeding()
     {
         return $this->belongsTo(Breeding::class, 'id_breeding');
     }

@@ -76,7 +76,6 @@ class UsersTableView extends TableView
         if(request()->user()->can('viewAnyDeleted', User::class )){
             return [
                 $model->name,
-                
                 $model->email,
                 $model->roles->implode('name', ', '),
                 $model->created_at,

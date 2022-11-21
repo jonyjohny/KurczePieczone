@@ -44,8 +44,13 @@ class IncubationincubatorForm extends Component
         ];
     }
 
-    public function mount(Incubationincubator $incubationincubator, Bool $editMode)
+    public function mount(Incubation $incubation, Incubationincubator $incubationincubator, Bool $editMode)
     {
+        if($incubation->id!=null){
+            $this->incubation=$incubation;
+        }else{
+            $this->incubation=$incubationincubator->incubation;
+        }
         $this->incubationincubator = $incubationincubator;
         $this->editMode = $editMode;
     }
@@ -67,7 +72,7 @@ class IncubationincubatorForm extends Component
             $this->authorize('create', Incubationincubator::class);
         }
         $this->validate();
-        $this->incubationincubator->save();
+        $this->incubation->incubationincubator()->save($this->incubationincubator);
         $this->notification()->success(
             $title = $this->editMode
             ? __('incubationincubators.messages.successes.update_title')

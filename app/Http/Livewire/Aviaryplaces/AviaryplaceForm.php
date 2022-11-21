@@ -44,8 +44,13 @@ class AviaryplaceForm extends Component
         ];
     }
 
-    public function mount(Aviaryplace $aviaryplace, Bool $editMode)
+    public function mount(Aviary $aviary, Aviaryplace $aviaryplace, Bool $editMode)
     {
+        if($aviary->id!=null){
+            $this->aviary=$aviary;
+        }else{
+            $this->aviary=$aviaryplace->aviary;
+        }
         $this->aviaryplace = $aviaryplace;
         $this->editMode = $editMode;
     }
@@ -67,7 +72,7 @@ class AviaryplaceForm extends Component
             $this->authorize('create', Aviaryplace::class);
         }
         $this->validate();
-        $this->aviaryplace->save();
+        $this->aviary->aviaryplace()->save($this->aviaryplace);
         $this->notification()->success(
             $title = $this->editMode
             ? __('aviaryplaces.messages.successes.update_title')

@@ -16,7 +16,7 @@ class Aviary extends Model
         'remarks'
     ];
 
-    public function reporductionRows() 
+    public function aviaryplace() 
     {
         return $this->hasMany(Aviaryplace::class,'id_aviary');
     }

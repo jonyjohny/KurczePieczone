@@ -18,7 +18,7 @@ class Breeding extends Model
         'remarks'
     ];
 
-    public function reporductionRows() 
+    public function breedingplace() 
     {
         return $this->hasMany(Breedingplace::class,'id_breeding');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Reproductionrows;
 
+use App\Models\User;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
@@ -31,8 +32,6 @@ class ReproductionrowForm extends Component
             'reproductionrow.id_user' => [
                 'required',
             ],
-            'reproductionrow.id_reproduction' => [
-            ],
         ];
     }
 
@@ -44,8 +43,13 @@ class ReproductionrowForm extends Component
         ];
     }
 
-    public function mount(Reproductionrow $reproductionrow, Bool $editMode)
+    public function mount(Reproduction $reproduction, Reproductionrow $reproductionrow, Bool $editMode)
     {
+        if($reproduction->id!=null){
+            $this->reproduction=$reproduction;
+        }else{
+            $this->reproduction=$reproductionrow->reproduction;
+        }
         $this->reproductionrow = $reproductionrow;
         $this->editMode = $editMode;
     }
@@ -67,7 +71,7 @@ class ReproductionrowForm extends Component
             $this->authorize('create', Reproductionrow::class);
         }
         $this->validate();
-        $this->reproductionrow->save();
+        $this->reproduction->reporductionRow()->save($this->reproductionrow);
         $this->notification()->success(
             $title = $this->editMode
             ? __('reproductionrows.messages.successes.update_title')

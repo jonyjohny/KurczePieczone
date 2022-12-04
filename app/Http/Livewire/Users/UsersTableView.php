@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Users;
 
 use App\Models\User;
 use WireUi\Traits\Actions;
+use LaravelViews\Facades\UI;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use App\Http\Livewire\Users\Actions\EditUserAction;
@@ -49,6 +50,7 @@ class UsersTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', User::class )){
             return [
+                'Avatar',
                 Header::title(__('users.attributes.name'))->sortBy('name'),
                 Header::title(__('users.attributes.email'))->sortBy('email'),
                 __('users.attributes.roles'),
@@ -58,6 +60,7 @@ class UsersTableView extends TableView
             ];
         }
         return [
+            'Avatar',
             Header::title(__('users.attributes.name'))->sortBy('name'),
             Header::title(__('users.attributes.email'))->sortBy('email'),
             __('users.attributes.roles'),
@@ -75,6 +78,7 @@ class UsersTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', User::class )){
             return [
+                UI::avatar(asset($model->profile_photo_url)),
                 $model->name,
                 $model->email,
                 $model->roles->implode('name', ', '),
@@ -85,6 +89,7 @@ class UsersTableView extends TableView
         }
         return User::query();
         return [
+            UI::avatar(asset($model->profile_photo_url)),
             $model->name,
             $model->email,
             $model->roles->implode('name', ', '),

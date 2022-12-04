@@ -21,18 +21,25 @@
         </style>
     </head>
     <body class="antialiased">
+
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
+                    <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 px-6 dark:text-gray-500 underline">{{ __('mainWebsite.Breeding') }}</a>
                     @endauth
+                    <select onchange="location = this.value;"> 
+                        <option disabled selected hidden>{{ __('mainWebsite.SelectLang') }}</option>
+                        <option value="{{ url('change-language/pl') }}">Polish</option>
+                        <option value="{{ url('change-language/en') }}">English</option>
+                        <option value="{{ url('change-language/fr') }}">French</option>
+                        <option value="{{ url('change-language/it') }}">Italian</option>
+                        <option value="{{ url('change-language/de') }}">German</option>
+                        <option value="{{ url('change-language/dk') }}">Danish</option>
+                        <option value="{{ url('change-language/cz') }}">Czech</option>
+                        <option value="{{ url('change-language/ru') }}">Russian</option>
+                    </select> 
                 </div>
             @endif
 
@@ -123,7 +130,16 @@
                     </div>
 
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+
+
+
+
+
+
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+                        
+                        
+                        
                     </div>
                 </div>
             </div>

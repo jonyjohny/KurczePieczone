@@ -16,5 +16,12 @@ return [
     'failed' => 'Te dane uwierzytelniające nie są zgodne z naszymi danymi.',
     'password' => 'Podane hasło jest nieprawidłowe.',
     'throttle' => 'Za dużo prób logowania. Spróbuj ponownie za :seconds sekund.',
-
+    'Rememberme' => 'Zapamiętaj mnie',
+    'Password' => 'Hasło',
+    'Email' => 'Email',
+    'Forgotyourpassword' => 'Zapomniałeś hasła?',
+    'Login' => 'Zaloguj sie',
+    'Forgotyourpasswordinfo' => 'Zapomniałeś hasła? Nie ma problemu. Po prostu podaj nam swój adres e-mail, a wyślemy Ci link resetowania hasła, który pozwoli Ci wybrać nowe.',
+    'EmailPasswordResetLink' => 'Wyślij link',
+    'Whoops' => 'Ups! Coś poszło nie tak.',
 ];

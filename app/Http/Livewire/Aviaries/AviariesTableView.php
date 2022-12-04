@@ -78,8 +78,8 @@ class AviariesTableView extends TableView
             return [
                 $model->name,
                 $model->remarks,
-                $model->closed,
-                $model->archived,
+                $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+                $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
                 $model->created_at,
                 $model->updated_at,
                 $model->deleted_at,
@@ -88,8 +88,8 @@ class AviariesTableView extends TableView
         return [
             $model->name,
             $model->remarks,
-            $model->closed,
-            $model->archived,
+            $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+            $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
             $model->created_at,
             $model->updated_at,
         ];

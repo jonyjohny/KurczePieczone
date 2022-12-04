@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Reproductions;
 
 use WireUi\Traits\Actions;
 use App\Models\Reproduction;
+use LaravelViews\Facades\UI;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -77,8 +78,8 @@ class ReproductionsTableView extends TableView
             return [
                 $model->name,
                 $model->remarks,
-                $model->closed,
-                $model->archived,
+                $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+                $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
                 $model->created_at,
                 $model->updated_at,
                 $model->deleted_at,
@@ -87,8 +88,8 @@ class ReproductionsTableView extends TableView
         return [
             $model->name,
             $model->remarks,
-            $model->closed,
-            $model->archived,
+            $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+            $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
             $model->created_at,
             $model->updated_at,
         ];

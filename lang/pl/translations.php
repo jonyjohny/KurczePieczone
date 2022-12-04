@@ -87,4 +87,6 @@ return [
         'create' => 'Stwórz',
         'open' => 'Otwórz',
     ],
+    'Profile Information' => 'test',
+    'Photo' => 'Zdjęcie'
 ];

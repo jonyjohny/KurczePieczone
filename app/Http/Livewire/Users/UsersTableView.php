@@ -50,7 +50,7 @@ class UsersTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', User::class )){
             return [
-                'Avatar',
+                __('users.attributes.Avatar'),
                 Header::title(__('users.attributes.name'))->sortBy('name'),
                 Header::title(__('users.attributes.email'))->sortBy('email'),
                 __('users.attributes.roles'),
@@ -60,7 +60,7 @@ class UsersTableView extends TableView
             ];
         }
         return [
-            'Avatar',
+            __('users.attributes.Avatar'),
             Header::title(__('users.attributes.name'))->sortBy('name'),
             Header::title(__('users.attributes.email'))->sortBy('email'),
             __('users.attributes.roles'),

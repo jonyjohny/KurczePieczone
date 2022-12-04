@@ -6,7 +6,8 @@ return [
         'email' => 'Email',
         'roles' => 'Role',
         'password' => 'Hasło',
-        'email_verified_at' => 'Weryfikacja'
+        'email_verified_at' => 'Weryfikacja',
+        'Avatar' => 'Awatar'
     ],
     'labels' => [
         'edit_form_title' => 'Edycja użytkownika',

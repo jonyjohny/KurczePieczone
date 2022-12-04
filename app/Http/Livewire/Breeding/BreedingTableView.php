@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Breeding;
 
 use App\Models\Breeding;
 use WireUi\Traits\Actions;
+use LaravelViews\Facades\UI;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;

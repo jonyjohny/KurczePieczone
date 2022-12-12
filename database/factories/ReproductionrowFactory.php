@@ -23,6 +23,12 @@ class ReproductionrowFactory extends Factory
             'remarks' => $this->faker->text,
             'id_reproduction' => $this->faker->randomElement(Reproduction::pluck('id')),
             'id_user' => $this->faker->randomElement(User::pluck('id')),
+            'hens' => $this->faker->randomNumber(5, false),
+            'roosters' => $this->faker->randomNumber(5, false),
+            'added' => $this->faker->dateTimeBetween(
+                '- 8 weeks',
+                '- 4 weeks',
+            ),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',

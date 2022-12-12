@@ -23,6 +23,11 @@ class BreedingplaceFactory extends Factory
             'remarks' => $this->faker->text,
             'id_breeding' => $this->faker->randomElement(Breeding::pluck('id')),
             'id_user' => $this->faker->randomElement(User::pluck('id')),
+            'animals' => $this->faker->randomNumber(5, false),
+            'added' => $this->faker->dateTimeBetween(
+                '- 8 weeks',
+                '- 4 weeks',
+            ),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',

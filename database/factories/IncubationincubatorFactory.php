@@ -23,6 +23,11 @@ class IncubationincubatorFactory extends Factory
             'remarks' => $this->faker->text,
             'id_incubation' => $this->faker->randomElement(Incubation::pluck('id')),
             'id_user' => $this->faker->randomElement(User::pluck('id')),
+            'eggs' => $this->faker->randomNumber(5, false),
+            'added' => $this->faker->dateTimeBetween(
+                '- 8 weeks',
+                '- 4 weeks',
+            ),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',

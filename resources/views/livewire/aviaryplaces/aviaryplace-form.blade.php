@@ -16,12 +16,6 @@
                 <x-input placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.name" />
             </div>
             <div class="">
-                <label for="remarks">{{ __('translations.attributes.remarks') }}</label>
-            </div>
-            <div class="">
-                <x-input placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.remarks" />
-            </div>
-            <div class="">
                 <label for="id_user">{{ __('translations.attributes.patroness') }}</label>
             </div>
             <div class="">
@@ -33,6 +27,42 @@
                 option-label="name"
                 option-value="id"
             />
+            </div>
+            <div class="">
+                <label for="animals">{{ __('aviaryplaces.labels.animals') }}</label>
+            </div>
+            <div class="">
+                <x-inputs.number placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.animals" />
+            </div>
+            <div class="">
+                <label for="hens">{{ __('aviaryplaces.labels.hens') }}</label>
+            </div>
+            <div class="">
+                <x-inputs.number placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.hens" />
+            </div>
+            <div class="">
+                <label for="roosters">{{ __('aviaryplaces.labels.roosters') }}</label>
+            </div>
+            <div class="">
+                <x-inputs.number placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.roosters" />
+            </div>
+            <div class="">
+                <label for="age">{{ __('aviaryplaces.labels.age') }}</label>
+            </div>
+            <div class="">
+                <x-inputs.number placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.age" />
+            </div>
+            <div class="">
+                <label for="added">{{ __('translations.attributes.added') }}</label>
+            </div>
+            <div class="">
+                <x-datetime-picker without-time placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.added" />
+            </div>
+            <div class="">
+                <label for="remarks">{{ __('translations.attributes.remarks') }}</label>
+            </div>
+            <div class="">
+                <x-input placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.remarks" />
             </div>
         </div>
         <hr class="my-2">

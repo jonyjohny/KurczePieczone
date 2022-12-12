@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('id_breeding')->references('id')->on('breeding');
             $table->foreignId('id_user')->references('id')->on('users');
+            $table->integer('animals');
+            $table->date('added');
             $table->longText('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -33,6 +33,12 @@ class IncubationincubatorForm extends Component
             ],
             'incubationincubator.id_incubation' => [
             ],
+            'incubationincubator.eggs' => [
+                'required',
+            ],
+            'incubationincubator.added' => [
+                'required',
+            ],
         ];
     }
 
@@ -41,6 +47,8 @@ class IncubationincubatorForm extends Component
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
             'users' => Str::lower(__('translations.attributes.patroness')),
+            'eggs' => Str::lower(__('incubationincubators.labels.eggs')),
+            'added' => Str::lower(__('translations.attributes.added')),
         ];
     }
 

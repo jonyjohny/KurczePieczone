@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('id_reproduction')->references('id')->on('reproductions');
             $table->foreignId('id_user')->references('id')->on('users');
+            $table->integer('hens');
+            $table->integer('roosters');
+            $table->date('added');
             $table->longText('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();

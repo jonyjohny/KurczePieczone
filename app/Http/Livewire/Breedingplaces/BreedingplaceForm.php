@@ -33,6 +33,12 @@ class BreedingplaceForm extends Component
             ],
             'breedingplace.id_breeding' => [
             ],
+            'breedingplace.animals' => [
+                'required',
+            ],
+            'breedingplace.added' => [
+                'required',
+            ],
         ];
     }
 
@@ -41,6 +47,8 @@ class BreedingplaceForm extends Component
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
             'users' => Str::lower(__('translations.attributes.patroness')),
+            'animals' => Str::lower(__('breedingplaces.labels.animals')),
+            'added' => Str::lower(__('translations.attributes.added')),
         ];
     }
 

@@ -23,6 +23,14 @@ class AviaryplaceFactory extends Factory
             'remarks' => $this->faker->text,
             'id_aviary' => $this->faker->randomElement(Aviary::pluck('id')),
             'id_user' => $this->faker->randomElement(User::pluck('id')),
+            'animals' => $this->faker->randomNumber(5, false),
+            'hens' => $this->faker->randomNumber(5, false),
+            'roosters' => $this->faker->randomNumber(5, false),
+            'age' => $this->faker->randomNumber(5, false),
+            'added' => $this->faker->dateTimeBetween(
+                '- 8 weeks',
+                '- 4 weeks',
+            ),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',

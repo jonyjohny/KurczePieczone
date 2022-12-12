@@ -4,6 +4,8 @@ return [
     'labels' => [
         'edit_form_title' => 'Edycja rzędu reprodukcji',
         'create_form_title' => 'Tworzenie nowego rzędu reprodukcji',
+        'hens' => 'Kury',
+        'roosters' => 'Koguty',
     ],
     'messages' => [ 
         'successes' => [ 

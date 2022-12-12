@@ -19,6 +19,11 @@ return new class extends Migration
             $table->foreignId('id_aviary')->references('id')->on('aviaries');
             $table->foreignId('id_user')->references('id')->on('users');
             $table->longText('remarks')->nullable();
+            $table->integer('animals');
+            $table->integer('hens')->nullable();
+            $table->integer('roosters')->nullable();
+            $table->integer('age')->nullable();
+            $table->date('added');
             $table->timestamps();
             $table->softDeletes();
         });

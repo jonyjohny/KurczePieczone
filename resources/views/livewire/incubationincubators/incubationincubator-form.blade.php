@@ -16,12 +16,6 @@
                 <x-input placeholder="{{ __('translations.enter') }}" wire:model="incubationincubator.name" />
             </div>
             <div class="">
-                <label for="remarks">{{ __('translations.attributes.remarks') }}</label>
-            </div>
-            <div class="">
-                <x-input placeholder="{{ __('translations.enter') }}" wire:model="incubationincubator.remarks" />
-            </div>
-            <div class="">
                 <label for="id_user">{{ __('translations.attributes.patroness') }}</label>
             </div>
             <div class="">
@@ -33,6 +27,24 @@
                 option-label="name"
                 option-value="id"
             />
+            </div>
+            <div class="">
+                <label for="eggs">{{ __('incubationincubators.labels.eggs') }}</label>
+            </div>
+            <div class="">
+                <x-inputs.number placeholder="{{ __('translations.enter') }}" wire:model="incubationincubator.eggs" />
+            </div>
+            <div class="">
+                <label for="added">{{ __('translations.attributes.added') }}</label>
+            </div>
+            <div class="">
+                <x-datetime-picker without-time placeholder="{{ __('translations.enter') }}" wire:model="incubationincubator.added" />
+            </div>
+            <div class="">
+                <label for="remarks">{{ __('translations.attributes.remarks') }}</label>
+            </div>
+            <div class="">
+                <x-input placeholder="{{ __('translations.enter') }}" wire:model="incubationincubator.remarks" />
             </div>
         </div>
         <hr class="my-2">

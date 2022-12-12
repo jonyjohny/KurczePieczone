@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('id_incubation')->references('id')->on('incubations');
             $table->foreignId('id_user')->references('id')->on('users');
+            $table->integer('eggs');
+            $table->date('added');
             $table->longText('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();

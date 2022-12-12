@@ -33,6 +33,18 @@ class AviaryplaceForm extends Component
             ],
             'aviaryplace.id_aviary' => [
             ],
+            'aviaryplace.animals' => [
+                'required',
+            ],
+            'aviaryplace.hens' => [
+            ],
+            'aviaryplace.roosters' => [
+            ],
+            'aviaryplace.age' => [
+            ],
+            'aviaryplace.added' => [
+                'required',
+            ],
         ];
     }
 
@@ -41,6 +53,11 @@ class AviaryplaceForm extends Component
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
             'users' => Str::lower(__('translations.attributes.patroness')),
+            'animals' => Str::lower(__('aviaryplaces.labels.animals')),
+            'hens' => Str::lower(__('aviaryplaces.labels.hens')),
+            'roosters' => Str::lower(__('aviaryplaces.labels.roosters')),
+            'age' => Str::lower(__('aviaryplaces.labels.age')),
+            'added' => Str::lower(__('translations.attributes.added')),
         ];
     }
 

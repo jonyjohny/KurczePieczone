@@ -11,6 +11,7 @@ return [
         'archived' => 'Zarchiwizowane',
         'softdeletefiltr' => 'Usunięte',
         'patroness' => 'Opiekun',
+        'added' => 'Wstawiono',
     ],
     'menu' => [
         'dictionaries' => 'Słowniki',
@@ -34,7 +35,8 @@ return [
     'attribute' => [
         'created_at' => 'utworzono',
         'updated_at' => 'zaktualizowano',
-        'deleted_at' => 'usunięto'
+        'deleted_at' => 'usunięto',
+        'added' => 'wstawiono',
     ],
     'navigation' => [
         'Dashboard' => 'Główna',

@@ -4,6 +4,10 @@ return [
     'labels' => [
         'edit_form_title' => 'Edycja woliery',
         'create_form_title' => 'Tworzenie nowej woliery',
+        'animals' => 'Zwierzęta',
+        'hens' => 'Kury',
+        'roosters' => 'Koguty',
+        'age' => 'Wiek',
     ],
     'messages' => [ 
         'successes' => [ 

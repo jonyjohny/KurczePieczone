@@ -14,7 +14,7 @@ class EditBreedingplaceAction extends RedirectAction
 
     public function renderIf($model, View $view)
     {
-        return request()->user()->can('update', $model);
+        return request()->user()->can('delete', $model);
     }
 
 

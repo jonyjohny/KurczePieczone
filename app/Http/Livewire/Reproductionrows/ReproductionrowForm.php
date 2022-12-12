@@ -32,6 +32,15 @@ class ReproductionrowForm extends Component
             'reproductionrow.id_user' => [
                 'required',
             ],
+            'reproductionrow.roosters' => [
+                'required',
+            ],
+            'reproductionrow.hens' => [
+                'required',
+            ],
+            'reproductionrow.added' => [
+                'required',
+            ],
         ];
     }
 
@@ -40,6 +49,9 @@ class ReproductionrowForm extends Component
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
             'users' => Str::lower(__('translations.attributes.patroness')),
+            'roosters' => Str::lower(__('reproductionrows.labels.roosters')),
+            'hens' => Str::lower(__('reproductionrows.labels.hens')),
+            'added' => Str::lower(__('translations.attributes.added')),
         ];
     }
 

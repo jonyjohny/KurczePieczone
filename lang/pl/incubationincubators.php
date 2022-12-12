@@ -4,6 +4,7 @@ return [
     'labels' => [
         'edit_form_title' => 'Edycja inkubatora',
         'create_form_title' => 'Tworzenie nowego inkubatora',
+        'eggs' => 'Jajka',
     ],
     'messages' => [ 
         'successes' => [ 

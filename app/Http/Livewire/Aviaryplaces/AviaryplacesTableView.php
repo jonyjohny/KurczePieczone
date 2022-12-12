@@ -23,7 +23,9 @@ class AviaryplacesTableView extends TableView
     public $searchBy = [
         'name',
         'users.name',
+        'age',
         'remarks',
+        'added',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -54,7 +56,12 @@ class AviaryplacesTableView extends TableView
             return [
                 Header::title(__('translations.attributes.name'))->sortBy('name'),
                 __('translations.attributes.patroness'),
+                Header::title(__('aviaryplaces.labels.animals'))->sortBy('animals'),
+                Header::title(__('aviaryplaces.labels.hens'))->sortBy('hens'),
+                Header::title(__('aviaryplaces.labels.roosters'))->sortBy('roosters'),
+                Header::title(__('aviaryplaces.labels.age'))->sortBy('age'),
                 Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
+                Header::title(__('translations.attributes.added'))->sortBy('added'),
                 Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
                 Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
@@ -63,7 +70,12 @@ class AviaryplacesTableView extends TableView
         return [
             Header::title(__('translations.attributes.name'))->sortBy('name'),
             __('translations.attributes.patroness'),
+            Header::title(__('aviaryplaces.labels.animals'))->sortBy('animals'),
+            Header::title(__('aviaryplaces.labels.hens'))->sortBy('hens'),
+            Header::title(__('aviaryplaces.labels.roosters'))->sortBy('roosters'),
+            Header::title(__('aviaryplaces.labels.age'))->sortBy('age'),
             Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
+            Header::title(__('translations.attributes.added'))->sortBy('added'),
             Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
         ];
@@ -80,13 +92,28 @@ class AviaryplacesTableView extends TableView
             return [
                 $model->name,
                 $model->users->name,
+                $model->animals,
+                $model->hens,
+                $model->roosters,
+                $model->age,
                 $model->remarks,
+                $model->added,
                 $model->created_at,
                 $model->updated_at,
                 $model->deleted_at,
             ];
         }
         return [
+            $model->name,
+            $model->users->name,
+            $model->animals,
+            $model->hens,
+            $model->roosters,
+            $model->age,
+            $model->remarks,
+            $model->added,
+            $model->created_at,
+            $model->updated_at,
         ];
     }
 

@@ -4,6 +4,7 @@ return [
     'labels' => [
         'edit_form_title' => 'Edycja miejsca do odchowu',
         'create_form_title' => 'Tworzenie nowego miejsca do odchowu',
+        'animals' => 'Zwierzęta',
     ],
     'messages' => [ 
         'successes' => [ 

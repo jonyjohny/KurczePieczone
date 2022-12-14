@@ -6,9 +6,11 @@ use App\Models\User;
 use App\Models\Incubation;
 use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use LaravelViews\Views\TableView;
 use App\Models\Incubationincubator;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Livewire\Incubationincubators\Actions\AddIncubationReportAction;
+use App\Http\Livewire\Incubationincubators\Actions\OpenIncubationReportAction;
 use App\Http\Livewire\Incubationincubators\Actions\EditIncubationincubatorAction;
 use App\Http\Livewire\Incubationincubators\Actions\RestoreIncubationincubatorAction;
 use App\Http\Livewire\Incubationincubators\Actions\SoftDeleteIncubationincubatorAction;
@@ -102,12 +104,16 @@ class IncubationincubatorsTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Incubation::class )){
             return [
+                new AddIncubationReportAction('incubationreport.create',__('translations.actions.addReport')),
+                new OpenIncubationReportAction('incubationreport.index',__('translations.actions.openReport')),
                 new EditIncubationincubatorAction('incubationincubators.edit', __('translations.actions.edit')),
                 new SoftDeleteIncubationincubatorAction(),
                 new RestoreIncubationincubatorAction(),
             ];        
         }
         return [
+            new AddIncubationReportAction('incubationreport.create',__('translations.actions.addReport')),
+            new OpenIncubationReportAction('incubationreport.index',__('translations.actions.openReport')),
             new EditIncubationincubatorAction('incubationincubators.edit', __('translations.actions.edit')),
             new SoftDeleteIncubationincubatorAction(),
         ];

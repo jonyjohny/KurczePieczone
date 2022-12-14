@@ -18,7 +18,12 @@ class ReproductionReportPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->can('reproductions.index');
+    }
+
+    public function viewAnyDeleted(User $user)
+    {
+        return $user->can('reproductions.destroy');
     }
 
     /**
@@ -30,7 +35,7 @@ class ReproductionReportPolicy
      */
     public function view(User $user, ReproductionReport $reproductionReport)
     {
-        //
+        return $user->can('reproductions.index');
     }
 
     /**
@@ -41,7 +46,7 @@ class ReproductionReportPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->can('reproductions.store');
     }
 
     /**
@@ -53,7 +58,7 @@ class ReproductionReportPolicy
      */
     public function update(User $user, ReproductionReport $reproductionReport)
     {
-        //
+        return $user->can('reproductions.store');
     }
 
     /**
@@ -65,7 +70,8 @@ class ReproductionReportPolicy
      */
     public function delete(User $user, ReproductionReport $reproductionReport)
     {
-        //
+        return $reproductionReport->deleted_at === null 
+        && $user->can('reproductions.store');
     }
 
     /**
@@ -77,7 +83,8 @@ class ReproductionReportPolicy
      */
     public function restore(User $user, ReproductionReport $reproductionReport)
     {
-        //
+        return $reproductionReport->deleted_at !== null 
+        && $user->can('reproductions.destroy');
     }
 
     /**

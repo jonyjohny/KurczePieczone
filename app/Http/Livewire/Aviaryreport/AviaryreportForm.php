@@ -9,7 +9,7 @@ use App\Models\Aviaryplace;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class AviaryreportTableView extends Component
+class AviaryreportForm extends Component
 {
     use Actions;
     use AuthorizesRequests;

@@ -9,6 +9,8 @@ use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Aviaryplaces\Actions\EditAviaryplaceAction;
+use App\Http\Livewire\Aviaryplaces\Actions\AddAviarypReportAction;
+use App\Http\Livewire\Aviaryplaces\Actions\OpenAviaryReportAction;
 use App\Http\Livewire\Aviaryplaces\Actions\RestoreAviaryplaceAction;
 use App\Http\Livewire\Aviaryplaces\Actions\SoftDeleteAviaryplaceAction;
 
@@ -121,12 +123,16 @@ class AviaryplacesTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Aviary::class )){
             return [
+                new AddAviarypReportAction('aviaryreport.create',__('translations.actions.addReport')),
+                new OpenAviaryReportAction('aviaryreport.index',__('translations.actions.openReport')),
                 new EditAviaryplaceAction('aviaryplaces.edit', __('translations.actions.edit')),
                 new SoftDeleteAviaryplaceAction(),
                 new RestoreAviaryplaceAction(),
             ];        
         }
         return [
+            new AddAviarypReportAction('aviaryreport.create',__('translations.actions.addReport')),
+            new OpenAviaryReportAction('aviaryreport.index',__('translations.actions.openReport')),
             new EditAviaryplaceAction('aviaryplaces.edit', __('translations.actions.edit')),
             new SoftDeleteAviaryplaceAction(),
         ];

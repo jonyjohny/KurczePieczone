@@ -91,6 +91,8 @@ return [
         'restore' => 'Przywróć',
         'create' => 'Stwórz',
         'open' => 'Otwórz',
+        'openReport' => 'Otwórz Raport',
+        'addReport' => 'Dodaj Raport',
     ],
     'Profile Information' => 'test',
     'Photo' => 'Zdjęcie'

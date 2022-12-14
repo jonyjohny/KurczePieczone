@@ -31,7 +31,7 @@ class AviaryreportTableView extends TableView
     public function repository()
     {   
         if (!$this->aviaryplace) {
-            $this->aviaviaryplaceary = request()->route('aviaryplace.id');
+            $this->aviaryplace = request()->route('aviaryplace.id');
         }
 
         if(request()->user()->can('viewAnyDeleted', Aviary::class )){

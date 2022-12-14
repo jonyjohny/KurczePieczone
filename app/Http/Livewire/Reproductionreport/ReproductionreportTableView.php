@@ -31,7 +31,7 @@ class ReproductionreportTableView extends TableView
     public function repository()
     {   
         if (!$this->reproductionrow) {
-            $this->reproductionrow = request()->route('reproduction.id');
+            $this->reproductionrow = request()->route('reproductionrow.id');
         }
 
         if(request()->user()->can('viewAnyDeleted', Reproduction::class )){

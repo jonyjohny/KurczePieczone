@@ -8,6 +8,8 @@ use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Reproductionrows\Actions\EditReproductionrowAction;
+use App\Http\Livewire\Reproductionrows\Actions\AddReproductionReportAction;
+use App\Http\Livewire\Reproductionrows\Actions\OpenReproductionReportAction;
 use App\Http\Livewire\Reproductionrows\Actions\RestoreReproductionrowAction;
 use App\Http\Livewire\Reproductionrows\Actions\SoftDeleteReproductionrowAction;
 
@@ -111,12 +113,16 @@ class ReproductionrowsTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
             return [
+                new AddReproductionReportAction('reproductionreport.create',__('translations.actions.addReport')),
+                new OpenReproductionReportAction('reproductionreport.index',__('translations.actions.openReport')),
                 new EditReproductionrowAction('reproductionrows.edit', __('translations.actions.edit')),
                 new SoftDeleteReproductionrowAction(),
                 new RestoreReproductionrowAction(),
             ];        
         }
         return [
+            new AddReproductionReportAction('reproductionreport.create',__('translations.actions.addReport')),
+            new OpenReproductionReportAction('reproductionreport.index',__('translations.actions.openReport')),
             new EditReproductionrowAction('reproductionrows.edit', __('translations.actions.edit')),
             new SoftDeleteReproductionrowAction(),
         ];

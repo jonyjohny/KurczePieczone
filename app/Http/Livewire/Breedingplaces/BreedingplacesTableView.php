@@ -9,7 +9,9 @@ use App\Models\Breedingplace;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Livewire\Breedingplaces\Actions\AddBreedingReportAction;
 use App\Http\Livewire\Breedingplaces\Actions\EditBreedingplaceAction;
+use App\Http\Livewire\Breedingplaces\Actions\OpenBreedingReportAction;
 use App\Http\Livewire\Breedingplaces\Actions\RestoreBreedingplaceAction;
 use App\Http\Livewire\Breedingplaces\Actions\SoftDeleteBreedingplaceAction;
 
@@ -109,12 +111,16 @@ class BreedingplacesTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Breeding::class )){
             return [
+                new AddBreedingReportAction('breedingreport.create',__('translations.actions.addReport')),
+                new OpenBreedingReportAction('breedingreport.index',__('translations.actions.openReport')),
                 new EditBreedingplaceAction('breedingplaces.edit', __('translations.actions.edit')),
                 new SoftDeleteBreedingplaceAction(),
                 new RestoreBreedingplaceAction(),
             ];        
         }
         return [
+            new AddBreedingReportAction('breedingreport.create',__('translations.actions.addReport')),
+            new OpenBreedingReportAction('breedingreport.index',__('translations.actions.openReport')),
             new EditBreedingplaceAction('breedingplaces.edit', __('translations.actions.edit')),
             new SoftDeleteBreedingplaceAction(),
         ];

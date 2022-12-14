@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\IncubationReport;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +26,11 @@ class Incubationincubator extends Model
     public function users()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function incubationreport() 
+    {
+        return $this->hasMany(IncubationReport::class,'incubationincubators_id');
     }
 }
  

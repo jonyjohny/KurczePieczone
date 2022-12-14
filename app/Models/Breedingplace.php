@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\BreedingReport;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,5 +26,10 @@ class Breedingplace extends Model
     public function users()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function breedingreport() 
+    {
+        return $this->hasMany(BreedingReport::class,'breedingplaces_id');
     }
 }

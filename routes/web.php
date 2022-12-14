@@ -8,10 +8,14 @@ use App\Http\Controllers\AviaryController;
 use App\Http\Controllers\BreedingController;
 use App\Http\Controllers\IncubationController;
 use App\Http\Controllers\AviaryplaceController;
+use App\Http\Controllers\AviaryReportController;
 use App\Http\Controllers\ReproductionController;
 use App\Http\Controllers\BreedingplaceController;
+use App\Http\Controllers\BreedingReportController;
 use App\Http\Controllers\ReproductionrowController;
 use App\Http\Controllers\IncubationincubatorController;
+use App\Http\Controllers\IncubationReportController;
+use App\Http\Controllers\ReproductionReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +87,38 @@ Route::resource('aviaryplaces', AviaryplaceController::class)->only([
 ]);
 
 Route::get('/aviaryplaces/{aviary}', [AviaryplaceController::class, 'index'])->name('aviaryplaces.index');
+
+Route::get('/reproductionreport/create/{reproductionrow}', [ReproductionReportController::class, 'create'])->name('reproductionreport.create');
+
+Route::resource('reproductionreport', ReproductionReportController::class)->only([
+    'edit'
+]);
+
+Route::get('/reproductionreport/{reproductionrow}', [ReproductionReportController::class, 'index'])->name('reproductionreport.index');
+
+Route::get('/incubationreport/create/{incubationincubator}', [IncubationReportController::class, 'create'])->name('incubationreport.create');
+
+Route::resource('incubationreport', IncubationReportController::class)->only([
+    'edit'
+]);
+
+Route::get('/incubationreport/{incubationincubator}', [IncubationReportController::class, 'index'])->name('incubationreport.index');
+
+Route::get('/breedingreport/create/{breedingplace}', [BreedingReportController::class, 'create'])->name('breedingreport.create');
+
+Route::resource('breedingreport', BreedingReportController::class)->only([
+    'edit'
+]);
+
+Route::get('/breedingreport/{breedingplace}', [BreedingReportController::class, 'index'])->name('breedingreport.index');
+
+Route::get('/aviaryreport/create/{aviaryplace}', [AviaryReportController::class, 'create'])->name('aviaryreport.create');
+
+Route::resource('aviaryreport', AviaryReportController::class)->only([
+    'edit'
+]);
+
+Route::get('/aviaryreport/{aviaryplace}', [AviaryReportController::class, 'index'])->name('aviaryreport.index');
 
 Route::middleware([
     'auth:sanctum',

@@ -19,7 +19,7 @@ class IncubationReportFactory extends Factory
     public function definition()
     {
         return [
-            'incubationincubators_id' => $this->faker->randomElement(Incubationincubator::pluck('id')),
+            'incubationincubator_id' => $this->faker->randomElement(Incubationincubator::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',

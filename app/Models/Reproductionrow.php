@@ -31,6 +31,6 @@ class Reproductionrow extends Model
 
     public function reproductionreport() 
     {
-        return $this->hasMany(ReproductionReport::class,'reproductionrows_id');
+        return $this->hasMany(ReproductionReport::class,'reproductionrow_id');
     }
 }

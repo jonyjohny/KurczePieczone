@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('incubation_reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('incubationincubators_id')->references('id')->on('incubationincubators');
+            $table->foreignId('incubationincubator_id')->references('id')->on('incubationincubators');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();

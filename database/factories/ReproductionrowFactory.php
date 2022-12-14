@@ -19,7 +19,7 @@ class ReproductionrowFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->word(100),
+            'name' => $this->faker->word(100),
             'remarks' => $this->faker->text,
             'id_reproduction' => $this->faker->randomElement(Reproduction::pluck('id')),
             'id_user' => $this->faker->randomElement(User::pluck('id')),

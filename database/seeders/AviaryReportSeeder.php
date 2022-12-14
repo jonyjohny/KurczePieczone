@@ -15,6 +15,6 @@ class AviaryReportSeeder extends Seeder
      */
     public function run()
     {
-        AviaryReport::factory(50)->create();
+        AviaryReport::factory(1000)->create();
     }
 }

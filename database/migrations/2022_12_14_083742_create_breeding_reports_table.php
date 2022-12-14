@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('breeding_reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('breedingplaces_id')->references('id')->on('breedingplaces');
+            $table->foreignId('breedingplace_id')->references('id')->on('breedingplaces');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();

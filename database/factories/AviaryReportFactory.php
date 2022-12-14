@@ -19,7 +19,7 @@ class AviaryReportFactory extends Factory
     public function definition()
     {
         return [
-            'aviaryplaces_id' => $this->faker->randomElement(Aviaryplace::pluck('id')),
+            'aviaryplace_id' => $this->faker->randomElement(Aviaryplace::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',

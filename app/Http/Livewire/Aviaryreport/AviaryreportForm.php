@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Aviaryplaces;
+namespace App\Http\Livewire\Aviaryreport;
 
 use App\Models\Aviary;
 use Livewire\Component;
@@ -9,7 +9,7 @@ use App\Models\Aviaryplace;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class AviaryplaceForm extends Component
+class AviaryreportTableView extends Component
 {
     use Actions;
     use AuthorizesRequests;
@@ -21,12 +21,30 @@ class AviaryplaceForm extends Component
     public function rules()
     {
         return [
-            'aviaryplace.user_id' => [
+            'aviaryplace.name' => [
+                'required',
+                'string',
+                'min:3'
+            ],
+            'aviaryplace.remarks' => [
+            ],
+            'aviaryplace.id_user' => [
                 'required',
             ],
-            'aviaryplace.aviaryplace_id' => [
+            'aviaryplace.id_aviary' => [
             ],
-
+            'aviaryplace.animals' => [
+                'required',
+            ],
+            'aviaryplace.hens' => [
+            ],
+            'aviaryplace.roosters' => [
+            ],
+            'aviaryplace.age' => [
+            ],
+            'aviaryplace.added' => [
+                'required',
+            ],
         ];
     }
 

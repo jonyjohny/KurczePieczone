@@ -128,7 +128,7 @@ class AviaryplacesTableView extends TableView
         }
         return [
             new EditAviaryplaceAction('aviaryplaces.edit', __('translations.actions.edit')),
-            new RestoreAviaryplaceAction(),
+            new SoftDeleteAviaryplaceAction(),
         ];
     }
 

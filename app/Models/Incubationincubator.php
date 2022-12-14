@@ -30,7 +30,7 @@ class Incubationincubator extends Model
 
     public function incubationreport() 
     {
-        return $this->hasMany(IncubationReport::class,'incubationincubators_id');
+        return $this->hasMany(IncubationReport::class,'incubationincubator_id');
     }
 }
  

@@ -15,7 +15,7 @@ class BreedingReportSeeder extends Seeder
      */
     public function run()
     {
-        BreedingReport::factory(50)->create();
+        BreedingReport::factory(1000)->create();
 
     }
 }

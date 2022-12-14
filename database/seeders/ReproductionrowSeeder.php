@@ -15,6 +15,6 @@ class ReproductionrowSeeder extends Seeder
      */
     public function run()
     {
-        Reproductionrow::factory(50)->create();
+        Reproductionrow::factory(200)->create();
     }
 }

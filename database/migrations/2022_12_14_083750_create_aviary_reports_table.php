@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('aviary_reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('aviaryplaces_id')->references('id')->on('aviaryplaces');
+            $table->foreignId('aviaryplace_id')->references('id')->on('aviaryplaces');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();

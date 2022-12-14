@@ -15,6 +15,6 @@ class BreedingplaceSeeder extends Seeder
      */
     public function run()
     {
-        Breedingplace::factory(50)->create();
+        Breedingplace::factory(200)->create();
     }
 }

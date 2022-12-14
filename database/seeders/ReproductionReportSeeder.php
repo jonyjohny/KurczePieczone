@@ -15,6 +15,6 @@ class ReproductionReportSeeder extends Seeder
      */
     public function run()
     {
-        ReproductionReport::factory(50)->create();
+        ReproductionReport::factory(1000)->create();
     }
 }

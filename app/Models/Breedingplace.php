@@ -30,6 +30,6 @@ class Breedingplace extends Model
 
     public function breedingreport() 
     {
-        return $this->hasMany(BreedingReport::class,'breedingplaces_id');
+        return $this->hasMany(BreedingReport::class,'breedingplace_id');
     }
 }

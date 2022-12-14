@@ -19,7 +19,7 @@ class BreedingReportFactory extends Factory
     public function definition()
     {
         return [
-            'breedingplaces_id' => $this->faker->randomElement(Breedingplace::pluck('id')),
+            'breedingplace_id' => $this->faker->randomElement(Breedingplace::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',

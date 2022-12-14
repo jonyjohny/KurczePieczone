@@ -19,7 +19,7 @@ class IncubationReport extends Model
 
     public function incubationincubator()
     {
-        return $this->belongsTo(Incubationincubator::class, 'incubationincubators_id');
+        return $this->belongsTo(Incubationincubator::class, 'incubationincubator_id');
     }
 
     public function users()

@@ -19,7 +19,7 @@ class BreedingReport extends Model
 
     public function breedingplace()
     {
-        return $this->belongsTo(Breedingplace::class, 'breedingplaces_id');
+        return $this->belongsTo(Breedingplace::class, 'breedingplace_id');
     }
 
     public function users()

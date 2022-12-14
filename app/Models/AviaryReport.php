@@ -19,7 +19,7 @@ class AviaryReport extends Model
 
     public function aviaryplace()
     {
-        return $this->belongsTo(Aviaryplace::class, 'aviaryplaces_id');
+        return $this->belongsTo(Aviaryplace::class, 'aviaryplace_id');
     }
 
     public function users()

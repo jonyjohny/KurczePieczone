@@ -19,7 +19,7 @@ class ReproductionReport extends Model
 
     public function reproductionrow()
     {
-        return $this->belongsTo(Reproductionrow::class, 'reproductionrows_id');
+        return $this->belongsTo(Reproductionrow::class, 'reproductionrow_id');
     }
 
     public function users()

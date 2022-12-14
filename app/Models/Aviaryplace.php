@@ -30,6 +30,6 @@ class Aviaryplace extends Model
 
     public function aviaryreport() 
     {
-        return $this->hasMany(AviaryReport::class,'aviaryplaces_id');
+        return $this->hasMany(AviaryReport::class,'aviaryplace_id');
     }
 }

@@ -54,7 +54,10 @@ return [
         'Incubationincubators' => 'Inkubatory',
         'Breedingplace' => 'Miejsca odchowu',
         'Aviaryplaces' => 'Woliery',
-
+        'ReproductionReport' => 'Raport reprodukcyjny',
+        'IncubationReport' => 'Raport inkubatorowy',
+        'BreedingReport' => 'Raport odchowu',
+        'AviaryReport' => 'Raport hodowli',
     ],
     'yes' => 'Tak',
     'no' => 'Nie',

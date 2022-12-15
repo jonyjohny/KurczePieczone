@@ -21,6 +21,12 @@ class IncubationReportFactory extends Factory
         return [
             'incubationincubator_id' => $this->faker->randomElement(Incubationincubator::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
+            'impregnation' => $this->faker->randomFloat(2, 1, 100),
+            'remarks' => $this->faker->text,
+            'eggTest' => $this->faker->dateTimeBetween(
+                '- 8 weeks',
+                '- 4 weeks',
+            ),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',

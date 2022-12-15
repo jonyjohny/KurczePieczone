@@ -17,6 +17,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('aviaryplace_id')->references('id')->on('aviaryplaces');
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->longText('feeding')->nullable();
+            $table->longText('cure')->nullable();
+            $table->integer('hensExport')->nullable();
+            $table->integer('roostersExport')->nullable();
+            $table->longText('destination')->nullable();
+            $table->integer('hensFalls')->nullable();
+            $table->integer('roostersFalls')->nullable();
+            $table->longText('remarksFalls')->nullable();
+            $table->longText('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -21,6 +21,20 @@ class ReproductionReportFactory extends Factory
         return [
             'reproductionrow_id' => $this->faker->randomElement(Reproductionrow::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
+            'nicHens' => $this->faker->randomNumber(5, false),
+            'nicRoosters' => $this->faker->randomNumber(5, false),
+            'cannibalismHens' => $this->faker->randomNumber(5, false),
+            'cannibalismRoosters' => $this->faker->randomNumber(5, false),
+            'debilityHens' => $this->faker->randomNumber(5, false),
+            'debilityRoosters' => $this->faker->randomNumber(5, false),
+            'otherHens' => $this->faker->randomNumber(5, false),
+            'otherRoosters' => $this->faker->randomNumber(5, false),
+            'fallsRemarks' => $this->faker->text,
+            'goodEggs' => $this->faker->randomNumber(5, false),
+            'badEggs' => $this->faker->randomNumber(5, false),
+            'exportEggs' => $this->faker->randomNumber(5, false),
+            'prevention' => $this->faker->text,
+            'remarks' => $this->faker->text,
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',
@@ -37,3 +51,5 @@ class ReproductionReportFactory extends Factory
         ];
     }
 }
+
+

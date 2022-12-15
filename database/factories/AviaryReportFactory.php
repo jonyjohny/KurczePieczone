@@ -21,6 +21,15 @@ class AviaryReportFactory extends Factory
         return [
             'aviaryplace_id' => $this->faker->randomElement(Aviaryplace::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
+            'feeding' => $this->faker->text,
+            'cure' => $this->faker->text,
+            'hensExport' => $this->faker->randomNumber(5, false),
+            'roostersExport' => $this->faker->randomNumber(5, false),
+            'destination' => $this->faker->text,
+            'hensFalls' => $this->faker->randomNumber(5, false),
+            'roostersFalls' => $this->faker->randomNumber(5, false),
+            'remarksFalls' => $this->faker->text,
+            'remarks' => $this->faker->text,
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',
@@ -30,10 +39,10 @@ class AviaryReportFactory extends Factory
                 '- 1 weeks',
             ),
             'deleted_at' => rand(0, 10) === 0 ? $this->faker->dateTimeBetween(
-                    '- 1 weeks',
-                    '+ 2 weeks',
+                '- 1 weeks',
+                '+ 2 weeks',
             )
-            : null,
+                : null,
         ];
     }
 }

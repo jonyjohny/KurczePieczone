@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('incubationincubator_id')->references('id')->on('incubationincubators');
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->float('impregnation', 8, 2)->nullable();
+            $table->date('eggTest')->nullable();
+            $table->longText('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

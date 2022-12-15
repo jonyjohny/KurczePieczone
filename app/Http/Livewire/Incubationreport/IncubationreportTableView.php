@@ -23,6 +23,9 @@ class IncubationreportTableView extends TableView
     public $incubationincubator;
 
     public $searchBy = [
+        'impregnation',
+        'eggTest',
+        'remarks',
         'users.name',
         'created_at',
         'updated_at',
@@ -42,7 +45,6 @@ class IncubationreportTableView extends TableView
         return IncubationReport::where('incubationincubator_id', $this->incubationincubator);
     }
 
-
     /**
      * Sets the headers of the table as you want to be displayed
      *
@@ -52,6 +54,9 @@ class IncubationreportTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Incubation::class )){
             return [
+                Header::title(__('translations.attributes.impregnation'))->sortBy('impregnation'),
+                Header::title(__('translations.attributes.eggTest'))->sortBy('eggTest'),
+                Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
                 __('translations.attributes.patroness'),
                 Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
                 Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
@@ -59,12 +64,16 @@ class IncubationreportTableView extends TableView
             ];
         }
         return [
+            Header::title(__('translations.attributes.impregnation'))->sortBy('impregnation'),
+            Header::title(__('translations.attributes.eggTest'))->sortBy('eggTest'),
+            Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
             __('translations.attributes.patroness'),
             Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
         ];
     }
 
+    
     /**
      * Sets the data to every cell of a single row
      *
@@ -74,6 +83,9 @@ class IncubationreportTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Incubation::class )){
             return [
+                $model->impregnation,
+                $model->eggTest,
+                $model->remarks,
                 $model->users->name,
                 $model->created_at,
                 $model->updated_at,
@@ -81,6 +93,12 @@ class IncubationreportTableView extends TableView
             ];
         }
         return [
+            $model->impregnation,
+            $model->eggTest,
+            $model->remarks,
+            $model->users->name,
+            $model->created_at,
+            $model->updated_at,
         ];
     }
     

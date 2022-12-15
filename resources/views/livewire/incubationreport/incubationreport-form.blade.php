@@ -8,19 +8,24 @@
             @endif
         </h3>
         <hr class="my-2">
-        <div class="grid grid-cols-2 gap-2">
-            <div class="">
-                <label for="id_user">{{ __('translations.attributes.patroness') }}</label>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+            <div class="flex justify-center lg:justify-start">
+                <label for="impregnation">{{ __('translations.attributes.impregnation') }}</label>
             </div>
             <div class="">
-                <x-select
-                name="incubationreport.users"
-                placeholder="{{ __('translations.select') }}"
-                wire:model.defer="incubationreport.id_user"
-                :async-data="route('users.allOpen')"
-                option-label="name"
-                option-value="id"
-            />
+                <x-input placeholder="{{ __('translations.enter') }}" wire:model="incubationreport.impregnation" />
+            </div>
+            <div class="flex justify-center lg:justify-start">
+                <label for="eggTest">{{ __('translations.attributes.eggTest') }}</label>
+            </div>
+            <div class="">
+                <x-datetime-picker without-time placeholder="{{ __('translations.enter') }}" wire:model="incubationreport.eggTest" />
+            </div>
+            <div class="flex justify-center lg:justify-start">
+                <label for="remarks">{{ __('translations.attributes.remarks') }}</label>
+            </div>
+            <div class="">
+                <x-input placeholder="{{ __('translations.enter') }}" wire:model="incubationreport.remarks" />
             </div>
         </div>
         <hr class="my-2">

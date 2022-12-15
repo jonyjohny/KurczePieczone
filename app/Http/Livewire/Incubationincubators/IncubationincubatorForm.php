@@ -80,6 +80,7 @@ class IncubationincubatorForm extends Component
             $this->authorize('create', Incubationincubator::class);
         }
         $this->validate();
+        $this->incubationincubator->added = date("Y-m-d H:i:s", strtotime($this->incubationincubator->added));
         $this->incubation->incubationincubator()->save($this->incubationincubator);
         $this->notification()->success(
             $title = $this->editMode

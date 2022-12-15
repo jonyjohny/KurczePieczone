@@ -26,7 +26,9 @@
                             href="{{ route('aviaryplaces.index', [$aviaryplace->id_aviary]) }}" />
                     </div>
                 </div>
-                <livewire:aviaryreport.aviaryreport-table-view />
+                <div style="overflow-x: auto;">
+                    <livewire:aviaryreport.aviaryreport-table-view />
+                </div>
             </div>
         </div>
     </div>

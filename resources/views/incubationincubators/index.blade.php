@@ -9,10 +9,12 @@
         <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg" id="table-view-wrapper">
                 <div class="grid justify-items-stretch pt-2 pr-2">
-                    <x-button primary label="{{ __('translations.actions.create')}}"
-                        href="{{ route('incubationincubators.create', [$incubation])}}"  class="justify-self-end" />
-                    </div>
-                <livewire:incubationincubators.incubationincubators-table-view />
+                    <x-button primary label="{{ __('translations.actions.create') }}"
+                        href="{{ route('incubationincubators.create', [$incubation]) }}" class="justify-self-end" />
+                </div>
+                <div style="overflow-x: auto;">
+                    <livewire:incubationincubators.incubationincubators-table-view />
+                </div>
             </div>
         </div>
     </div>

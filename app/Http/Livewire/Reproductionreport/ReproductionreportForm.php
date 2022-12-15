@@ -24,14 +24,39 @@ class ReproductionreportForm extends Component
     public function rules()
     {
         return [
-            'reproductionreport.user_id' => [
+            'reproductionreport.nicHens' => [
+            ],
+            'reproductionreport.nicRoosters' => [
+            ],
+            'reproductionreport.cannibalismHens' => [
+            ],
+            'reproductionreport.cannibalismRoosters' => [
+            ],
+            'reproductionreport.debilityHens' => [
+            ],
+            'reproductionreport.debilityRoosters' => [
+            ],
+            'reproductionreport.otherHens' => [
+            ],
+            'reproductionreport.otherRoosters' => [
+            ],
+            'reproductionreport.fallsRemarks' => [
+            ],
+            'reproductionreport.goodEggs' => [
+            ],
+            'reproductionreport.badEggs' => [
+            ],
+            'reproductionreport.exportEggs' => [
+            ],
+            'reproductionreport.prevention' => [
+            ],
+            'reproductionreport.remarks' => [
             ],
         ];
     }
 
     public function validationAttributes(){
         return [
-            'users' => Str::lower(__('translations.attributes.patroness')),
         ];
     }
 

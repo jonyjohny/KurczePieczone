@@ -7,12 +7,12 @@ return [
     ],
     'messages' => [ 
         'successes' => [ 
-            'stored' => 'Dodano raport :name',
-            'updated' => 'Zaktualizowano raport :name',
-            'destroy' => 'Usunięto raport :name',
+            'stored' => 'Dodano raport',
+            'updated' => 'Zaktualizowano raport',
+            'destroy' => 'Usunięto raport',
             'update_title' => 'Zaktualizowano raport',
             'stored_title' => 'Utworzono raport',
-            'restore' => 'Przywrócono raport :name',
+            'restore' => 'Przywrócono raport',
         ],
     ],
     'dialogs' => [
@@ -26,3 +26,4 @@ return [
         ],
     ],
 ];
+

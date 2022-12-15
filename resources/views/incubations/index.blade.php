@@ -10,11 +10,13 @@
             <div class="bg-white shadow-xl sm:rounded-lg" id="table-view-wrapper">
                 <div class="grid justify-items-stretch pt-2 pr-2">
                     @can('create', App\Models\Incubation::class)
-                    <x-button primary label="{{ __('translations.actions.create')}}"
-                        href="{{ route('incubations.create')}}"  class="justify-self-end" />
-                        @endcan
-                    </div>
-                <livewire:incubations.incubations-table-view />
+                        <x-button primary label="{{ __('translations.actions.create') }}"
+                            href="{{ route('incubations.create') }}" class="justify-self-end" />
+                    @endcan
+                </div>
+                <div style="overflow-x: auto;">
+                    <livewire:incubations.incubations-table-view />
+                </div>
             </div>
         </div>
     </div>

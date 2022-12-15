@@ -56,7 +56,7 @@
                 <label for="added">{{ __('translations.attributes.added') }}</label>
             </div>
             <div class="">
-                <x-datetime-picker without-time placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.added" />
+                <x-datetime-picker placeholder="{{ __('translations.enter') }}" wire:model="aviaryplace.added" />
             </div>
             <div class="">
                 <label for="remarks">{{ __('translations.attributes.remarks') }}</label>

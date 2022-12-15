@@ -24,14 +24,17 @@ class IncubationreportForm extends Component
     public function rules()
     {
         return [
-            'incubationreport.user_id' => [
+            'incubationreport.impregnation' => [
+            ],
+            'incubationreport.eggTest' => [
+            ],
+            'incubationreport.remarks' => [
             ],
         ];
     }
 
     public function validationAttributes(){
         return [
-            'users' => Str::lower(__('translations.attributes.patroness')),
         ];
     }
 
@@ -65,6 +68,7 @@ class IncubationreportForm extends Component
             $this->authorize('create', IncubationReport::class);
         }
         $this->validate();
+        $this->incubationreport->eggTest = date("Y-m-d H:i:s", strtotime($this->incubationreport->eggTest));
         $this->incubationreport->user_id = $this->user->id;
         $this->incubationincubator->incubationreport()->save($this->incubationreport);
         $this->notification()->success(

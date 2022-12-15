@@ -26,7 +26,9 @@
                             href="{{ route('breedingplaces.index', [$breedingplace->id_breeding]) }}" />
                     </div>
                 </div>
-                <livewire:breedingreport.breedingreport-table-view />
+                <div style="overflow-x: auto;">
+                    <livewire:breedingreport.breedingreport-table-view />
+                </div>
             </div>
         </div>
     </div>

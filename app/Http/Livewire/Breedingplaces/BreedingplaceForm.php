@@ -80,6 +80,7 @@ class BreedingplaceForm extends Component
             $this->authorize('create', Breedingplace::class);
         }
         $this->validate();
+        $this->breedingplace->added = date("Y-m-d H:i:s", strtotime($this->breedingplace->added));
         $this->breeding->breedingplace()->save($this->breedingplace);
         $this->notification()->success(
             $title = $this->editMode

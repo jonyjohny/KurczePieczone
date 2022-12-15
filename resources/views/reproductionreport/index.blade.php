@@ -26,7 +26,9 @@
                             href="{{ route('reproductionrows.index', [$reproductionrow->id_reproduction]) }}" />
                     </div>
                 </div>
-                <livewire:reproductionreport.reproductionreport-table-view />
+                <div style="overflow-x: auto;">
+                    <livewire:reproductionreport.reproductionreport-table-view />
+                </div>
             </div>
         </div>
     </div>

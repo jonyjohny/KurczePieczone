@@ -13,6 +13,8 @@ return [
         'patroness' => 'Opiekun',
         'added' => 'Wstawiono',
         'nr' => 'Nr',
+        'eggTest' => 'Prześwietlenie',
+        'impregnation' => 'Zapłodnienie',
     ],
     'menu' => [
         'dictionaries' => 'Słowniki',

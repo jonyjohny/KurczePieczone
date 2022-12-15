@@ -24,14 +24,29 @@ class AviaryreportForm extends Component
     public function rules()
     {
         return [
-            'aviaryreport.user_id' => [
+            'aviaryreport.feeding' => [
+            ],
+            'aviaryreport.cure' => [
+            ],
+            'aviaryreport.hensExport' => [
+            ],
+            'aviaryreport.roostersExport' => [
+            ],
+            'aviaryreport.destination' => [
+            ],
+            'aviaryreport.hensFalls' => [
+            ],
+            'aviaryreport.roostersFalls' => [
+            ],
+            'aviaryreport.remarksFalls' => [
+            ],
+            'aviaryreport.remarks' => [
             ],
         ];
     }
 
     public function validationAttributes(){
         return [
-            'users' => Str::lower(__('translations.attributes.patroness')),
         ];
     }
 

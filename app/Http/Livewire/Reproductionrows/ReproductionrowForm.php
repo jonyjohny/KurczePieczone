@@ -83,6 +83,7 @@ class ReproductionrowForm extends Component
             $this->authorize('create', Reproductionrow::class);
         }
         $this->validate();
+        $this->reproductionrow->added = date("Y-m-d H:i:s", strtotime($this->reproductionrow->added));
         $this->reproduction->reporductionRow()->save($this->reproductionrow);
         $this->notification()->success(
             $title = $this->editMode

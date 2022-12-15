@@ -21,12 +21,29 @@ class AviaryplaceForm extends Component
     public function rules()
     {
         return [
-            'aviaryplace.user_id' => [
+            'aviaryplace.id_user' => [
                 'required',
             ],
             'aviaryplace.aviaryplace_id' => [
             ],
-
+            'aviaryplace.name' => [
+                'required',
+            ],
+            'aviaryplace.remarks' => [
+                'required',
+            ],
+            'aviaryplace.animals' => [
+                'required',
+            ],
+            'aviaryplace.hens' => [
+            ],
+            'aviaryplace.roosters' => [
+                'required',
+            ],
+            'aviaryplace.age' => [
+            ],
+            'aviaryplace.added' => [
+            ],
         ];
     }
 
@@ -71,6 +88,7 @@ class AviaryplaceForm extends Component
             $this->authorize('create', Aviaryplace::class);
         }
         $this->validate();
+        $this->aviaryplace->added = date("Y-m-d H:i:s", strtotime($this->aviaryplace->added));
         $this->aviary->aviaryplace()->save($this->aviaryplace);
         $this->notification()->success(
             $title = $this->editMode

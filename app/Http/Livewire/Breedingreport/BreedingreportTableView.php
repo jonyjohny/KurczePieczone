@@ -23,6 +23,19 @@ class BreedingreportTableView extends TableView
     public $breedingplace;
 
     public $searchBy = [
+        'falls',
+        'selection',
+        'mainTemperature',
+        'hallTemperature',
+        'humidity',
+        'fodder',
+        'water',
+        'lighting',
+        'lightingRemarks',
+        'ventilation',
+        'animalsTaken',
+        'destination',
+        'remarks',
         'users.name',
         'created_at',
         'updated_at',
@@ -52,6 +65,19 @@ class BreedingreportTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Breeding::class )){
             return [
+                Header::title(__('breedingreport.attributes.falls'))->sortBy('falls'),
+                Header::title(__('breedingreport.attributes.selection'))->sortBy('selection'),
+                Header::title(__('breedingreport.attributes.mainTemperature'))->sortBy('mainTemperature'),
+                Header::title(__('breedingreport.attributes.hallTemperature'))->sortBy('hallTemperature'),
+                Header::title(__('breedingreport.attributes.humidity'))->sortBy('humidity'),
+                Header::title(__('breedingreport.attributes.fodder'))->sortBy('fodder'),
+                Header::title(__('breedingreport.attributes.water'))->sortBy('water'),
+                Header::title(__('breedingreport.attributes.lighting'))->sortBy('lighting'),
+                Header::title(__('breedingreport.attributes.lightingRemarks'))->sortBy('lightingRemarks'),
+                Header::title(__('breedingreport.attributes.ventilation'))->sortBy('ventilation'),
+                Header::title(__('breedingreport.attributes.animalsTaken'))->sortBy('animalsTaken'),
+                Header::title(__('breedingreport.attributes.destination'))->sortBy('destination'),
+                Header::title(__('breedingreport.attributes.remarks'))->sortBy('remarks'),
                 __('translations.attributes.patroness'),
                 Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
                 Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
@@ -59,6 +85,19 @@ class BreedingreportTableView extends TableView
             ];
         }
         return [
+            Header::title(__('breedingreport.attributes.falls'))->sortBy('falls'),
+            Header::title(__('breedingreport.attributes.selection'))->sortBy('selection'),
+            Header::title(__('breedingreport.attributes.mainTemperature'))->sortBy('mainTemperature'),
+            Header::title(__('breedingreport.attributes.hallTemperature'))->sortBy('hallTemperature'),
+            Header::title(__('breedingreport.attributes.humidity'))->sortBy('humidity'),
+            Header::title(__('breedingreport.attributes.fodder'))->sortBy('fodder'),
+            Header::title(__('breedingreport.attributes.water'))->sortBy('water'),
+            Header::title(__('breedingreport.attributes.lighting'))->sortBy('lighting'),
+            Header::title(__('breedingreport.attributes.lightingRemarks'))->sortBy('lightingRemarks'),
+            Header::title(__('breedingreport.attributes.ventilation'))->sortBy('ventilation'),
+            Header::title(__('breedingreport.attributes.animalsTaken'))->sortBy('animalsTaken'),
+            Header::title(__('breedingreport.attributes.destination'))->sortBy('destination'),
+            Header::title(__('breedingreport.attributes.remarks'))->sortBy('remarks'),
             __('translations.attributes.patroness'),
             Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
             Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
@@ -74,6 +113,19 @@ class BreedingreportTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Breeding::class )){
             return [
+                $model->falls,
+                $model->selection,
+                $model->mainTemperature,
+                $model->hallTemperature,
+                $model->humidity,
+                $model->fodder,
+                $model->water,
+                $model->lighting,
+                $model->lightingRemarks,
+                $model->ventilation,
+                $model->animalsTaken,
+                $model->destination,
+                $model->remarks,
                 $model->users->name,
                 $model->created_at,
                 $model->updated_at,
@@ -81,6 +133,19 @@ class BreedingreportTableView extends TableView
             ];
         }
         return [
+            $model->falls,
+            $model->selection,
+            $model->mainTemperature,
+            $model->hallTemperature,
+            $model->humidity,
+            $model->fodder,
+            $model->water,
+            $model->lighting,
+            $model->lightingRemarks,
+            $model->ventilation,
+            $model->animalsTaken,
+            $model->destination,
+            $model->remarks,
             $model->users->name,
             $model->created_at,
             $model->updated_at,

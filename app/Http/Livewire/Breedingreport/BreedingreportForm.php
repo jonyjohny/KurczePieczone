@@ -24,14 +24,37 @@ class BreedingreportForm extends Component
     public function rules()
     {
         return [
-            'breedingreport.user_id' => [
+            'breedingreport.falls' => [
+            ],
+            'breedingreport.selection' => [
+            ],
+            'breedingreport.mainTemperature' => [
+            ],
+            'breedingreport.hallTemperature' => [
+            ],
+            'breedingreport.humidity' => [
+            ],
+            'breedingreport.fodder' => [
+            ],
+            'breedingreport.water' => [
+            ],
+            'breedingreport.lighting' => [
+            ],
+            'breedingreport.lightingRemarks' => [
+            ],
+            'breedingreport.ventilation' => [
+            ],
+            'breedingreport.animalsTaken' => [
+            ],
+            'breedingreport.destination' => [
+            ],
+            'breedingreport.remarks' => [
             ],
         ];
     }
 
     public function validationAttributes(){
         return [
-            'users' => Str::lower(__('translations.attributes.patroness')),
         ];
     }
 

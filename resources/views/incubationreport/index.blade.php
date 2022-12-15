@@ -26,7 +26,9 @@
                             href="{{ route('incubationincubators.index', [$incubationincubator->id_incubation]) }}" />
                     </div>
                 </div>
-                <livewire:incubationreport.incubationreport-table-view />
+                <div style="overflow-x: auto;">
+                    <livewire:incubationreport.incubationreport-table-view />
+                </div>
             </div>
         </div>
     </div>

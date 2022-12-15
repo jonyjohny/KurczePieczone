@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\Incubationreport;
 
+use App\Models\User;
 use Livewire\Component;
-use App\Models\Incubation;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
+use App\Models\IncubationReport;
 use App\Models\Incubationincubator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class IncubationreportForm extends Component
@@ -14,58 +16,40 @@ class IncubationreportForm extends Component
     use Actions;
     use AuthorizesRequests;
 
-    public Incubation $incubation;
     public Incubationincubator $incubationincubator;
+    public IncubationReport $incubationreport;
     public Bool $editMode;
+    public User $user;
 
     public function rules()
     {
         return [
-            'incubationincubator.name' => [
-                'required',
-                'string',
-                'min:3'
-            ],
-            'incubationincubator.remarks' => [
-            ],
-            'incubationincubator.id_user' => [
-                'required',
-            ],
-            'incubationincubator.id_incubation' => [
-            ],
-            'incubationincubator.eggs' => [
-                'required',
-            ],
-            'incubationincubator.added' => [
-                'required',
+            'incubationreport.user_id' => [
             ],
         ];
     }
 
     public function validationAttributes(){
         return [
-            'name' => Str::lower(__('translations.attributes.name')),
-            'remarks' => Str::lower(__('translations.attributes.remarks')),
             'users' => Str::lower(__('translations.attributes.patroness')),
-            'eggs' => Str::lower(__('incubationincubators.labels.eggs')),
-            'added' => Str::lower(__('translations.attributes.added')),
         ];
     }
 
-    public function mount(Incubation $incubation, Incubationincubator $incubationincubator, Bool $editMode)
+    public function mount(Incubationincubator $incubationincubator, IncubationReport $incubationreport, Bool $editMode)
     {
-        if($incubation->id!=null){
-            $this->incubation=$incubation;
+        if($incubationincubator->id!=null){
+            $this->incubationincubator=$incubationincubator;
         }else{
-            $this->incubation=$incubationincubator->incubation;
+            $this->incubationincubator=$incubationreport->incubationincubator;
         }
-        $this->incubationincubator = $incubationincubator;
+        $this->incubationreport = $incubationreport;
         $this->editMode = $editMode;
+        $this->user = Auth::user();
     }
 
     public function render()
     {
-        return view('livewire.incubationincubators.incubationincubator-form');
+        return view('livewire.incubationreport.incubationreport-form');
     }
 
     public function update($propertyName){
@@ -74,20 +58,22 @@ class IncubationreportForm extends Component
 
     public function save()
     {
+        
         if($this->editMode){
-            $this->authorize('update', $this->incubationincubator);
+            $this->authorize('update', $this->incubationreport);
         } else {
-            $this->authorize('create', Incubationincubator::class);
+            $this->authorize('create', IncubationReport::class);
         }
         $this->validate();
-        $this->incubation->incubationincubator()->save($this->incubationincubator);
+        $this->incubationreport->user_id = $this->user->id;
+        $this->incubationincubator->incubationreport()->save($this->incubationreport);
         $this->notification()->success(
             $title = $this->editMode
-            ? __('incubationincubators.messages.successes.update_title')
-            : __('incubationincubators.messages.successes.stored_title'),
+            ? __('incubationreport.messages.successes.update_title')
+            : __('incubationreport.messages.successes.stored_title'),
             $description = $this->editMode
-            ? __('incubationincubators.messages.successes.updated', ['name' => $this->incubationincubator->name])
-            :__('incubationincubators.messages.successes.stored', ['name' => $this->incubationincubator->name]),
+            ? __('incubationreport.messages.successes.updated')
+            :__('incubationreport.messages.successes.stored'),
         );
         $this->editMode = true;
     }

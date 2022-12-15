@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\Breedingreport;
 
+use App\Models\User;
 use Livewire\Component;
-use App\Models\Breeding;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
 use App\Models\Breedingplace;
+use App\Models\BreedingReport;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class BreedingreportForm extends Component
@@ -14,58 +16,40 @@ class BreedingreportForm extends Component
     use Actions;
     use AuthorizesRequests;
 
-    public Breeding $breeding;
     public Breedingplace $breedingplace;
+    public BreedingReport $breedingreport;
     public Bool $editMode;
+    public User $user;
 
     public function rules()
     {
         return [
-            'breedingplace.name' => [
-                'required',
-                'string',
-                'min:3'
-            ],
-            'breedingplace.remarks' => [
-            ],
-            'breedingplace.id_user' => [
-                'required',
-            ],
-            'breedingplace.id_breeding' => [
-            ],
-            'breedingplace.animals' => [
-                'required',
-            ],
-            'breedingplace.added' => [
-                'required',
+            'breedingreport.user_id' => [
             ],
         ];
     }
 
     public function validationAttributes(){
         return [
-            'name' => Str::lower(__('translations.attributes.name')),
-            'remarks' => Str::lower(__('translations.attributes.remarks')),
             'users' => Str::lower(__('translations.attributes.patroness')),
-            'animals' => Str::lower(__('breedingplaces.labels.animals')),
-            'added' => Str::lower(__('translations.attributes.added')),
         ];
     }
 
-    public function mount(Breeding $breeding, Breedingplace $breedingplace, Bool $editMode)
+    public function mount(Breedingplace $breedingplace, BreedingReport $breedingreport, Bool $editMode)
     {
-        if($breeding->id!=null){
-            $this->breeding=$breeding;
+        if($breedingplace->id!=null){
+            $this->breedingplace=$breedingplace;
         }else{
-            $this->breeding=$breedingplace->breeding;
+            $this->breedingplace=$breedingreport->breedingplace;
         }
-        $this->breedingplace = $breedingplace;
+        $this->breedingreport = $breedingreport;
         $this->editMode = $editMode;
+        $this->user = Auth::user();
     }
 
     public function render()
     {
-        return view('livewire.breedingplaces.breedingplace-form');
+        return view('livewire.breedingreport.breedingreport-form');
     }
 
     public function update($propertyName){
@@ -74,20 +58,22 @@ class BreedingreportForm extends Component
 
     public function save()
     {
+        
         if($this->editMode){
-            $this->authorize('update', $this->breedingplace);
+            $this->authorize('update', $this->breedingreport);
         } else {
-            $this->authorize('create', Breedingplace::class);
+            $this->authorize('create', BreedingReport::class);
         }
         $this->validate();
-        $this->breeding->breedingplace()->save($this->breedingplace);
+        $this->breedingreport->user_id = $this->user->id;
+        $this->breedingplace->breedingreport()->save($this->breedingreport);
         $this->notification()->success(
             $title = $this->editMode
-            ? __('breedingplaces.messages.successes.update_title')
-            : __('breedingplaces.messages.successes.stored_title'),
+            ? __('breedingreport.messages.successes.update_title')
+            : __('breedingreport.messages.successes.stored_title'),
             $description = $this->editMode
-            ? __('breedingplaces.messages.successes.updated', ['name' => $this->breedingplace->name])
-            :__('breedingplaces.messages.successes.stored', ['name' => $this->breedingplace->name]),
+            ? __('breedingreport.messages.successes.updated')
+            :__('breedingreport.messages.successes.stored'),
         );
         $this->editMode = true;
     }

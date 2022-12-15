@@ -6,8 +6,9 @@ use App\Models\User;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 use Illuminate\Support\Str;
-use App\Models\Reproduction;
 use App\Models\Reproductionrow;
+use App\Models\ReproductionReport;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ReproductionreportForm extends Component
@@ -15,60 +16,40 @@ class ReproductionreportForm extends Component
     use Actions;
     use AuthorizesRequests;
 
-    public Reproduction $reproduction;
     public Reproductionrow $reproductionrow;
+    public ReproductionReport $reproductionreport;
     public Bool $editMode;
+    public User $user;
 
     public function rules()
     {
         return [
-            'reproductionrow.name' => [
-                'required',
-                'string',
-                'min:3'
-            ],
-            'reproductionrow.remarks' => [
-            ],
-            'reproductionrow.id_user' => [
-                'required',
-            ],
-            'reproductionrow.roosters' => [
-                'required',
-            ],
-            'reproductionrow.hens' => [
-                'required',
-            ],
-            'reproductionrow.added' => [
-                'required',
+            'reproductionreport.user_id' => [
             ],
         ];
     }
 
     public function validationAttributes(){
         return [
-            'name' => Str::lower(__('translations.attributes.name')),
-            'remarks' => Str::lower(__('translations.attributes.remarks')),
             'users' => Str::lower(__('translations.attributes.patroness')),
-            'roosters' => Str::lower(__('reproductionrows.labels.roosters')),
-            'hens' => Str::lower(__('reproductionrows.labels.hens')),
-            'added' => Str::lower(__('translations.attributes.added')),
         ];
     }
 
-    public function mount(Reproduction $reproduction, Reproductionrow $reproductionrow, Bool $editMode)
+    public function mount(Reproductionrow $reproductionrow, ReproductionReport $reproductionreport, Bool $editMode)
     {
-        if($reproduction->id!=null){
-            $this->reproduction=$reproduction;
+        if($reproductionrow->id!=null){
+            $this->reproductionrow=$reproductionrow;
         }else{
-            $this->reproduction=$reproductionrow->reproduction;
+            $this->reproductionrow=$reproductionreport->reproductionrow;
         }
-        $this->reproductionrow = $reproductionrow;
+        $this->reproductionreport = $reproductionreport;
         $this->editMode = $editMode;
+        $this->user = Auth::user();
     }
 
     public function render()
     {
-        return view('livewire.reproductionrows.reproductionrow-form');
+        return view('livewire.reproductionreport.reproductionreport-form');
     }
 
     public function update($propertyName){
@@ -77,20 +58,22 @@ class ReproductionreportForm extends Component
 
     public function save()
     {
+        
         if($this->editMode){
-            $this->authorize('update', $this->reproductionrow);
+            $this->authorize('update', $this->reproductionreport);
         } else {
-            $this->authorize('create', Reproductionrow::class);
+            $this->authorize('create', ReproductionReport::class);
         }
         $this->validate();
-        $this->reproduction->reporductionRow()->save($this->reproductionrow);
+        $this->reproductionreport->user_id = $this->user->id;
+        $this->reproductionrow->reproductionreport()->save($this->reproductionreport);
         $this->notification()->success(
             $title = $this->editMode
-            ? __('reproductionrows.messages.successes.update_title')
-            : __('reproductionrows.messages.successes.stored_title'),
+            ? __('reproductionreport.messages.successes.update_title')
+            : __('reproductionreport.messages.successes.stored_title'),
             $description = $this->editMode
-            ? __('reproductionrows.messages.successes.updated', ['name' => $this->reproductionrow->name])
-            :__('reproductionrows.messages.successes.stored', ['name' => $this->reproductionrow->name]),
+            ? __('reproductionreport.messages.successes.updated')
+            :__('reproductionreport.messages.successes.stored'),
         );
         $this->editMode = true;
     }

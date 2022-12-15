@@ -12,6 +12,7 @@ return [
         'softdeletefiltr' => 'Usunięte',
         'patroness' => 'Opiekun',
         'added' => 'Wstawiono',
+        'nr' => 'Nr',
     ],
     'menu' => [
         'dictionaries' => 'Słowniki',
@@ -93,6 +94,9 @@ return [
         'open' => 'Otwórz',
         'openReport' => 'Otwórz Raport',
         'addReport' => 'Dodaj Raport',
+        'back' => 'Cofnij',
+        'report' => 'Raport',
+        'chart' => 'Wykres',
     ],
     'Profile Information' => 'test',
     'Photo' => 'Zdjęcie'

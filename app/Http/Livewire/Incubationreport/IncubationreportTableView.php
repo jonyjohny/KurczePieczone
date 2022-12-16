@@ -83,7 +83,7 @@ class IncubationreportTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Incubation::class )){
             return [
-                $model->impregnation,
+                $model->impregnation." %",
                 $model->eggTest,
                 $model->remarks,
                 $model->users->name,
@@ -93,7 +93,7 @@ class IncubationreportTableView extends TableView
             ];
         }
         return [
-            $model->impregnation,
+            $model->impregnation." %",
             $model->eggTest,
             $model->remarks,
             $model->users->name,

@@ -25,19 +25,19 @@
                 <label for="mainTemperature">{{ __('breedingreport.labels.mainTemperature') }}</label>
             </div>
             <div class="">
-                <x-input placeholder="{{ __('translations.enter') }}" wire:model="breedingreport.mainTemperature" />
+                <x-inputs.currency decimal="." precision="2" placeholder="{{ __('translations.enter') }}" wire:model="breedingreport.mainTemperature" />
             </div>
             <div class="flex justify-center lg:justify-start">
                 <label for="hallTemperature">{{ __('breedingreport.labels.hallTemperature') }}</label>
             </div>
             <div class="">
-                <x-input placeholder="{{ __('translations.enter') }}" wire:model="breedingreport.hallTemperature" />
+                <x-inputs.currency decimal="." precision="2" placeholder="{{ __('translations.enter') }}" wire:model="breedingreport.hallTemperature" />
             </div>
             <div class="flex justify-center lg:justify-start">
                 <label for="humidity">{{ __('breedingreport.labels.humidity') }}</label>
             </div>
             <div class="">
-                <x-input placeholder="{{ __('translations.enter') }}" wire:model="breedingreport.humidity" />
+                <x-inputs.currency decimal="." precision="2" placeholder="{{ __('translations.enter') }}" wire:model="breedingreport.humidity" />
             </div>
             <div class="flex justify-center lg:justify-start">
                 <label for="fodder">{{ __('breedingreport.labels.fodder') }}</label>
@@ -91,8 +91,11 @@
         <hr class="my-2">
         <div class="flex justify-end pt-2">
             <x-button
+                href="{{ route('breedingplaces.index', $breedingplace->id_breeding) }}"
+                secondary class="mr-2" label="{{ __('translations.breedingplaces') }}" />
+            <x-button
                 href="{{ route('breedingreport.index', $editMode ? $breedingreport->breedingplace_id : $breedingplace) }}"
-                secondary class="mr-2" label="{{ __('translations.back') }}" />
+                secondary class="mr-2" label="{{ __('translations.reports') }}" />
             <x-button type="submit" primary label="{{ __('translations.save') }}" spinner />
         </div>
     </form>

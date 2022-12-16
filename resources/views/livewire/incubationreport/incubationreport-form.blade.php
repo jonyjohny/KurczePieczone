@@ -13,13 +13,15 @@
                 <label for="impregnation">{{ __('translations.attributes.impregnation') }}</label>
             </div>
             <div class="">
-                <x-input placeholder="{{ __('translations.enter') }}" wire:model="incubationreport.impregnation" />
+                <x-inputs.currency decimal="." precision="2" placeholder="{{ __('translations.enter') }}"
+                    wire:model="incubationreport.impregnation" />
             </div>
             <div class="flex justify-center lg:justify-start">
                 <label for="eggTest">{{ __('translations.attributes.eggTest') }}</label>
             </div>
             <div class="">
-                <x-datetime-picker without-time placeholder="{{ __('translations.enter') }}" wire:model="incubationreport.eggTest" />
+                <x-datetime-picker without-time placeholder="{{ __('translations.enter') }}"
+                    wire:model="incubationreport.eggTest" />
             </div>
             <div class="flex justify-center lg:justify-start">
                 <label for="remarks">{{ __('translations.attributes.remarks') }}</label>
@@ -30,9 +32,12 @@
         </div>
         <hr class="my-2">
         <div class="flex justify-end pt-2">
-            <x-button href="{{ route('incubationreport.index', ($editMode ? $incubationreport->incubationincubator_id : $incubationincubator)) }}" secondary class="mr-2"
-                label="{{ __('translations.back') }}" />
-            <x-button type="submit" primary label="{{ __('translations.save') }}" spinner />
+            <x-button href="{{ route('incubationincubators.index', $incubationincubator->id_incubation) }}" secondary
+                class="mr-2" label="{{ __('translations.incubations') }}" />
+            <x-button
+                href="{{ route('incubationreport.index', $editMode ? $incubationreport->incubationincubator_id : $incubationincubator) }}"
+                secondary class="mr-2" label="{{ __('translations.back') }}" />
+            <x-button type="submit" primary label="{{ __('translations.reports') }}" spinner />
         </div>
     </form>
 </div>

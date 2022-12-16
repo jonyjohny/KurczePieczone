@@ -76,6 +76,11 @@ return [
     'save' => 'Zapisz',
     'back' => 'Wstecz',
     'enter' => 'Wprowadź wartość',
+    'reports' => 'Raporty',
+    'aviaries' => 'Woliery',
+    'breedingplaces' => 'Miejsca odchowu',
+    'incubations' => 'Inkubatory',
+    'rows' => 'Rzędy',
     'select' => 'Wybierz wartość',
     'messages' => [
         'successes' => [

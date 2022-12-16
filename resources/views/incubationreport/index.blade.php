@@ -17,14 +17,6 @@
                         <x-button primary label="{{ __('translations.actions.create') }}"
                             href="{{ route('incubationreport.create', [$incubationincubator]) }}" />
                     </div>
-                    <div class="px-2">
-                        <x-button green label="{{ __('translations.actions.report') }}"
-                            href="{{ route('incubationincubators.index', [$incubationincubator->id_incubation]) }}" />
-                    </div>
-                    <div class="px-2">
-                        <x-button rose label="{{ __('translations.actions.chart') }}"
-                            href="{{ route('incubationincubators.index', [$incubationincubator->id_incubation]) }}" />
-                    </div>
                 </div>
                 <div style="overflow-x: auto;">
                     <livewire:incubationreport.incubationreport-table-view />

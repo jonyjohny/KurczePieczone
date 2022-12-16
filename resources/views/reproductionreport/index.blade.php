@@ -17,14 +17,6 @@
                         <x-button primary label="{{ __('translations.actions.create') }}"
                             href="{{ route('reproductionreport.create', [$reproductionrow]) }}" />
                     </div>
-                    <div class="px-2">
-                        <x-button green label="{{ __('translations.actions.report') }}"
-                            href="{{ route('reproductionrows.index', [$reproductionrow->id_reproduction]) }}" />
-                    </div>
-                    <div class="px-2">
-                        <x-button rose label="{{ __('translations.actions.chart') }}"
-                            href="{{ route('reproductionrows.index', [$reproductionrow->id_reproduction]) }}" />
-                    </div>
                 </div>
                 <div style="overflow-x: auto;">
                     <livewire:reproductionreport.reproductionreport-table-view />

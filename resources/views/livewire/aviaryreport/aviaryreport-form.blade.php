@@ -67,8 +67,11 @@
         <hr class="my-2">
         <div class="flex justify-end pt-2">
             <x-button
+                href="{{ route('aviaryplaces.index', $aviaryplace->id_aviary) }}"
+                secondary class="mr-2" label="{{ __('translations.aviaries') }}" />
+            <x-button
                 href="{{ route('aviaryreport.index', $editMode ? $aviaryreport->aviaryplace_id : $aviaryplace) }}"
-                secondary class="mr-2" label="{{ __('translations.back') }}" />
+                secondary class="mr-2" label="{{ __('translations.reports') }}" />
             <x-button type="submit" primary label="{{ __('translations.save') }}" spinner />
         </div>
     </form>

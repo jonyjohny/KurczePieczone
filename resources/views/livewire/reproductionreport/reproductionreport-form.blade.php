@@ -74,13 +74,15 @@
                 <label for="goodEggs">{{ __('reproductionreport.labels.goodEggs') }}</label>
             </div>
             <div class="">
-                <x-inputs.number placeholder="{{ __('translations.enter') }}" wire:model="reproductionreport.goodEggs" />
+                <x-inputs.number placeholder="{{ __('translations.enter') }}"
+                    wire:model="reproductionreport.goodEggs" />
             </div>
             <div class="flex justify-center lg:justify-start">
                 <label for="badEggs">{{ __('reproductionreport.labels.badEggs') }}</label>
             </div>
             <div class="">
-                <x-inputs.number placeholder="{{ __('translations.enter') }}" wire:model="reproductionreport.badEggs" />
+                <x-inputs.number placeholder="{{ __('translations.enter') }}"
+                    wire:model="reproductionreport.badEggs" />
             </div>
             <div class="flex justify-center lg:justify-start">
                 <label for="exportEggs">{{ __('reproductionreport.labels.exportEggs') }}</label>
@@ -104,9 +106,11 @@
         </div>
         <hr class="my-2">
         <div class="flex justify-end pt-2">
+            <x-button href="{{ route('reproductionrows.index', $reproductionrow->id_reproduction) }}" secondary
+                class="mr-2" label="{{ __('translations.rows') }}" />
             <x-button
                 href="{{ route('reproductionreport.index', $editMode ? $reproductionreport->reproductionrow_id : $reproductionrow) }}"
-                secondary class="mr-2" label="{{ __('translations.back') }}" />
+                secondary class="mr-2" label="{{ __('translations.reports') }}" />
             <x-button type="submit" primary label="{{ __('translations.save') }}" spinner />
         </div>
     </form>

@@ -47,8 +47,8 @@ class BreedingreportallTableView extends TableView
         }
 
         if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
-            return BreedingReport::wherehas('breedingplace', function ($query) {
-                $query->where("id_breeding", $this->breeding)->withTrashed();
+            return BreedingReport::withTrashed()->wherehas('breedingplace', function ($query) {
+                $query->where("id_breeding", $this->breeding);
             });
         }
 

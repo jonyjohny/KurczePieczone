@@ -42,8 +42,8 @@ class AviaryreportallTableView extends TableView
         }
 
         if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
-            return AviaryReport::wherehas('aviaryplace', function ($query) {
-                $query->where("id_aviary", $this->aviary)->withTrashed();
+            return AviaryReport::withTrashed()->wherehas('aviaryplace', function ($query) {
+                $query->where("id_aviary", $this->aviary);
             });
         }
 

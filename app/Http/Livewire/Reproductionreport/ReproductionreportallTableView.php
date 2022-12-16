@@ -47,8 +47,8 @@ class ReproductionreportallTableView extends TableView
         }
 
         if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
-            return ReproductionReport::wherehas('reproductionrow', function ($query) {
-                $query->where("id_reproduction", $this->reproduction)->withTrashed();
+            return ReproductionReport::withTrashed()->wherehas('reproductionrow', function ($query) {
+                $query->where("id_reproduction", $this->reproduction);
             });
         }
 

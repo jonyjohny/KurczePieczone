@@ -36,8 +36,8 @@ class IncubationreportallTableView extends TableView
         }
 
         if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
-            return IncubationReport::wherehas('incubationincubator', function ($query) {
-                $query->where("id_incubation", $this->incubation)->withTrashed();
+            return IncubationReport::withTrashed()->wherehas('incubationincubator', function ($query) {
+                $query->where("id_incubation", $this->incubation);
             });
         }
 

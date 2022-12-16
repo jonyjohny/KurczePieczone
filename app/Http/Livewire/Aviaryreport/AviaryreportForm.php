@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Aviaryreport;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 use App\Models\Aviaryplace;
-use Illuminate\Support\Str;
 use App\Models\AviaryReport;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;

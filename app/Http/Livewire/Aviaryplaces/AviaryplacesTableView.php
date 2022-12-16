@@ -7,7 +7,6 @@ use WireUi\Traits\Actions;
 use App\Models\Aviaryplace;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Aviaryplaces\Actions\EditAviaryplaceAction;
 use App\Http\Livewire\Aviaryplaces\Actions\AddAviarypReportAction;
 use App\Http\Livewire\Aviaryplaces\Actions\OpenAviaryReportAction;

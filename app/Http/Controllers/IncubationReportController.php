@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Incubation;
 use App\Models\IncubationReport;
-use App\Http\Requests\StoreIncubationReportRequest;
-use App\Http\Requests\UpdateIncubationReportRequest;
 use App\Models\Incubationincubator;
 
 class IncubationReportController extends Controller
@@ -24,6 +23,16 @@ class IncubationReportController extends Controller
         ]);
     }
 
+    public function report(Incubation $incubation)
+    {
+        $this->authorize('viewAny', IncubationReport::class);
+        return view(
+            'incubationreport.report'
+        , [
+            'incubation' => $incubation
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -37,17 +46,6 @@ class IncubationReportController extends Controller
             , [
                 'incubationincubator' => $incubationincubator
             ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreIncubationReportRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreIncubationReportRequest $request)
-    {
-        //
     }
 
     /**
@@ -76,18 +74,6 @@ class IncubationReportController extends Controller
                 'incubationreport' => $incubationreport
             ],
             );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateIncubationReportRequest  $request
-     * @param  \App\Models\IncubationReport  $incubationReport
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateIncubationReportRequest $request, IncubationReport $incubationReport)
-    {
-        //
     }
 
     /**

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aviary;
 use App\Models\Aviaryplace;
 use App\Models\AviaryReport;
-use App\Http\Requests\StoreAviaryReportRequest;
-use App\Http\Requests\UpdateAviaryReportRequest;
 
 class AviaryReportController extends Controller
 {
@@ -24,6 +23,16 @@ class AviaryReportController extends Controller
         ]);
     }
 
+    public function report(Aviary $aviary)
+    {
+        $this->authorize('viewAny', AviaryReport::class);
+        return view(
+            'aviaryreport.report'
+        , [
+            'aviary' => $aviary
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -37,17 +46,6 @@ class AviaryReportController extends Controller
             , [
                 'aviaryplace' => $aviaryplace
             ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreAviaryReportRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreAviaryReportRequest $request)
-    {
-        //
     }
 
     /**
@@ -76,18 +74,6 @@ class AviaryReportController extends Controller
                 'aviaryreport' => $aviaryreport
             ],
             );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateAviaryReportRequest  $request
-     * @param  \App\Models\AviaryReport  $aviaryReport
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateAviaryReportRequest $request, AviaryReport $aviaryReport)
-    {
-        //
     }
 
     /**

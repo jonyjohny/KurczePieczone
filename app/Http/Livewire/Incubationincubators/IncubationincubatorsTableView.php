@@ -2,13 +2,11 @@
 
 namespace App\Http\Livewire\Incubationincubators;
 
-use App\Models\User;
 use App\Models\Incubation;
 use WireUi\Traits\Actions;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use App\Models\Incubationincubator;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Incubationincubators\Actions\AddIncubationReportAction;
 use App\Http\Livewire\Incubationincubators\Actions\OpenIncubationReportAction;
 use App\Http\Livewire\Incubationincubators\Actions\EditIncubationincubatorAction;
@@ -97,6 +95,13 @@ class IncubationincubatorsTableView extends TableView
             ];
         }
         return [
+            $model->name,
+            $model->users->name,
+            $model->remarks,
+            $model->eggs,
+            $model->added,
+            $model->created_at,
+            $model->updated_at,
         ];
     }
     

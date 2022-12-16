@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Breeding;
 use App\Models\Breedingplace;
-use App\Http\Requests\StoreBreedingplaceRequest;
-use App\Http\Requests\UpdateBreedingplaceRequest;
 
 class BreedingplaceController extends Controller
 {
@@ -40,17 +38,6 @@ class BreedingplaceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBreedingplaceRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreBreedingplaceRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Breedingplace  $breedingplace
@@ -76,18 +63,6 @@ class BreedingplaceController extends Controller
                 'breedingplace' => $breedingplace
             ],
             );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBreedingplaceRequest  $request
-     * @param  \App\Models\Breedingplace  $breedingplace
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBreedingplaceRequest $request, Breedingplace $breedingplace)
-    {
-        //
     }
 
     /**

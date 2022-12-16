@@ -19,7 +19,7 @@
                     </div>
                     <div class="px-2">
                         <x-button green label="{{ __('translations.actions.report') }}"
-                            href="{{ route('incubationincubators.index', [$incubation]) }}" />
+                            href="{{ route('incubationreport.report', [$incubation]) }}" />
                     </div>
                     <div class="px-2">
                         <x-button rose label="{{ __('translations.actions.chart') }}"

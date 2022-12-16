@@ -32,93 +32,109 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users/allOpen', [UserController::class, 'allOpen'])->name('users.allOpen');
 
+
+Route::get('/users/allOpen', [UserController::class, 'allOpen'])->name('users.allOpen');
 Route::get('/users/allRoles', [UserController::class, 'allRoles'])->name('users.allRoles');
+
+
 
 Route::resource('users', UserController::class)->only([
     'index', 'create', 'edit'
 ]);
 
+
+
 Route::resource('reproductions', ReproductionController::class)->only([
     'index', 'create', 'edit'
 ]);
+
+
 
 Route::resource('incubations', IncubationController::class)->only([
     'index', 'create', 'edit'
 ]);
 
+
+
 Route::resource('breeding', BreedingController::class)->only([
     'index', 'create', 'edit'
 ]);
+
+
 
 Route::resource('aviaries', AviaryController::class)->only([
     'index', 'create', 'edit'
 ]);
 
-Route::get('/reproductionrows/create/{reproduction}', [ReproductionrowController::class, 'create'])->name('reproductionrows.create');
 
+
+Route::get('/reproductionrows/create/{reproduction}', [ReproductionrowController::class, 'create'])->name('reproductionrows.create');
 Route::resource('reproductionrows', ReproductionrowController::class)->only([
     'edit'
 ]);
-
 Route::get('/reproductionrows/{reproduction}', [ReproductionrowController::class, 'index'])->name('reproductionrows.index');
 
-Route::get('/incubationincubators/create/{incubation}', [IncubationincubatorController::class, 'create'])->name('incubationincubators.create');
 
+
+Route::get('/incubationincubators/create/{incubation}', [IncubationincubatorController::class, 'create'])->name('incubationincubators.create');
 Route::resource('incubationincubators', IncubationincubatorController::class)->only([
     'edit'
 ]);
-
 Route::get('/incubationincubators/{incubation}', [IncubationincubatorController::class, 'index'])->name('incubationincubators.index');
 
-Route::get('/breedingplaces/create/{breeding}', [BreedingplaceController::class, 'create'])->name('breedingplaces.create');
 
+
+Route::get('/breedingplaces/create/{breeding}', [BreedingplaceController::class, 'create'])->name('breedingplaces.create');
 Route::resource('breedingplaces', BreedingplaceController::class)->only([
     'edit'
 ]);
-
 Route::get('/breedingplaces/{breeding}', [BreedingplaceController::class, 'index'])->name('breedingplaces.index');
 
-Route::get('/aviaryplaces/create/{aviary}', [AviaryplaceController::class, 'create'])->name('aviaryplaces.create');
 
+
+Route::get('/aviaryplaces/create/{aviary}', [AviaryplaceController::class, 'create'])->name('aviaryplaces.create');
 Route::resource('aviaryplaces', AviaryplaceController::class)->only([
     'edit'
 ]);
-
 Route::get('/aviaryplaces/{aviary}', [AviaryplaceController::class, 'index'])->name('aviaryplaces.index');
 
-Route::get('/reproductionreport/create/{reproductionrow}', [ReproductionReportController::class, 'create'])->name('reproductionreport.create');
 
+
+Route::get('/reproductionreport/{reproduction}', [ReproductionReportController::class, 'report'])->name('reproductionreport.report');
+Route::get('/reproductionreport/create/{reproductionrow}', [ReproductionReportController::class, 'create'])->name('reproductionreport.create');
 Route::resource('reproductionreport', ReproductionReportController::class)->only([
     'edit'
 ]);
-
 Route::get('/reproductionreport/{reproductionrow}', [ReproductionReportController::class, 'index'])->name('reproductionreport.index');
 
-Route::get('/incubationreport/create/{incubationincubator}', [IncubationReportController::class, 'create'])->name('incubationreport.create');
 
+
+Route::get('/incubationreport/{incubation}', [IncubationReportController::class, 'report'])->name('incubationreport.report');
+Route::get('/incubationreport/create/{incubationincubator}', [IncubationReportController::class, 'create'])->name('incubationreport.create');
 Route::resource('incubationreport', IncubationReportController::class)->only([
     'edit'
 ]);
-
 Route::get('/incubationreport/{incubationincubator}', [IncubationReportController::class, 'index'])->name('incubationreport.index');
 
-Route::get('/breedingreport/create/{breedingplace}', [BreedingReportController::class, 'create'])->name('breedingreport.create');
 
+
+Route::get('/breedingreport/{breeding}', [BreedingReportController::class, 'report'])->name('breedingreport.report');
+Route::get('/breedingreport/create/{breedingplace}', [BreedingReportController::class, 'create'])->name('breedingreport.create');
 Route::resource('breedingreport', BreedingReportController::class)->only([
     'edit'
 ]);
-
 Route::get('/breedingreport/{breedingplace}', [BreedingReportController::class, 'index'])->name('breedingreport.index');
 
-Route::get('/aviaryreport/create/{aviaryplace}', [AviaryReportController::class, 'create'])->name('aviaryreport.create');
 
+
+Route::get('/aviaryreport/{aviary}', [AviaryReportController::class, 'report'])->name('aviaryreport.report');
+Route::get('/aviaryreport/create/{aviaryplace}', [AviaryReportController::class, 'create'])->name('aviaryreport.create');
 Route::resource('aviaryreport', AviaryReportController::class)->only([
     'edit'
 ]);
-
 Route::get('/aviaryreport/{aviaryplace}', [AviaryReportController::class, 'index'])->name('aviaryreport.index');
+
 
 Route::middleware([
     'auth:sanctum',

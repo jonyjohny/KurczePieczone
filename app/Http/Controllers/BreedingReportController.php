@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BreedingReport;
-use App\Http\Requests\StoreBreedingReportRequest;
-use App\Http\Requests\UpdateBreedingReportRequest;
+use App\Models\Breeding;
 use App\Models\Breedingplace;
+use App\Models\BreedingReport;
 
 class BreedingReportController extends Controller
 {
@@ -24,6 +23,16 @@ class BreedingReportController extends Controller
         ]);
     }
 
+    public function report(Breeding $breeding)
+    {
+        $this->authorize('viewAny', BreedingReport::class);
+        return view(
+            'breedingreport.report'
+        , [
+            'breeding' => $breeding
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -37,17 +46,6 @@ class BreedingReportController extends Controller
             , [
                 'breedingplace' => $breedingplace
             ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBreedingReportRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreBreedingReportRequest $request)
-    {
-        //
     }
 
     /**
@@ -76,18 +74,6 @@ class BreedingReportController extends Controller
                 'breedingreport' => $breedingreport
             ],
             );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBreedingReportRequest  $request
-     * @param  \App\Models\BreedingReport  $breedingReport
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBreedingReportRequest $request, BreedingReport $breedingReport)
-    {
-        //
     }
 
     /**

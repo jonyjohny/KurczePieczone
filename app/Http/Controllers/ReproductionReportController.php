@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReproductionReport;
-use App\Http\Requests\StoreReproductionReportRequest;
-use App\Http\Requests\UpdateReproductionReportRequest;
+use App\Models\Reproduction;
 use App\Models\Reproductionrow;
+use App\Models\ReproductionReport;
 
 class ReproductionReportController extends Controller
 {
@@ -24,6 +23,16 @@ class ReproductionReportController extends Controller
         ]);
     }
 
+    public function report(Reproduction $reproduction)
+    {
+        $this->authorize('viewAny', ReproductionReport::class);
+        return view(
+            'reproductionreport.report'
+        , [
+            'reproduction' => $reproduction
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -37,17 +46,6 @@ class ReproductionReportController extends Controller
             , [
                 'reproductionrow' => $reproductionrow
             ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreReproductionReportRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreReproductionReportRequest $request)
-    {
-        //
     }
 
     /**
@@ -76,18 +74,6 @@ class ReproductionReportController extends Controller
                 'reproductionreport' => $reproductionreport
             ],
             );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateReproductionReportRequest  $request
-     * @param  \App\Models\ReproductionReport  $reproductionReport
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateReproductionReportRequest $request, ReproductionReport $reproductionReport)
-    {
-        //
     }
 
     /**

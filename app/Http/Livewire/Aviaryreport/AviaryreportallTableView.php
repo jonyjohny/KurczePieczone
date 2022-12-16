@@ -11,13 +11,13 @@ use App\Http\Livewire\Aviaryreport\Actions\RestoreAviaryreportAction;
 use App\Http\Livewire\Aviaryreport\Actions\SoftDeleteAviaryreportAction;
 use App\Models\AviaryReport;
 
-class AviaryreportTableView extends TableView
+class AviaryreportallTableView extends TableView
 {
     use Actions;
     /**
      * Sets a model class to get the initial data
      */
-    public $aviaryplace;
+    public $aviary;
 
     public $searchBy = [
         'feeding',
@@ -36,16 +36,20 @@ class AviaryreportTableView extends TableView
     ];
 
     public function repository()
-    {   
-        if (!$this->aviaryplace) {
-            $this->aviaryplace = request()->route('aviaryplace.id');
+    {
+        if (!$this->aviary) {
+            $this->aviary = request()->route('aviary.id');
         }
 
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
-            return AviaryReport::where('aviaryplace_id', $this->aviaryplace)->withTrashed();
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
+            return AviaryReport::wherehas('aviaryplace', function ($query) {
+                $query->where("id_aviary", $this->aviary)->withTrashed();
+            });
         }
 
-        return AviaryReport::where('aviaryplace_id', $this->aviaryplace);
+        return AviaryReport::wherehas('aviaryplace', function ($query) {
+            $query->where("id_aviary", $this->aviary);
+        });
     }
 
 
@@ -56,8 +60,9 @@ class AviaryreportTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
+                __('translations.attributes.Aviary'),
                 Header::title(__('aviaryreport.attributes.feeding'))->sortBy('feeding'),
                 Header::title(__('aviaryreport.attributes.cure'))->sortBy('cure'),
                 Header::title(__('aviaryreport.attributes.hensExport'))->sortBy('hensExport'),
@@ -74,6 +79,7 @@ class AviaryreportTableView extends TableView
             ];
         }
         return [
+            __('translations.attributes.Aviary'),
             Header::title(__('aviaryreport.attributes.feeding'))->sortBy('feeding'),
             Header::title(__('aviaryreport.attributes.cure'))->sortBy('cure'),
             Header::title(__('aviaryreport.attributes.hensExport'))->sortBy('hensExport'),
@@ -96,8 +102,9 @@ class AviaryreportTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
+                $model->aviaryplace->name,
                 $model->feeding,
                 $model->cure,
                 $model->hensExport,
@@ -114,6 +121,7 @@ class AviaryreportTableView extends TableView
             ];
         }
         return [
+            $model->aviaryplace->name,
             $model->feeding,
             $model->cure,
             $model->hensExport,
@@ -131,12 +139,12 @@ class AviaryreportTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
                 new EditAviaryreportAction('aviaryreport.edit', __('translations.actions.edit')),
                 new SoftDeleteAviaryreportAction(),
                 new RestoreAviaryreportAction(),
-            ];        
+            ];
         }
         return [
             new EditAviaryreportAction('aviaryreport.edit', __('translations.actions.edit')),
@@ -151,7 +159,7 @@ class AviaryreportTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('aviaryreport.messages.successes.destroy')
-            );
+        );
     }
 
     public function restore(int $id)

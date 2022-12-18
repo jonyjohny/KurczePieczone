@@ -21,10 +21,6 @@
                         <x-button green label="{{ __('translations.actions.report') }}"
                             href="{{ route('aviaryreport.report', [$aviary]) }}" />
                     </div>
-                    <div class="px-2">
-                        <x-button rose label="{{ __('translations.actions.chart') }}"
-                            href="{{ route('aviaryplaces.index', [$aviary]) }}" />
-                    </div>
                 </div>
                 <div style="overflow-x: auto;">
                     <livewire:aviaryplaces.aviaryplaces-table-view />

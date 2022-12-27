@@ -17,8 +17,8 @@ class ReproductionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->word(100),
-            'remarks' => $this->faker->text,
+            'name' => $this->faker->word(1),
+            'remarks' => $this->faker->word(15),
             'closed' => false,
             'archived' => false,
             'created_at' => $this->faker->dateTimeBetween(

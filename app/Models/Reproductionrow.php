@@ -33,4 +33,9 @@ class Reproductionrow extends Model
     {
         return $this->hasMany(ReproductionReport::class,'reproductionrow_id');
     }
+
+    public function reproductionrowcage() 
+    {
+        return $this->hasMany(Reproductionrowcages::class,'reproductionrow_id');
+    }
 }

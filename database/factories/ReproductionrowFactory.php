@@ -19,12 +19,12 @@ class ReproductionrowFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(100),
-            'remarks' => $this->faker->text,
+            'name' => $this->faker->word(1),
+            'remarks' => $this->faker->word(15),
             'id_reproduction' => $this->faker->randomElement(Reproduction::pluck('id')),
             'id_user' => $this->faker->randomElement(User::pluck('id')),
-            'hens' => $this->faker->randomNumber(5, false),
-            'roosters' => $this->faker->randomNumber(5, false),
+            'hens' => $this->faker->randomNumber(2, false),
+            'roosters' => $this->faker->randomNumber(2, false),
             'added' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',

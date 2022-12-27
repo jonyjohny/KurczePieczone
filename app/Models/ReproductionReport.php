@@ -22,6 +22,11 @@ class ReproductionReport extends Model
         return $this->belongsTo(Reproductionrow::class, 'reproductionrow_id');
     }
 
+    public function reproductionrowcage()
+    {
+        return $this->belongsTo(Reproductionrowcages::class, 'reproductionrowcage_id');
+    }
+
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');

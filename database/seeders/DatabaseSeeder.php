@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Reproduction;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
@@ -14,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Database\Seeders\IncubationSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\ReproductionSeeder;
+use Database\Seeders\ReproductionrowcagesSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call(IncubationincubatorSeeder::class);
         $this->call(BreedingplaceSeeder::class);
         $this->call(AviaryPlaceSeeder::class);
+        $this->call(ReproductionrowcagesSeeder::class);
         $this->call(ReproductionReportSeeder::class);
         $this->call(IncubationReportSeeder::class);
         $this->call(BreedingReportSeeder::class);

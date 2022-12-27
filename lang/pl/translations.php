@@ -19,6 +19,7 @@ return [
         'Incubator' => 'Inkubator',
         'Place' => 'Miejsce',
         'Aviary' => 'Woliera',
+        'Cages' => 'Klatki',
     ],
     'menu' => [
         'dictionaries' => 'Słowniki',
@@ -68,6 +69,9 @@ return [
         'IncubationReports' => 'Raport dla całego inkubatora',
         'BreedingReports' => 'Raport dla całego miejsca odchowu',
         'AviaryReports' => 'Raport dla całej woliery',
+        'Chart' => 'Wykres',
+        'Cages' => 'Klatki',
+        'ReproductionReportsRow' => 'Raport rzędu',
     ],
     'yes' => 'Tak',
     'no' => 'Nie',
@@ -89,6 +93,7 @@ return [
     'incubations' => 'Inkubatory',
     'rows' => 'Rzędy',
     'select' => 'Wybierz wartość',
+    'Cages' => 'Klatki',
     'messages' => [
         'successes' => [
             'update_title' => 'Zaktualizowano',
@@ -113,5 +118,7 @@ return [
         'chart' => 'Wykres',
     ],
     'Profile Information' => 'test',
-    'Photo' => 'Zdjęcie'
+    'Photo' => 'Zdjęcie',
+    'reportsall' => 'R Stada',
+    'reportsrow' => 'R rzędu',
 ];

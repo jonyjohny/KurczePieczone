@@ -16,6 +16,4 @@ class EditReproductionrowAction extends RedirectAction
     {
         return request()->user()->can('delete', $model);
     }
-
-
 }

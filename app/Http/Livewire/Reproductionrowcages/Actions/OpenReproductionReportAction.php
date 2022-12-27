@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Reproductionrows\Actions;
+namespace App\Http\Livewire\Reproductionrowcages\Actions;
 
 use LaravelViews\Views\View;
 use LaravelViews\Actions\Action;
 use LaravelViews\Actions\RedirectAction;
 
 
-class AddReproductionReportAction extends RedirectAction
+class OpenReproductionReportAction extends RedirectAction
 {
-    public function __construct(string $to, string $title, string $icon = 'plus')
+    public function __construct(string $to, string $title, string $icon = 'log-in')
     {
         parent::__construct($to, $title, $icon);
     }

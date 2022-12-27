@@ -16,6 +16,7 @@ use App\Http\Controllers\ReproductionrowController;
 use App\Http\Controllers\IncubationincubatorController;
 use App\Http\Controllers\IncubationReportController;
 use App\Http\Controllers\ReproductionReportController;
+use App\Http\Controllers\ReproductionrowcagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,7 @@ Route::resource('aviaries', AviaryController::class)->only([
 
 
 
+Route::get('/reproductionrows/chart/{reproduction}', [ReproductionrowController::class, 'chart'])->name('reproductionrows.chart');
 Route::get('/reproductionrows/create/{reproduction}', [ReproductionrowController::class, 'create'])->name('reproductionrows.create');
 Route::resource('reproductionrows', ReproductionrowController::class)->only([
     'edit'
@@ -101,12 +103,21 @@ Route::get('/aviaryplaces/{aviary}', [AviaryplaceController::class, 'index'])->n
 
 
 
-Route::get('/reproductionreport/{reproduction}', [ReproductionReportController::class, 'report'])->name('reproductionreport.report');
-Route::get('/reproductionreport/create/{reproductionrow}', [ReproductionReportController::class, 'create'])->name('reproductionreport.create');
+Route::get('/reproductionreport/{reproductionrowcage}', [ReproductionReportController::class, 'index'])->name('reproductionreport.index');
+Route::get('/reproductionreport/reportherd/{reproduction}', [ReproductionReportController::class, 'report'])->name('reproductionreport.report');
+Route::get('/reproductionreport/reportrow/{reproductionrow}', [ReproductionReportController::class, 'reportrow'])->name('reproductionreport.reportrow');
+Route::get('/reproductionreport/create/{reproductionrowcage}', [ReproductionReportController::class, 'create'])->name('reproductionreport.create');
 Route::resource('reproductionreport', ReproductionReportController::class)->only([
     'edit'
 ]);
-Route::get('/reproductionreport/{reproductionrow}', [ReproductionReportController::class, 'index'])->name('reproductionreport.index');
+
+
+
+Route::get('/reproductionrowcages/create/{reproductionrow}', [ReproductionrowcagesController::class, 'create'])->name('reproductionrowcages.create');
+Route::resource('reproductionrowcages', ReproductionrowcagesController::class)->only([
+    'edit'
+]);
+Route::get('/reproductionrowcages/{reproductionrow}', [ReproductionrowcagesController::class, 'index'])->name('reproductionrowcages.index');
 
 
 

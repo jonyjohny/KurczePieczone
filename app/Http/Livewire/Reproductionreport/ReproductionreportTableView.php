@@ -19,7 +19,7 @@ class ReproductionreportTableView extends TableView
     /**
      * Sets a model class to get the initial data
      */
-    public $reproductionrow;
+    public $reproductionrowcage;
 
     public $searchBy = [
         'nicHens',
@@ -44,15 +44,15 @@ class ReproductionreportTableView extends TableView
 
     public function repository()
     {   
-        if (!$this->reproductionrow) {
-            $this->reproductionrow = request()->route('reproductionrow.id');
+        if (!$this->reproductionrowcage) {
+            $this->reproductionrowcage = request()->route('reproductionrowcage.id');
         }
 
         if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
-            return ReproductionReport::where('reproductionrow_id', $this->reproductionrow)->withTrashed();
+            return ReproductionReport::where('reproductionrowcage_id', $this->reproductionrowcage)->withTrashed();
         }
 
-        return ReproductionReport::where('reproductionrow_id', $this->reproductionrow);
+        return ReproductionReport::where('reproductionrowcage_id', $this->reproductionrowcage);
     }
 
 

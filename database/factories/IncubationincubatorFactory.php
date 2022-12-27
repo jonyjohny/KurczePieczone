@@ -19,11 +19,11 @@ class IncubationincubatorFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(100),
-            'remarks' => $this->faker->text,
+            'name' => $this->faker->word(1),
+            'remarks' => $this->faker->word(15),
             'id_incubation' => $this->faker->randomElement(Incubation::pluck('id')),
             'id_user' => $this->faker->randomElement(User::pluck('id')),
-            'eggs' => $this->faker->randomNumber(5, false),
+            'eggs' => $this->faker->randomNumber(3, false),
             'added' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',

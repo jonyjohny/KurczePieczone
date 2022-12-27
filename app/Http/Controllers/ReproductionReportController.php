@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reproduction;
 use App\Models\Reproductionrow;
 use App\Models\ReproductionReport;
+use App\Models\Reproductionrowcages;
 
 class ReproductionReportController extends Controller
 {
@@ -13,13 +14,13 @@ class ReproductionReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Reproductionrow $reproductionrow)
+    public function index(Reproductionrowcages $reproductionrowcage)
     {
         $this->authorize('viewAny', ReproductionReport::class);
         return view(
             'reproductionreport.index'
         , [
-            'reproductionrow' => $reproductionrow
+            'reproductionrowcage' => $reproductionrowcage
         ]);
     }
 
@@ -33,18 +34,28 @@ class ReproductionReportController extends Controller
         ]);
     }
 
+    public function reportrow(Reproductionrow $reproductionrow)
+    {
+        $this->authorize('viewAny', ReproductionReport::class);
+        return view(
+            'reproductionreport.reportrow'
+        , [
+            'reproductionrow' => $reproductionrow
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Reproductionrow $reproductionrow)
+    public function create(Reproductionrowcages $reproductionrowcage)
     {
         $this->authorize('create', ReproductionReport::class);
         return view(
             'reproductionreport.form'
             , [
-                'reproductionrow' => $reproductionrow
+                'reproductionrowcage' => $reproductionrowcage
             ]);
     }
 

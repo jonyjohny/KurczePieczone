@@ -6,11 +6,9 @@ use WireUi\Traits\Actions;
 use App\Models\Reproductionrow;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Reproductionrows\Actions\EditReproductionrowAction;
-use App\Http\Livewire\Reproductionrows\Actions\AddReproductionReportAction;
-use App\Http\Livewire\Reproductionrows\Actions\OpenReproductionReportAction;
 use App\Http\Livewire\Reproductionrows\Actions\RestoreReproductionrowAction;
+use App\Http\Livewire\Reproductionrows\Actions\OpenReproductionrowcagesAction;
 use App\Http\Livewire\Reproductionrows\Actions\SoftDeleteReproductionrowAction;
 
 class ReproductionrowsTableView extends TableView
@@ -113,16 +111,14 @@ class ReproductionrowsTableView extends TableView
     {
         if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
             return [
-                new AddReproductionReportAction('reproductionreport.create',__('translations.actions.addReport')),
-                new OpenReproductionReportAction('reproductionreport.index',__('translations.actions.openReport')),
+                new OpenReproductionrowcagesAction('reproductionrowcages.index',__('translations.actions.open')),
                 new EditReproductionrowAction('reproductionrows.edit', __('translations.actions.edit')),
                 new SoftDeleteReproductionrowAction(),
                 new RestoreReproductionrowAction(),
             ];        
         }
         return [
-            new AddReproductionReportAction('reproductionreport.create',__('translations.actions.addReport')),
-            new OpenReproductionReportAction('reproductionreport.index',__('translations.actions.openReport')),
+            new OpenReproductionrowcagesAction('reproductionrowcages.index',__('translations.actions.open')),
             new EditReproductionrowAction('reproductionrows.edit', __('translations.actions.edit')),
             new SoftDeleteReproductionrowAction(),
         ];

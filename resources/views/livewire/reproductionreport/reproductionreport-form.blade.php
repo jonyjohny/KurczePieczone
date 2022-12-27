@@ -106,10 +106,10 @@
         </div>
         <hr class="my-2">
         <div class="flex justify-end pt-2">
-            <x-button href="{{ route('reproductionrows.index', $reproductionrow->id_reproduction) }}" secondary
-                class="mr-2" label="{{ __('translations.rows') }}" />
+            <x-button href="{{ route('reproductionrowcages.index', $reproductionrowcage->reproductionrow_id) }}" secondary
+                class="mr-2" label="{{ __('translations.Cages') }}" />
             <x-button
-                href="{{ route('reproductionreport.index', $editMode ? $reproductionreport->reproductionrow_id : $reproductionrow) }}"
+                href="{{ route('reproductionreport.index', $editMode ? $reproductionreport->reproductionrowcage_id : $reproductionrowcage) }}"
                 secondary class="mr-2" label="{{ __('translations.reports') }}" />
             <x-button type="submit" primary label="{{ __('translations.save') }}" spinner />
         </div>

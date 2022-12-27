@@ -15,6 +15,6 @@ class ReproductionSeeder extends Seeder
      */
     public function run()
     {
-        Reproduction::factory(50)->create();
+        Reproduction::factory(20)->create();
     }
 }

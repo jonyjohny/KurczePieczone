@@ -19,11 +19,11 @@ class BreedingplaceFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(100),
-            'remarks' => $this->faker->text,
+            'name' => $this->faker->word(1),
+            'remarks' => $this->faker->word(15),
             'id_breeding' => $this->faker->randomElement(Breeding::pluck('id')),
             'id_user' => $this->faker->randomElement(User::pluck('id')),
-            'animals' => $this->faker->randomNumber(5, false),
+            'animals' => $this->faker->randomNumber(3, false),
             'added' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',

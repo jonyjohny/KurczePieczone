@@ -23,7 +23,7 @@
                     </div>
                     <div class="px-2">
                         <x-button rose label="{{ __('translations.actions.chart') }}"
-                            href="{{ route('reproductionrows.index', [$reproduction]) }}" />
+                            href="{{ route('reproductionrows.chart', [$reproduction]) }}" />
                     </div>
                 </div>
                 <div style="overflow-x: auto;">

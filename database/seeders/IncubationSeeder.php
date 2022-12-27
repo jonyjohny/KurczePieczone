@@ -15,6 +15,6 @@ class IncubationSeeder extends Seeder
      */
     public function run()
     {
-        Incubation::factory(50)->create();
+        Incubation::factory(20)->create();
     }
 }

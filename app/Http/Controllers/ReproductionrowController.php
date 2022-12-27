@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reproduction;
-use App\Models\Reproductionrow;
 use Illuminate\Http\Request;
+use App\Models\Reproductionrow;
+use Illuminate\Support\Facades\DB;
 
 class ReproductionrowController extends Controller
 {
-/**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,10 +18,26 @@ class ReproductionrowController extends Controller
     {
         $this->authorize('viewAny', Reproductionrow::class);
         return view(
-            'reproductionrows.index'
-        , [
-            'reproduction' => $reproduction
-        ]);
+            'reproductionrows.index',
+            [
+                'reproduction' => $reproduction
+            ]
+        );
+    }
+
+    public function chart(Reproduction $reproduction)
+    {
+        $this->authorize('viewAny', Reproductionrow::class);
+        $reproductionrows = Reproductionrow::where('id_reproduction', $reproduction->id)->with('reproductionreport')->get();
+        $cages = DB::table('reproductionrows')->where('id_reproduction', $reproduction->id)->max('cages');
+        return view(
+            'reproductionrows.chart',
+            [
+                'reproduction' => $reproduction,
+                'reproductionrows' => $reproductionrows,
+                'cages' => $cages,
+            ]
+        );
     }
 
     /**
@@ -32,10 +49,11 @@ class ReproductionrowController extends Controller
     {
         $this->authorize('create', Reproductionrow::class);
         return view(
-            'reproductionrows.form'
-            , [
+            'reproductionrows.form',
+            [
                 'reproduction' => $reproduction
-            ]);
+            ]
+        );
     }
 
     /**
@@ -74,7 +92,7 @@ class ReproductionrowController extends Controller
             [
                 'reproductionrow' => $reproductionrow
             ],
-            );
+        );
     }
 
     /**

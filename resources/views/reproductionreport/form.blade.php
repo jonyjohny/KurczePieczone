@@ -10,7 +10,7 @@
                 @if (isset($reproductionreport))
                     <livewire:reproductionreport.reproductionreport-form :reproductionreport="$reproductionreport" :editMode="true" />
                 @else
-                    <livewire:reproductionreport.reproductionreport-form :reproductionrow="$reproductionrow" :editMode="false" />
+                    <livewire:reproductionreport.reproductionreport-form :reproductionrowcage="$reproductionrowcage" :editMode="false" />
                 @endif
             </div>
         </div>

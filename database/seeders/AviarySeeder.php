@@ -15,6 +15,6 @@ class AviarySeeder extends Seeder
      */
     public function run()
     {
-        Aviary::factory(50)->create();
+        Aviary::factory(20)->create();
     }
 }

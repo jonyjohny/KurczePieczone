@@ -20,7 +20,7 @@ class ReproductionrowcagesFactory extends Factory
         return [
             'reproductionrow_id' => $this->faker->randomElement(Reproductionrow::pluck('id')),
             'number' => $this->faker->randomNumber(2, false),
-            'remarks' => $this->faker->word(15),
+            'remarks' => $this->faker->word(10),
             'created_at' => $this->faker->dateTimeBetween(
                 '- 8 weeks',
                 '- 4 weeks',

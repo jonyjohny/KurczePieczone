@@ -34,32 +34,48 @@
                                             class="px-2 py-1 whitespace-nowrap text-sm font-medium text-left text-gray-900">
                                             {{ $reproductionrow->name }}</td>
                                         @foreach ($reproductionrow->reproductionrowcage as $cage)
-                                            <td
-                                                class="border px-2 py-1 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                @php
-                                                    $hens = 0;
-                                                    $nicHens = 0;
-                                                    $cannibalismHens = 0;
-                                                    $debilityHens = 0;
-                                                    $otherHens = 0;
-                                                    $roosters = 0;
-                                                    $nicRoosters = 0;
-                                                    $cannibalismRoosters = 0;
-                                                    $debilityRoosters = 0;
-                                                    $otherRoosters = 0;
-                                                    foreach ($cage->reproductionreport as $report) {
-                                                        $hens += $report->nicHens + $report->cannibalismHens + $report->debilityHens + $report->otherHens;
-                                                        $roosters = $report->nicRoosters + $report->cannibalismRoosters + $report->debilityRoosters + $report->otherRoosters;
-                                                        $nicHens += $report->nicHens;
-                                                        $cannibalismHens += $report->cannibalismHens;
-                                                        $debilityHens += $report->debilityHens;
-                                                        $otherHens += $report->otherHens;
-                                                        $nicRoosters += $report->nicRoosters;
-                                                        $cannibalismRoosters += $report->cannibalismRoosters;
-                                                        $debilityRoosters += $report->debilityRoosters;
-                                                        $otherRoosters += $report->otherRoosters;
-                                                    }
-                                                @endphp
+                                            @php
+                                                $bg = '';
+                                                $hens = 0;
+                                                $nicHens = 0;
+                                                $cannibalismHens = 0;
+                                                $debilityHens = 0;
+                                                $otherHens = 0;
+                                                $roosters = 0;
+                                                $nicRoosters = 0;
+                                                $cannibalismRoosters = 0;
+                                                $debilityRoosters = 0;
+                                                $otherRoosters = 0;
+                                                foreach ($cage->reproductionreport as $report) {
+                                                    $hens += $report->nicHens + $report->cannibalismHens + $report->debilityHens + $report->otherHens;
+                                                    $roosters += $report->nicRoosters + $report->cannibalismRoosters + $report->debilityRoosters + $report->otherRoosters;
+                                                    $nicHens += $report->nicHens;
+                                                    $cannibalismHens += $report->cannibalismHens;
+                                                    $debilityHens += $report->debilityHens;
+                                                    $otherHens += $report->otherHens;
+                                                    $nicRoosters += $report->nicRoosters;
+                                                    $cannibalismRoosters += $report->cannibalismRoosters;
+                                                    $debilityRoosters += $report->debilityRoosters;
+                                                    $otherRoosters += $report->otherRoosters;
+                                                }
+                                                $deadall = $hens + $roosters;
+                                                if ($deadall > 50) {
+                                                    $bg = 'bg-red-200';
+                                                } elseif ($deadall > 40) {
+                                                    $bg = 'bg-red-200';
+                                                } elseif ($deadall > 30) {
+                                                    $bg = 'bg-orange-200';
+                                                } elseif ($deadall > 20) {
+                                                    $bg = 'bg-orange-200';
+                                                } elseif ($deadall > 10) {
+                                                    $bg = 'bg-yellow-200';
+                                                } elseif ($deadall > 5) {
+                                                    $bg = 'bg-sky-200';
+                                                } else {
+                                                    //
+                                                }
+                                            @endphp
+                                            <td class="border px-2 py-1 whitespace-nowrap text-sm font-medium text-gray-900 {{ $bg }}">
                                                 <div class="flex justify-between mx-2">
                                                     <div class="text-red-700"><abbr
                                                             title="Kury-> Nicowanie: {{ $nicHens }}, Kanibalizm: {{ $cannibalismHens }}, Wycieńczenie: {{ $debilityHens }}, Inne: {{ $otherHens }}">{{ $hens }}</abbr>

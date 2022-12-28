@@ -15,6 +15,6 @@ class ReproductionrowcagesSeeder extends Seeder
      */
     public function run()
     {
-        Reproductionrowcages::factory(1000)->create();
+        Reproductionrowcages::factory(2000)->create();
     }
 }

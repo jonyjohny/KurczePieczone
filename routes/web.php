@@ -69,7 +69,8 @@ Route::resource('aviaries', AviaryController::class)->only([
 ]);
 
 
-
+Route::get('/reproductionrows/chart/hens/{reproductionrowcages}', [ReproductionrowController::class, 'hens'])->name('reproductionrows.hens');
+Route::get('/reproductionrows/chart/roosters/{reproductionrowcages}', [ReproductionrowController::class, 'roosters'])->name('reproductionrows.roosters');
 Route::get('/reproductionrows/chart/{reproduction}', [ReproductionrowController::class, 'chart'])->name('reproductionrows.chart');
 Route::get('/reproductionrows/create/{reproduction}', [ReproductionrowController::class, 'create'])->name('reproductionrows.create');
 Route::resource('reproductionrows', ReproductionrowController::class)->only([
@@ -121,7 +122,7 @@ Route::get('/reproductionrowcages/{reproductionrow}', [ReproductionrowcagesContr
 
 
 
-Route::get('/incubationreport/{incubation}', [IncubationReportController::class, 'report'])->name('incubationreport.report');
+Route::get('/incubationreport/report/{incubation}', [IncubationReportController::class, 'report'])->name('incubationreport.report');
 Route::get('/incubationreport/create/{incubationincubator}', [IncubationReportController::class, 'create'])->name('incubationreport.create');
 Route::resource('incubationreport', IncubationReportController::class)->only([
     'edit'
@@ -130,7 +131,7 @@ Route::get('/incubationreport/{incubationincubator}', [IncubationReportControlle
 
 
 
-Route::get('/breedingreport/{breeding}', [BreedingReportController::class, 'report'])->name('breedingreport.report');
+Route::get('/breedingreport/report/{breeding}', [BreedingReportController::class, 'report'])->name('breedingreport.report');
 Route::get('/breedingreport/create/{breedingplace}', [BreedingReportController::class, 'create'])->name('breedingreport.create');
 Route::resource('breedingreport', BreedingReportController::class)->only([
     'edit'
@@ -139,7 +140,7 @@ Route::get('/breedingreport/{breedingplace}', [BreedingReportController::class, 
 
 
 
-Route::get('/aviaryreport/{aviary}', [AviaryReportController::class, 'report'])->name('aviaryreport.report');
+Route::get('/aviaryreport/report/{aviary}', [AviaryReportController::class, 'report'])->name('aviaryreport.report');
 Route::get('/aviaryreport/create/{aviaryplace}', [AviaryReportController::class, 'create'])->name('aviaryreport.create');
 Route::resource('aviaryreport', AviaryReportController::class)->only([
     'edit'

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reproduction;
 use Illuminate\Http\Request;
 use App\Models\Reproductionrow;
+use App\Models\Reproductionrowcages;
 use Illuminate\Support\Facades\DB;
 
 class ReproductionrowController extends Controller
@@ -28,8 +29,14 @@ class ReproductionrowController extends Controller
     public function chart(Reproduction $reproduction)
     {
         $this->authorize('viewAny', Reproductionrow::class);
-        $reproductionrows = Reproductionrow::where('id_reproduction', $reproduction->id)->with('reproductionreport')->get();
-        $cages = DB::table('reproductionrows')->where('id_reproduction', $reproduction->id)->max('cages');
+        $reproductionrows = Reproductionrow::where('id_reproduction', $reproduction->id)->with('reproductionrowcage.reproductionreport')->get();
+        $cages = 0;
+
+        foreach ($reproductionrows as $reproductionrow) {
+            $cagestmp = $reproductionrow->reproductionrowcage()->count();
+            if($cages < $cagestmp) $cages = $cagestmp;
+        }
+      
         return view(
             'reproductionrows.chart',
             [
@@ -40,6 +47,18 @@ class ReproductionrowController extends Controller
         );
     }
 
+    static function hens(Reproductionrowcages $reproductionrowcages)
+    {
+        $deadhens =33;
+        echo $deadhens;
+    }
+
+    public function roosters(Reproductionrowcages $reproductionrowcages)
+    {
+        $deadroosters =44;
+        return $deadroosters;
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

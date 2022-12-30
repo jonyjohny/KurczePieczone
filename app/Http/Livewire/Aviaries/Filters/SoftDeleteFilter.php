@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Aviaries\Filters;
 
-use LaravelViews\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelViews\Filters\Filter;
 
 class SoftDeleteFilter extends Filter
 {
@@ -16,10 +16,11 @@ class SoftDeleteFilter extends Filter
     }
 
     public function apply(Builder $query, $value, $request): Builder
-    {  
-        if($value == 1) {
+    {
+        if ($value == 1) {
             return $query->whereNotNull('deleted_at');
         }
+
         return$query->whereNull('deleted_at');
     }
 

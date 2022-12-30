@@ -2,22 +2,21 @@
 
 namespace App\Http\Livewire\Breedingplaces;
 
-use App\Models\Breeding;
-
-use WireUi\Traits\Actions;
-use App\Models\Breedingplace;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Breedingplaces\Actions\AddBreedingReportAction;
 use App\Http\Livewire\Breedingplaces\Actions\EditBreedingplaceAction;
 use App\Http\Livewire\Breedingplaces\Actions\OpenBreedingReportAction;
 use App\Http\Livewire\Breedingplaces\Actions\RestoreBreedingplaceAction;
 use App\Http\Livewire\Breedingplaces\Actions\SoftDeleteBreedingplaceAction;
+use App\Models\Breeding;
+use App\Models\Breedingplace;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class BreedingplacesTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -34,18 +33,17 @@ class BreedingplacesTableView extends TableView
     ];
 
     public function repository()
-    {   
-        if (!$this->breeding) {
+    {
+        if (! $this->breeding) {
             $this->breeding = request()->route('breeding.id');
         }
 
-        if(request()->user()->can('viewAnyDeleted', Breeding::class )){
+        if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return Breedingplace::where('id_breeding', $this->breeding)->withTrashed();
         }
 
         return Breedingplace::where('id_breeding', $this->breeding);
     }
-
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -54,7 +52,7 @@ class BreedingplacesTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Breeding::class )){
+        if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return [
                 Header::title(__('translations.attributes.name'))->sortBy('name'),
                 __('translations.attributes.patroness'),
@@ -66,6 +64,7 @@ class BreedingplacesTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('translations.attributes.name'))->sortBy('name'),
             __('translations.attributes.patroness'),
@@ -84,7 +83,7 @@ class BreedingplacesTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Breeding::class )){
+        if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return [
                 $model->name,
                 $model->users->name,
@@ -96,6 +95,7 @@ class BreedingplacesTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->name,
             $model->users->name,
@@ -109,18 +109,19 @@ class BreedingplacesTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Breeding::class )){
+        if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return [
-                new AddBreedingReportAction('breedingreport.create',__('translations.actions.addReport')),
-                new OpenBreedingReportAction('breedingreport.index',__('translations.actions.openReport')),
+                new AddBreedingReportAction('breedingreport.create', __('translations.actions.addReport')),
+                new OpenBreedingReportAction('breedingreport.index', __('translations.actions.openReport')),
                 new EditBreedingplaceAction('breedingplaces.edit', __('translations.actions.edit')),
                 new SoftDeleteBreedingplaceAction(),
                 new RestoreBreedingplaceAction(),
-            ];        
+            ];
         }
+
         return [
-            new AddBreedingReportAction('breedingreport.create',__('translations.actions.addReport')),
-            new OpenBreedingReportAction('breedingreport.index',__('translations.actions.openReport')),
+            new AddBreedingReportAction('breedingreport.create', __('translations.actions.addReport')),
+            new OpenBreedingReportAction('breedingreport.index', __('translations.actions.openReport')),
             new EditBreedingplaceAction('breedingplaces.edit', __('translations.actions.edit')),
             new SoftDeleteBreedingplaceAction(),
         ];
@@ -133,9 +134,9 @@ class BreedingplacesTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('breedingplaces.messages.successes.destroy', [
-                'name' => $breedingplace->name
+                'name' => $breedingplace->name,
             ])
-            );
+        );
     }
 
     public function restore(int $id)
@@ -145,7 +146,7 @@ class BreedingplacesTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.restore_title'),
             $description = __('breedingplaces.messages.successes.restore', [
-                'name' => $breedingplace->name
+                'name' => $breedingplace->name,
             ])
         );
     }

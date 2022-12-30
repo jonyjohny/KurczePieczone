@@ -58,7 +58,7 @@ class IncubationPolicy
      */
     public function update(User $user, Incubation $incubation)
     {
-        return $incubation->deleted_at === null 
+        return $incubation->deleted_at === null
             && $user->can('incubations.store');
     }
 
@@ -71,7 +71,7 @@ class IncubationPolicy
      */
     public function delete(User $user, Incubation $incubation)
     {
-        return $incubation->deleted_at === null 
+        return $incubation->deleted_at === null
             && $user->can('incubations.destroy');
     }
 
@@ -84,7 +84,7 @@ class IncubationPolicy
      */
     public function restore(User $user, Incubation $incubation)
     {
-        return $incubation->deleted_at !== null 
+        return $incubation->deleted_at !== null
             && $user->can('incubations.destroy');
     }
 

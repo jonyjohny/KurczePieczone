@@ -2,20 +2,19 @@
 
 namespace App\Http\Livewire\Reproductionreport;
 
-use WireUi\Traits\Actions;
-use App\Models\Reproduction;
-use App\Models\Reproductionrow;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Reproductionreport\Actions\EditReproductionreportAction;
 use App\Http\Livewire\Reproductionreport\Actions\RestoreReproductionreportAction;
 use App\Http\Livewire\Reproductionreport\Actions\SoftDeleteReproductionreportAction;
+use App\Models\Reproduction;
 use App\Models\ReproductionReport;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class ReproductionreportTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -43,18 +42,17 @@ class ReproductionreportTableView extends TableView
     ];
 
     public function repository()
-    {   
-        if (!$this->reproductionrowcage) {
+    {
+        if (! $this->reproductionrowcage) {
             $this->reproductionrowcage = request()->route('reproductionrowcage.id');
         }
 
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return ReproductionReport::where('reproductionrowcage_id', $this->reproductionrowcage)->withTrashed();
         }
 
         return ReproductionReport::where('reproductionrowcage_id', $this->reproductionrowcage);
     }
-
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -63,7 +61,7 @@ class ReproductionreportTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
                 Header::title(__('reproductionreport.attributes.nicHens'))->sortBy('nicHens'),
                 Header::title(__('reproductionreport.attributes.nicRoosters'))->sortBy('nicRoosters'),
@@ -85,6 +83,7 @@ class ReproductionreportTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('reproductionreport.attributes.nicHens'))->sortBy('nicHens'),
             Header::title(__('reproductionreport.attributes.nicRoosters'))->sortBy('nicRoosters'),
@@ -113,7 +112,7 @@ class ReproductionreportTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
                 $model->nicHens,
                 $model->nicRoosters,
@@ -135,6 +134,7 @@ class ReproductionreportTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->nicHens,
             $model->nicRoosters,
@@ -158,13 +158,14 @@ class ReproductionreportTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
                 new EditReproductionreportAction('reproductionreport.edit', __('translations.actions.edit')),
                 new SoftDeleteReproductionreportAction(),
                 new RestoreReproductionreportAction(),
-            ];        
+            ];
         }
+
         return [
             new EditReproductionreportAction('reproductionreport.edit', __('translations.actions.edit')),
             new SoftDeleteReproductionreportAction(),
@@ -178,7 +179,7 @@ class ReproductionreportTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('reproductionreport.messages.successes.destroy')
-            );
+        );
     }
 
     public function restore(int $id)

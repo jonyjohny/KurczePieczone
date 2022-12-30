@@ -10,7 +10,7 @@ return [
         'hallTemperature' => 'Temp hali',
         'humidity' => 'Wilgotność',
         'fodder' => 'Pasza',
-        'water' => 'Water',
+        'water' => 'Woda',
         'lighting' => 'Oświetlenie',
         'lightingRemarks' => 'Oś uwagi',
         'ventilation' => 'Wentylacja',
@@ -18,8 +18,8 @@ return [
         'destination' => 'Miejsce wywozu',
         'remarks' => 'Uwagi',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano raport',
             'updated' => 'Zaktualizowano raport',
             'destroy' => 'Usunięto raport',
@@ -45,7 +45,7 @@ return [
         'hallTemperature' => 'Temp hali',
         'humidity' => 'Wilgotność',
         'fodder' => 'Pasza',
-        'water' => 'Water',
+        'water' => 'Woda',
         'lighting' => 'Oświetlenie',
         'lightingRemarks' => 'Oś uwagi',
         'ventilation' => 'Wentylacja',
@@ -54,8 +54,3 @@ return [
         'remarks' => 'Uwagi',
     ],
 ];
-
-
-
-
-

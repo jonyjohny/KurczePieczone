@@ -5,8 +5,8 @@ return [
         'edit_form_title' => 'Edycja raportu',
         'create_form_title' => 'Tworzenie nowego raportu',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano raport',
             'updated' => 'Zaktualizowano raport',
             'destroy' => 'Usunięto raport',
@@ -26,4 +26,3 @@ return [
         ],
     ],
 ];
-

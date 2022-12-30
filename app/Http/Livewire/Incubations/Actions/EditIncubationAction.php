@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Incubations\Actions;
 
-use LaravelViews\Views\View;
 use LaravelViews\Actions\RedirectAction;
+use LaravelViews\Views\View;
 
 class EditIncubationAction extends RedirectAction
 {
@@ -16,6 +16,4 @@ class EditIncubationAction extends RedirectAction
     {
         return request()->user()->can('delete', $model);
     }
-
-
 }

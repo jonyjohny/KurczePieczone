@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class UserController extends Controller
 {
     public function index()
     {
         $this->authorize('viewAny', User::class);
+
         return view(
             'users.index',
             [
-                'users' => User::with('roles')->get()
+                'users' => User::with('roles')->get(),
             ]
         );
     }
@@ -24,6 +25,7 @@ class UserController extends Controller
     public function create()
     {
         $this->authorize('create', User::class);
+
         return view(
             'users.form'
         );
@@ -32,18 +34,19 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $this->authorize('update', $user);
+
         return view(
             'users.form',
             [
                 'user' => $user,
             ],
-            );
+        );
     }
 
     public function allOpen()
     {
-        return User::with("roles")->whereHas("roles", function($q) {
-            $q->whereIn("name", ["worker"]);
+        return User::with('roles')->whereHas('roles', function ($q) {
+            $q->whereIn('name', ['worker']);
         })->get();
     }
 

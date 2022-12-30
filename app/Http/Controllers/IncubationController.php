@@ -15,6 +15,7 @@ class IncubationController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Incubation::class);
+
         return view(
             'incubations.index'
         );
@@ -28,6 +29,7 @@ class IncubationController extends Controller
     public function create()
     {
         $this->authorize('create', Incubation::class);
+
         return view(
             'incubations.form'
         );
@@ -64,12 +66,13 @@ class IncubationController extends Controller
     public function edit(Incubation $incubation)
     {
         $this->authorize('update', $incubation);
+
         return view(
             'incubations.form',
             [
                 'incubation' => $incubation,
             ],
-            );
+        );
     }
 
     /**

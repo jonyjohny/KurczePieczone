@@ -58,7 +58,7 @@ class BreedingPolicy
      */
     public function update(User $user, Breeding $breeding)
     {
-        return $breeding->deleted_at === null 
+        return $breeding->deleted_at === null
             && $user->can('breeding.store');
     }
 
@@ -71,7 +71,7 @@ class BreedingPolicy
      */
     public function delete(User $user, Breeding $breeding)
     {
-        return $breeding->deleted_at === null 
+        return $breeding->deleted_at === null
             && $user->can('breeding.destroy');
     }
 
@@ -84,7 +84,7 @@ class BreedingPolicy
      */
     public function restore(User $user, Breeding $breeding)
     {
-        return $breeding->deleted_at !== null 
+        return $breeding->deleted_at !== null
             && $user->can('breeding.destroy');
     }
 

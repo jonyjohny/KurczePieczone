@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Aviary extends Model
 {
@@ -13,11 +13,11 @@ class Aviary extends Model
 
     protected $fillable = [
         'name',
-        'remarks'
+        'remarks',
     ];
 
-    public function aviaryplace() 
+    public function aviaryplace()
     {
-        return $this->hasMany(Aviaryplace::class,'id_aviary');
+        return $this->hasMany(Aviaryplace::class, 'id_aviary');
     }
 }

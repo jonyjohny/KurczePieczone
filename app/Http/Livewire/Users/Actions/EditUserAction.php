@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Users\Actions;
 
-use LaravelViews\Views\View;
 use LaravelViews\Actions\RedirectAction;
+use LaravelViews\Views\View;
 
 class EditUserAction extends RedirectAction
 {
@@ -16,6 +16,4 @@ class EditUserAction extends RedirectAction
     {
         return request()->user()->can('delete', $model);
     }
-
-
 }

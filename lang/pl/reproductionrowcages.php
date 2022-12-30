@@ -8,8 +8,8 @@ return [
         'roosters' => 'Koguty',
         'number' => 'Numer',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano klatkę',
             'updated' => 'Zaktualizowano klatkę',
             'destroy' => 'Usunięto klatkę',
@@ -31,5 +31,5 @@ return [
     'attributes' => [
         'number' => 'numer',
         'remarks' => 'opis',
-    ]
+    ],
 ];

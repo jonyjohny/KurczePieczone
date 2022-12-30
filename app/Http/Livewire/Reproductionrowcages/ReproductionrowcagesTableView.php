@@ -2,20 +2,21 @@
 
 namespace App\Http\Livewire\Reproductionrowcages;
 
-use WireUi\Traits\Actions;
-use App\Models\Reproduction;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
-use App\Models\Reproductionrowcages;
 use App\Http\Livewire\Reproductionrowcages\Actions\AddReproductionReportAction;
-use App\Http\Livewire\Reproductionrowcages\Actions\OpenReproductionReportAction;
 use App\Http\Livewire\Reproductionrowcages\Actions\EditReproductionrowcagesAction;
+use App\Http\Livewire\Reproductionrowcages\Actions\OpenReproductionReportAction;
 use App\Http\Livewire\Reproductionrowcages\Actions\RestoreReproductionrowcagesAction;
 use App\Http\Livewire\Reproductionrowcages\Actions\SoftDeleteReproductionrowcagesAction;
+use App\Models\Reproduction;
+use App\Models\Reproductionrowcages;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class ReproductionrowcagesTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -30,18 +31,17 @@ class ReproductionrowcagesTableView extends TableView
     ];
 
     public function repository()
-    {   
-        if (!$this->reproductionrow) {
+    {
+        if (! $this->reproductionrow) {
             $this->reproductionrow = request()->route('reproductionrow.id');
         }
 
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return Reproductionrowcages::where('reproductionrow_id', $this->reproductionrow)->withTrashed();
         }
 
         return Reproductionrowcages::where('reproductionrow_id', $this->reproductionrow);
     }
-
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -50,7 +50,7 @@ class ReproductionrowcagesTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
                 Header::title(__('reproductionrowcages.attributes.number'))->sortBy('number'),
                 Header::title(__('reproductionrowcages.attributes.remarks'))->sortBy('remarks'),
@@ -59,6 +59,7 @@ class ReproductionrowcagesTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('reproductionrowcages.attributes.number'))->sortBy('number'),
             Header::title(__('reproductionrowcages.attributes.remarks'))->sortBy('remarks'),
@@ -74,7 +75,7 @@ class ReproductionrowcagesTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
                 $model->number,
                 $model->remarks,
@@ -83,6 +84,7 @@ class ReproductionrowcagesTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->number,
             $model->remarks,
@@ -93,18 +95,19 @@ class ReproductionrowcagesTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
-                new AddReproductionReportAction('reproductionreport.create',__('translations.actions.addReport')),
-                new OpenReproductionReportAction('reproductionreport.index',__('translations.actions.openReport')),
+                new AddReproductionReportAction('reproductionreport.create', __('translations.actions.addReport')),
+                new OpenReproductionReportAction('reproductionreport.index', __('translations.actions.openReport')),
                 new EditReproductionrowcagesAction('reproductionrowcages.edit', __('translations.actions.edit')),
                 new SoftDeleteReproductionrowcagesAction(),
                 new RestoreReproductionrowcagesAction(),
-            ];        
+            ];
         }
+
         return [
-            new AddReproductionReportAction('reproductionreport.create',__('translations.actions.addReport')),
-            new OpenReproductionReportAction('reproductionreport.index',__('translations.actions.openReport')),
+            new AddReproductionReportAction('reproductionreport.create', __('translations.actions.addReport')),
+            new OpenReproductionReportAction('reproductionreport.index', __('translations.actions.openReport')),
             new EditReproductionrowcagesAction('reproductionrowcages.edit', __('translations.actions.edit')),
             new SoftDeleteReproductionrowcagesAction(),
         ];
@@ -117,7 +120,7 @@ class ReproductionrowcagesTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('reproductionrowcages.messages.successes.destroy')
-            );
+        );
     }
 
     public function restore(int $id)

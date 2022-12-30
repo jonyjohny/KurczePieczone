@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\Models\Reproductionrow;
 use App\Models\Reproductionrowcages;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -46,12 +46,10 @@ class ReproductionReportFactory extends Factory
                 '- 1 weeks',
             ),
             'deleted_at' => rand(0, 10) === 0 ? $this->faker->dateTimeBetween(
-                    '- 1 weeks',
-                    '+ 2 weeks',
+                '- 1 weeks',
+                '+ 2 weeks',
             )
             : null,
         ];
     }
 }
-
-

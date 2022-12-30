@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Breeding\Actions;
 
-use LaravelViews\Views\View;
 use LaravelViews\Actions\Action;
-
+use LaravelViews\Views\View;
 
 class RestoreBreedingAction extends Action
 {
     public $title = '';
+
     public $icon = 'trash';
 
     public function __construct()
@@ -21,25 +21,24 @@ class RestoreBreedingAction extends Action
     {
         $view->dialog()->confirm([
             'title' => __('breeding.dialogs.restore.title'),
-            'description'=> __('breeding.dialogs.restore.description', [
-                'name' => $model->name
+            'description' => __('breeding.dialogs.restore.description', [
+                'name' => $model->name,
             ]),
             'icon' => 'question',
             'iconColor' => 'text-green-500',
             'accept' => [
                 'label' => __('translations.yes'),
                 'method' => 'restore',
-                'params' => $model->id
+                'params' => $model->id,
             ],
             'rejest' => [
                 'label' => __('translations.no'),
-            ]
+            ],
         ]);
     }
-    
+
     public function renderIf($model, View $view)
     {
         return request()->user()->can('restore', $model);
     }
-
 }

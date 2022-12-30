@@ -2,18 +2,19 @@
 
 namespace App\Http\Livewire\Aviaryreport;
 
-use App\Models\Aviary;
-use WireUi\Traits\Actions;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
 use App\Http\Livewire\Aviaryreport\Actions\EditAviaryreportAction;
 use App\Http\Livewire\Aviaryreport\Actions\RestoreAviaryreportAction;
 use App\Http\Livewire\Aviaryreport\Actions\SoftDeleteAviaryreportAction;
+use App\Models\Aviary;
 use App\Models\AviaryReport;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class AviaryreportTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -36,18 +37,17 @@ class AviaryreportTableView extends TableView
     ];
 
     public function repository()
-    {   
-        if (!$this->aviaryplace) {
+    {
+        if (! $this->aviaryplace) {
             $this->aviaryplace = request()->route('aviaryplace.id');
         }
 
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return AviaryReport::where('aviaryplace_id', $this->aviaryplace)->withTrashed();
         }
 
         return AviaryReport::where('aviaryplace_id', $this->aviaryplace);
     }
-
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -56,7 +56,7 @@ class AviaryreportTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
                 Header::title(__('aviaryreport.attributes.feeding'))->sortBy('feeding'),
                 Header::title(__('aviaryreport.attributes.cure'))->sortBy('cure'),
@@ -73,6 +73,7 @@ class AviaryreportTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('aviaryreport.attributes.feeding'))->sortBy('feeding'),
             Header::title(__('aviaryreport.attributes.cure'))->sortBy('cure'),
@@ -96,7 +97,7 @@ class AviaryreportTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
                 $model->feeding,
                 $model->cure,
@@ -113,6 +114,7 @@ class AviaryreportTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->feeding,
             $model->cure,
@@ -131,13 +133,14 @@ class AviaryreportTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
                 new EditAviaryreportAction('aviaryreport.edit', __('translations.actions.edit')),
                 new SoftDeleteAviaryreportAction(),
                 new RestoreAviaryreportAction(),
-            ];        
+            ];
         }
+
         return [
             new EditAviaryreportAction('aviaryreport.edit', __('translations.actions.edit')),
             new SoftDeleteAviaryreportAction(),
@@ -151,7 +154,7 @@ class AviaryreportTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('aviaryreport.messages.successes.destroy')
-            );
+        );
     }
 
     public function restore(int $id)

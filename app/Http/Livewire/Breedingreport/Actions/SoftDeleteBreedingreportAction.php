@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Breedingreport\Actions;
 
-use LaravelViews\Views\View;
 use LaravelViews\Actions\Action;
-
+use LaravelViews\Views\View;
 
 class SoftDeleteBreedingreportAction extends Action
 {
     public $title = '';
+
     public $icon = 'trash-2';
 
     public function __construct()
@@ -21,22 +21,22 @@ class SoftDeleteBreedingreportAction extends Action
     {
         $view->dialog()->confirm([
             'title' => __('breedingreport.dialogs.soft_delete.title'),
-            'description'=> __('breedingreport.dialogs.soft_delete.description', [
-                'name' => $model->name
+            'description' => __('breedingreport.dialogs.soft_delete.description', [
+                'name' => $model->name,
             ]),
             'icon' => 'question',
             'iconColor' => 'text-red-500',
             'accept' => [
                 'label' => __('translations.yes'),
                 'method' => 'softDelete',
-                'params' => $model->id
+                'params' => $model->id,
             ],
             'rejest' => [
                 'label' => __('translations.no'),
-            ]
+            ],
         ]);
     }
-    
+
     public function renderIf($model, View $view)
     {
         return request()->user()->can('delete', $model);

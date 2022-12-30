@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire\Breedingplaces\Actions;
 
-use LaravelViews\Views\View;
-use LaravelViews\Actions\Action;
 use LaravelViews\Actions\RedirectAction;
-
+use LaravelViews\Views\View;
 
 class AddBreedingReportAction extends RedirectAction
 {

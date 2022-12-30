@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reproduction;
-use Illuminate\Http\Request;
 use App\Models\Reproductionrow;
 use App\Models\Reproductionrowcages;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class ReproductionrowController extends Controller
 {
@@ -18,10 +17,11 @@ class ReproductionrowController extends Controller
     public function index(Reproduction $reproduction)
     {
         $this->authorize('viewAny', Reproductionrow::class);
+
         return view(
             'reproductionrows.index',
             [
-                'reproduction' => $reproduction
+                'reproduction' => $reproduction,
             ]
         );
     }
@@ -34,9 +34,11 @@ class ReproductionrowController extends Controller
 
         foreach ($reproductionrows as $reproductionrow) {
             $cagestmp = $reproductionrow->reproductionrowcage()->count();
-            if($cages < $cagestmp) $cages = $cagestmp;
+            if ($cages < $cagestmp) {
+                $cages = $cagestmp;
+            }
         }
-      
+
         return view(
             'reproductionrows.chart',
             [
@@ -47,18 +49,19 @@ class ReproductionrowController extends Controller
         );
     }
 
-    static function hens(Reproductionrowcages $reproductionrowcages)
+    public static function hens(Reproductionrowcages $reproductionrowcages)
     {
-        $deadhens =33;
+        $deadhens = 33;
         echo $deadhens;
     }
 
     public function roosters(Reproductionrowcages $reproductionrowcages)
     {
-        $deadroosters =44;
+        $deadroosters = 44;
+
         return $deadroosters;
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -67,10 +70,11 @@ class ReproductionrowController extends Controller
     public function create(Reproduction $reproduction)
     {
         $this->authorize('create', Reproductionrow::class);
+
         return view(
             'reproductionrows.form',
             [
-                'reproduction' => $reproduction
+                'reproduction' => $reproduction,
             ]
         );
     }
@@ -106,10 +110,11 @@ class ReproductionrowController extends Controller
     public function edit(Reproductionrow $reproductionrow)
     {
         $this->authorize('update', $reproductionrow);
+
         return view(
             'reproductionrows.form',
             [
-                'reproductionrow' => $reproductionrow
+                'reproductionrow' => $reproductionrow,
             ],
         );
     }

@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire\Incubationincubators\Actions;
 
-use LaravelViews\Views\View;
-use LaravelViews\Actions\Action;
 use LaravelViews\Actions\RedirectAction;
-
+use LaravelViews\Views\View;
 
 class AddIncubationReportAction extends RedirectAction
 {

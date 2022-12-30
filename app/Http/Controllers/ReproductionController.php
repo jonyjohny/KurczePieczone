@@ -15,6 +15,7 @@ class ReproductionController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Reproduction::class);
+
         return view(
             'reproductions.index'
         );
@@ -28,6 +29,7 @@ class ReproductionController extends Controller
     public function create()
     {
         $this->authorize('create', Reproduction::class);
+
         return view(
             'reproductions.form'
         );
@@ -64,12 +66,13 @@ class ReproductionController extends Controller
     public function edit(Reproduction $reproduction)
     {
         $this->authorize('update', $reproduction);
+
         return view(
             'reproductions.form',
             [
                 'reproduction' => $reproduction,
             ],
-            );
+        );
     }
 
     /**

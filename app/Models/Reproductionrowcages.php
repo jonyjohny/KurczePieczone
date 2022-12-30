@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reproductionrowcages extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    
     protected $fillable = [
     ];
 
@@ -20,8 +19,8 @@ class Reproductionrowcages extends Model
         return $this->belongsTo(Reproductionrow::class, 'reproductionrow_id');
     }
 
-    public function reproductionreport() 
+    public function reproductionreport()
     {
-        return $this->hasMany(ReproductionReport::class,'reproductionrowcage_id');
+        return $this->hasMany(ReproductionReport::class, 'reproductionrowcage_id');
     }
 }

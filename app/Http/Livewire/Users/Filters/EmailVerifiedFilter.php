@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Users\Filters;
 
-use LaravelViews\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelViews\Filters\Filter;
 
 class EmailVerifiedFilter extends Filter
 {
@@ -17,9 +17,10 @@ class EmailVerifiedFilter extends Filter
 
     public function apply(Builder $query, $value, $request): Builder
     {
-        if($value == 1){
+        if ($value == 1) {
             return $query->whereNotNull('email_verified_at');
-        } 
+        }
+
         return $query->whereNull('email_verified_at');
     }
 

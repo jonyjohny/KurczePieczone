@@ -9,8 +9,8 @@ return [
         'roosters' => 'Koguty',
         'age' => 'Wiek',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano woliere :name',
             'updated' => 'Zaktualizowano woliere :name',
             'destroy' => 'Usunięto woliere :name',

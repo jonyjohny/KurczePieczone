@@ -70,7 +70,7 @@ class IncubationReportPolicy
      */
     public function delete(User $user, IncubationReport $incubationReport)
     {
-        return $incubationReport->deleted_at === null 
+        return $incubationReport->deleted_at === null
         && $user->can('incubations.store');
     }
 
@@ -83,7 +83,7 @@ class IncubationReportPolicy
      */
     public function restore(User $user, IncubationReport $incubationReport)
     {
-        return $incubationReport->deleted_at !== null 
+        return $incubationReport->deleted_at !== null
         && $user->can('incubations.destroy');
     }
 

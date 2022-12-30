@@ -7,14 +7,14 @@ return [
         'roles' => 'Role',
         'password' => 'Hasło',
         'email_verified_at' => 'Weryfikacja',
-        'Avatar' => 'Awatar'
+        'Avatar' => 'Awatar',
     ],
     'labels' => [
         'edit_form_title' => 'Edycja użytkownika',
         'create_form_title' => 'Tworzenie nowego użytkownika',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano użytkownika :name',
             'updated' => 'Zaktualizowano użytkownika :name',
             'destroy' => 'Usunięto użytkownika :name',

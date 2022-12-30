@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Reproductionrows\Actions;
 
-use LaravelViews\Views\View;
 use LaravelViews\Actions\RedirectAction;
+use LaravelViews\Views\View;
 
 class EditReproductionrowAction extends RedirectAction
 {

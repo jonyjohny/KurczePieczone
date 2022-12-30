@@ -2,21 +2,19 @@
 
 namespace App\Http\Livewire\Breedingreport;
 
-use App\Models\Breeding;
-
-use WireUi\Traits\Actions;
-use App\Models\Breedingplace;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Breedingreport\Actions\EditBreedingreportAction;
 use App\Http\Livewire\Breedingreport\Actions\RestoreBreedingreportAction;
 use App\Http\Livewire\Breedingreport\Actions\SoftDeleteBreedingreportAction;
+use App\Models\Breeding;
 use App\Models\BreedingReport;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class BreedingreportTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -43,18 +41,17 @@ class BreedingreportTableView extends TableView
     ];
 
     public function repository()
-    {   
-        if (!$this->breedingplace) {
+    {
+        if (! $this->breedingplace) {
             $this->breedingplace = request()->route('breedingplace.id');
         }
 
-        if(request()->user()->can('viewAnyDeleted', Breeding::class )){
+        if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return BreedingReport::where('breedingplace_id', $this->breedingplace)->withTrashed();
         }
 
         return BreedingReport::where('breedingplace_id', $this->breedingplace);
     }
-
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -63,7 +60,7 @@ class BreedingreportTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Breeding::class )){
+        if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return [
                 Header::title(__('breedingreport.attributes.falls'))->sortBy('falls'),
                 Header::title(__('breedingreport.attributes.selection'))->sortBy('selection'),
@@ -84,6 +81,7 @@ class BreedingreportTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('breedingreport.attributes.falls'))->sortBy('falls'),
             Header::title(__('breedingreport.attributes.selection'))->sortBy('selection'),
@@ -111,13 +109,13 @@ class BreedingreportTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Breeding::class )){
+        if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return [
                 $model->falls,
                 $model->selection,
-                $model->mainTemperature." °C",
-                $model->hallTemperature." °C",
-                $model->humidity." %",
+                $model->mainTemperature.' °C',
+                $model->hallTemperature.' °C',
+                $model->humidity.' %',
                 $model->fodder,
                 $model->water,
                 $model->lighting,
@@ -132,12 +130,13 @@ class BreedingreportTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->falls,
             $model->selection,
-            $model->mainTemperature." °C",
-            $model->hallTemperature." °C",
-            $model->humidity." %",
+            $model->mainTemperature.' °C',
+            $model->hallTemperature.' °C',
+            $model->humidity.' %',
             $model->fodder,
             $model->water,
             $model->lighting,
@@ -154,13 +153,14 @@ class BreedingreportTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Breeding::class )){
+        if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return [
                 new EditBreedingreportAction('breedingreport.edit', __('translations.actions.edit')),
                 new SoftDeleteBreedingreportAction(),
                 new RestoreBreedingreportAction(),
-            ];        
+            ];
         }
+
         return [
             new EditBreedingreportAction('breedingreport.edit', __('translations.actions.edit')),
             new SoftDeleteBreedingreportAction(),
@@ -174,7 +174,7 @@ class BreedingreportTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('breedingreport.messages.successes.destroy')
-            );
+        );
     }
 
     public function restore(int $id)

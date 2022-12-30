@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Incubationincubators\Actions;
 
-use LaravelViews\Views\View;
 use LaravelViews\Actions\Action;
-
+use LaravelViews\Views\View;
 
 class RestoreIncubationincubatorAction extends Action
 {
     public $title = '';
+
     public $icon = 'trash';
 
     public function __construct()
@@ -21,25 +21,24 @@ class RestoreIncubationincubatorAction extends Action
     {
         $view->dialog()->confirm([
             'title' => __('incubationincubators.dialogs.restore.title'),
-            'description'=> __('incubationincubators.dialogs.restore.description', [
-                'name' => $model->name
+            'description' => __('incubationincubators.dialogs.restore.description', [
+                'name' => $model->name,
             ]),
             'icon' => 'question',
             'iconColor' => 'text-green-500',
             'accept' => [
                 'label' => __('translations.yes'),
                 'method' => 'restore',
-                'params' => $model->id
+                'params' => $model->id,
             ],
             'rejest' => [
                 'label' => __('translations.no'),
-            ]
+            ],
         ]);
     }
-    
+
     public function renderIf($model, View $view)
     {
         return request()->user()->can('restore', $model);
     }
-
 }

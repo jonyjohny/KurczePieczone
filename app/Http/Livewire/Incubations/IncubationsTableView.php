@@ -2,25 +2,25 @@
 
 namespace App\Http\Livewire\Incubations;
 
-use App\Models\Incubation;
-use WireUi\Traits\Actions;
-use LaravelViews\Facades\UI;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Incubations\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Incubations\Actions\EditIncubationAction;
 use App\Http\Livewire\Incubations\Actions\OpenIncubationAction;
 use App\Http\Livewire\Incubations\Actions\RestoreIncubationAction;
 use App\Http\Livewire\Incubations\Actions\SoftDeleteIncubationAction;
+use App\Http\Livewire\Incubations\Filters\SoftDeleteFilter;
+use App\Models\Incubation;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use LaravelViews\Facades\Header;
+use LaravelViews\Facades\UI;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class IncubationsTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
-
     public $searchBy = [
         'name',
         'remarks',
@@ -36,6 +36,7 @@ class IncubationsTableView extends TableView
         if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
             return Incubation::query()->withTrashed();
         }
+
         return Incubation::query();
     }
 
@@ -57,6 +58,7 @@ class IncubationsTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('translations.attributes.name'))->sortBy('name'),
             Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
@@ -79,17 +81,18 @@ class IncubationsTableView extends TableView
                 $model->name,
                 $model->remarks,
                 $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
-                $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+                $model->archived ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
                 $model->created_at,
                 $model->updated_at,
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->name,
             $model->remarks,
             $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
-            $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+            $model->archived ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
             $model->created_at,
             $model->updated_at,
         ];
@@ -102,6 +105,7 @@ class IncubationsTableView extends TableView
                 new SoftDeleteFilter,
             ];
         }
+
         return [
             //
         ];
@@ -111,12 +115,13 @@ class IncubationsTableView extends TableView
     {
         if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
             return [
-                new OpenIncubationAction('incubationincubators.index',__('translations.actions.open')),
+                new OpenIncubationAction('incubationincubators.index', __('translations.actions.open')),
                 new EditIncubationAction('incubations.edit', __('translations.actions.edit')),
                 new SoftDeleteIncubationAction(),
-                new RestoreIncubationAction()
+                new RestoreIncubationAction(),
             ];
         }
+
         return [
             new EditIncubationAction('incubations.edit', __('translations.actions.edit')),
         ];
@@ -129,7 +134,7 @@ class IncubationsTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('incubations.messages.successes.destroy', [
-                'name' => $incubation->name
+                'name' => $incubation->name,
             ])
         );
     }
@@ -141,7 +146,7 @@ class IncubationsTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.restore_title'),
             $description = __('incubations.messages.successes.restore', [
-                'name' => $incubation->name
+                'name' => $incubation->name,
             ])
         );
     }

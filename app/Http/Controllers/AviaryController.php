@@ -15,6 +15,7 @@ class AviaryController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Aviary::class);
+
         return view(
             'aviaries.index'
         );
@@ -28,6 +29,7 @@ class AviaryController extends Controller
     public function create()
     {
         $this->authorize('create', Aviary::class);
+
         return view(
             'aviaries.form'
         );
@@ -64,12 +66,13 @@ class AviaryController extends Controller
     public function edit(Aviary $aviary)
     {
         $this->authorize('update', $aviary);
+
         return view(
             'aviaries.form',
             [
                 'aviary' => $aviary,
             ],
-            );
+        );
     }
 
     /**

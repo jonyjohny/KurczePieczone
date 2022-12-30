@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\IncubationReport;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Incubationincubator extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    
     protected $fillable = [
         'name',
-        'remarks'
+        'remarks',
     ];
 
     public function incubation()
@@ -28,9 +26,8 @@ class Incubationincubator extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function incubationreport() 
+    public function incubationreport()
     {
-        return $this->hasMany(IncubationReport::class,'incubationincubator_id');
+        return $this->hasMany(IncubationReport::class, 'incubationincubator_id');
     }
 }
- 

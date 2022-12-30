@@ -2,18 +2,19 @@
 
 namespace App\Http\Livewire\Reproductionrows;
 
-use WireUi\Traits\Actions;
+use App\Http\Livewire\Reproductionrows\Actions\EditReproductionrowAction;
+use App\Http\Livewire\Reproductionrows\Actions\OpenReproductionrowcagesAction;
+use App\Http\Livewire\Reproductionrows\Actions\RestoreReproductionrowAction;
+use App\Http\Livewire\Reproductionrows\Actions\SoftDeleteReproductionrowAction;
 use App\Models\Reproductionrow;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
-use App\Http\Livewire\Reproductionrows\Actions\EditReproductionrowAction;
-use App\Http\Livewire\Reproductionrows\Actions\RestoreReproductionrowAction;
-use App\Http\Livewire\Reproductionrows\Actions\OpenReproductionrowcagesAction;
-use App\Http\Livewire\Reproductionrows\Actions\SoftDeleteReproductionrowAction;
+use WireUi\Traits\Actions;
 
 class ReproductionrowsTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -30,18 +31,17 @@ class ReproductionrowsTableView extends TableView
     ];
 
     public function repository()
-    {   
-        if (!$this->reproduction) {
+    {
+        if (! $this->reproduction) {
             $this->reproduction = request()->route('reproduction.id');
         }
 
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return Reproductionrow::where('id_reproduction', $this->reproduction)->withTrashed();
         }
 
         return Reproductionrow::where('id_reproduction', $this->reproduction);
     }
-
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -50,7 +50,7 @@ class ReproductionrowsTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
                 Header::title(__('translations.attributes.name'))->sortBy('name'),
                 __('translations.attributes.patroness'),
@@ -63,6 +63,7 @@ class ReproductionrowsTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('translations.attributes.name'))->sortBy('name'),
             __('translations.attributes.patroness'),
@@ -82,7 +83,7 @@ class ReproductionrowsTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
                 $model->name,
                 $model->users->name,
@@ -95,6 +96,7 @@ class ReproductionrowsTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->name,
             $model->users->name,
@@ -109,16 +111,17 @@ class ReproductionrowsTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
-                new OpenReproductionrowcagesAction('reproductionrowcages.index',__('translations.actions.open')),
+                new OpenReproductionrowcagesAction('reproductionrowcages.index', __('translations.actions.open')),
                 new EditReproductionrowAction('reproductionrows.edit', __('translations.actions.edit')),
                 new SoftDeleteReproductionrowAction(),
                 new RestoreReproductionrowAction(),
-            ];        
+            ];
         }
+
         return [
-            new OpenReproductionrowcagesAction('reproductionrowcages.index',__('translations.actions.open')),
+            new OpenReproductionrowcagesAction('reproductionrowcages.index', __('translations.actions.open')),
             new EditReproductionrowAction('reproductionrows.edit', __('translations.actions.edit')),
             new SoftDeleteReproductionrowAction(),
         ];
@@ -131,9 +134,9 @@ class ReproductionrowsTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('reproductionrows.messages.successes.destroy', [
-                'name' => $reproductionrow->name
+                'name' => $reproductionrow->name,
             ])
-            );
+        );
     }
 
     public function restore(int $id)
@@ -143,7 +146,7 @@ class ReproductionrowsTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.restore_title'),
             $description = __('reproductionrows.messages.successes.restore', [
-                'name' => $reproductionrow->name
+                'name' => $reproductionrow->name,
             ])
         );
     }

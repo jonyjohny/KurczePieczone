@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Reproductions;
 
-use Livewire\Component;
-use WireUi\Traits\Actions;
-use Illuminate\Support\Str;
 use App\Models\Reproduction;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
+use Livewire\Component;
+use WireUi\Traits\Actions;
 
 class ReproductionForm extends Component
 {
@@ -14,6 +14,7 @@ class ReproductionForm extends Component
     use AuthorizesRequests;
 
     public Reproduction $reproduction;
+
     public Bool $editMode;
 
     public function rules()
@@ -22,7 +23,7 @@ class ReproductionForm extends Component
             'reproduction.name' => [
                 'required',
                 'string',
-                'min:3'
+                'min:3',
             ],
             'reproduction.remarks' => [
             ],
@@ -33,20 +34,21 @@ class ReproductionForm extends Component
             'reproduction.archived' => [
                 'required',
                 'boolean',
-            ]
+            ],
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
             'closed' => Str::lower(__('translations.attributes.closed')),
-            'archived' => Str::lower(__('translations.attributes.archived'))
+            'archived' => Str::lower(__('translations.attributes.archived')),
         ];
     }
 
-    public function mount(Reproduction $reproduction, Bool $editMode)
+    public function mount(Reproduction $reproduction, bool $editMode)
     {
         $this->reproduction = $reproduction;
         $this->editMode = $editMode;
@@ -57,13 +59,14 @@ class ReproductionForm extends Component
         return view('livewire.reproductions.reproduction-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->reproduction);
         } else {
             $this->authorize('create', Reproduction::class);
@@ -76,7 +79,7 @@ class ReproductionForm extends Component
             : __('reproductions.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('reproductions.messages.successes.updated', ['name' => $this->reproduction->name])
-            :__('reproductions.messages.successes.stored', ['name' => $this->reproduction->name]),
+            : __('reproductions.messages.successes.stored', ['name' => $this->reproduction->name]),
         );
         $this->editMode = true;
     }

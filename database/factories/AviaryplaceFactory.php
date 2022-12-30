@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\Models\Aviary;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -40,8 +40,8 @@ class AviaryplaceFactory extends Factory
                 '- 1 weeks',
             ),
             'deleted_at' => rand(0, 10) === 0 ? $this->faker->dateTimeBetween(
-                    '- 1 weeks',
-                    '+ 2 weeks',
+                '- 1 weeks',
+                '+ 2 weeks',
             )
             : null,
         ];

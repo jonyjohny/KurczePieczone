@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\BreedingReport;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class BreedingReportSeeder extends Seeder
@@ -16,6 +15,5 @@ class BreedingReportSeeder extends Seeder
     public function run()
     {
         BreedingReport::factory(1000)->create();
-
     }
 }

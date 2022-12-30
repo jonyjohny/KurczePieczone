@@ -25,7 +25,7 @@ class AviaryPolicy
     {
         return $user->can('aviaries.destroy');
     }
-    
+
     /**
      * Determine whether the user can view the model.
      *
@@ -58,7 +58,7 @@ class AviaryPolicy
      */
     public function update(User $user, Aviary $aviary)
     {
-        return $aviary->deleted_at === null 
+        return $aviary->deleted_at === null
             && $user->can('aviaries.store');
     }
 
@@ -71,7 +71,7 @@ class AviaryPolicy
      */
     public function delete(User $user, Aviary $aviary)
     {
-        return $aviary->deleted_at === null 
+        return $aviary->deleted_at === null
             && $user->can('aviaries.destroy');
     }
 
@@ -84,7 +84,7 @@ class AviaryPolicy
      */
     public function restore(User $user, Aviary $aviary)
     {
-        return $aviary->deleted_at !== null 
+        return $aviary->deleted_at !== null
             && $user->can('aviaries.destroy');
     }
 

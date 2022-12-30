@@ -2,13 +2,12 @@
 
 namespace App\Http\Livewire\Reproductionrows;
 
-use App\Models\User;
-use Livewire\Component;
-use WireUi\Traits\Actions;
-use Illuminate\Support\Str;
 use App\Models\Reproduction;
 use App\Models\Reproductionrow;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
+use Livewire\Component;
+use WireUi\Traits\Actions;
 
 class ReproductionrowForm extends Component
 {
@@ -16,7 +15,9 @@ class ReproductionrowForm extends Component
     use AuthorizesRequests;
 
     public Reproduction $reproduction;
+
     public Reproductionrow $reproductionrow;
+
     public Bool $editMode;
 
     public function rules()
@@ -25,7 +26,7 @@ class ReproductionrowForm extends Component
             'reproductionrow.name' => [
                 'required',
                 'string',
-                'min:3'
+                'min:3',
             ],
             'reproductionrow.remarks' => [
             ],
@@ -44,7 +45,8 @@ class ReproductionrowForm extends Component
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
@@ -55,12 +57,12 @@ class ReproductionrowForm extends Component
         ];
     }
 
-    public function mount(Reproduction $reproduction, Reproductionrow $reproductionrow, Bool $editMode)
+    public function mount(Reproduction $reproduction, Reproductionrow $reproductionrow, bool $editMode)
     {
-        if($reproduction->id!=null){
-            $this->reproduction=$reproduction;
-        }else{
-            $this->reproduction=$reproductionrow->reproduction;
+        if ($reproduction->id != null) {
+            $this->reproduction = $reproduction;
+        } else {
+            $this->reproduction = $reproductionrow->reproduction;
         }
         $this->reproductionrow = $reproductionrow;
         $this->editMode = $editMode;
@@ -71,19 +73,20 @@ class ReproductionrowForm extends Component
         return view('livewire.reproductionrows.reproductionrow-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->reproductionrow);
         } else {
             $this->authorize('create', Reproductionrow::class);
         }
         $this->validate();
-        $this->reproductionrow->added = date("Y-m-d H:i:s", strtotime($this->reproductionrow->added));
+        $this->reproductionrow->added = date('Y-m-d H:i:s', strtotime($this->reproductionrow->added));
         $this->reproduction->reporductionRow()->save($this->reproductionrow);
         $this->notification()->success(
             $title = $this->editMode
@@ -91,7 +94,7 @@ class ReproductionrowForm extends Component
             : __('reproductionrows.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('reproductionrows.messages.successes.updated', ['name' => $this->reproductionrow->name])
-            :__('reproductionrows.messages.successes.stored', ['name' => $this->reproductionrow->name]),
+            : __('reproductionrows.messages.successes.stored', ['name' => $this->reproductionrow->name]),
         );
         $this->editMode = true;
     }

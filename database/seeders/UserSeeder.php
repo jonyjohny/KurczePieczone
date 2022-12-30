@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -26,7 +25,7 @@ class UserSeeder extends Seeder
         ]);
 
         $adminRole = Role::findByName(config('auth.roles.admin'));
-        if(isset($adminRole)) {
+        if (isset($adminRole)) {
             $admin->assignRole($adminRole);
         }
 
@@ -38,7 +37,7 @@ class UserSeeder extends Seeder
         ]);
 
         $bossRole = Role::findByName(config('auth.roles.boss'));
-        if(isset($bossRole)) {
+        if (isset($bossRole)) {
             $boss->assignRole($bossRole);
         }
 
@@ -50,7 +49,7 @@ class UserSeeder extends Seeder
         ]);
 
         $supervisorRole = Role::findByName(config('auth.roles.supervisor'));
-        if(isset($supervisorRole)) {
+        if (isset($supervisorRole)) {
             $supervisor->assignRole($supervisorRole);
         }
 
@@ -62,9 +61,8 @@ class UserSeeder extends Seeder
         ]);
 
         $workerRole = Role::findByName(config('auth.roles.worker'));
-        if(isset($workerRole)) {
+        if (isset($workerRole)) {
             $worker->assignRole($workerRole);
         }
-
     }
 }

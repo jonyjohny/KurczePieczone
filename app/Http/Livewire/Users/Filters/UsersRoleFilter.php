@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Users\Filters;
 
+use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Filters\Filter;
 use Spatie\Permission\Models\Role;
-use Illuminate\Database\Eloquent\Builder;
 
 class UsersRoleFilter extends Filter
 {
@@ -18,7 +18,7 @@ class UsersRoleFilter extends Filter
 
     public function apply(Builder $query, $value, $request): Builder
     {
-        return $query->whereHas('roles', function(Builder $query) use ($value) {
+        return $query->whereHas('roles', function (Builder $query) use ($value) {
             $query->where('id', '=', $value);
         });
     }
@@ -28,6 +28,7 @@ class UsersRoleFilter extends Filter
         $roles = Role::all();
         $labels = $roles->pluck('name');
         $values = $roles->pluck('id');
+
         return $labels->combine($values)->toArray();
     }
 }

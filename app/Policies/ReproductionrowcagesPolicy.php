@@ -65,7 +65,7 @@ class ReproductionrowcagesPolicy
      */
     public function delete(User $user, Reproductionrowcages $reproductionrowcage)
     {
-        return $reproductionrowcage->deleted_at === null 
+        return $reproductionrowcage->deleted_at === null
         && $user->can('reproductions.store');
     }
 
@@ -78,7 +78,7 @@ class ReproductionrowcagesPolicy
      */
     public function restore(User $user, Reproductionrowcages $reproductionrowcage)
     {
-        return $reproductionrowcage->deleted_at !== null 
+        return $reproductionrowcage->deleted_at !== null
         && $user->can('reproductions.destroy');
     }
 

@@ -70,7 +70,7 @@ class AviaryReportPolicy
      */
     public function delete(User $user, AviaryReport $aviaryReport)
     {
-        return $aviaryReport->deleted_at === null 
+        return $aviaryReport->deleted_at === null
         && $user->can('aviaries.store');
     }
 
@@ -83,7 +83,7 @@ class AviaryReportPolicy
      */
     public function restore(User $user, AviaryReport $aviaryReport)
     {
-        return $aviaryReport->deleted_at !== null 
+        return $aviaryReport->deleted_at !== null
         && $user->can('aviaries.destroy');
     }
 

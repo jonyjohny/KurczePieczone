@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Breeding extends Model
 {
@@ -15,11 +15,11 @@ class Breeding extends Model
 
     protected $fillable = [
         'name',
-        'remarks'
+        'remarks',
     ];
 
-    public function breedingplace() 
+    public function breedingplace()
     {
-        return $this->hasMany(Breedingplace::class,'id_breeding');
+        return $this->hasMany(Breedingplace::class, 'id_breeding');
     }
 }

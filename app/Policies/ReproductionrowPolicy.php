@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Reproductionrow;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ReproductionrowPolicy
@@ -19,7 +19,7 @@ class ReproductionrowPolicy
     {
         return $user->can('reproductions.index');
     }
-    
+
     public function viewAnyDeleted(User $user)
     {
         return $user->can('reproductions.destroy');
@@ -37,13 +37,13 @@ class ReproductionrowPolicy
 
     public function delete(User $user, Reproductionrow $reproductionrow)
     {
-        return $reproductionrow->deleted_at === null 
+        return $reproductionrow->deleted_at === null
             && $user->can('reproductions.destroy');
     }
 
     public function restore(User $user, Reproductionrow $reproductionrow)
     {
-        return $reproductionrow->deleted_at !== null 
+        return $reproductionrow->deleted_at !== null
             && $user->can('reproductions.destroy');
     }
 

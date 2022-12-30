@@ -6,8 +6,8 @@ return [
         'create_form_title' => 'Tworzenie nowego miejsca do odchowu',
         'animals' => 'Zwierzęta',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano miejsce odchowu :name',
             'updated' => 'Zaktualizowano miejsce odchowu :name',
             'destroy' => 'Usunięto miejsce odchowu :name',

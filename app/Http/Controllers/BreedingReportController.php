@@ -16,21 +16,21 @@ class BreedingReportController extends Controller
     public function index(Breedingplace $breedingplace)
     {
         $this->authorize('viewAny', BreedingReport::class);
+
         return view(
-            'breedingreport.index'
-        , [
-            'breedingplace' => $breedingplace
-        ]);
+            'breedingreport.index', [
+                'breedingplace' => $breedingplace,
+            ]);
     }
 
     public function report(Breeding $breeding)
     {
         $this->authorize('viewAny', BreedingReport::class);
+
         return view(
-            'breedingreport.report'
-        , [
-            'breeding' => $breeding
-        ]);
+            'breedingreport.report', [
+                'breeding' => $breeding,
+            ]);
     }
 
     /**
@@ -41,10 +41,10 @@ class BreedingReportController extends Controller
     public function create(Breedingplace $breedingplace)
     {
         $this->authorize('create', BreedingReport::class);
+
         return view(
-            'breedingreport.form'
-            , [
-                'breedingplace' => $breedingplace
+            'breedingreport.form', [
+                'breedingplace' => $breedingplace,
             ]);
     }
 
@@ -68,12 +68,13 @@ class BreedingReportController extends Controller
     public function edit(BreedingReport $breedingreport)
     {
         $this->authorize('update', $breedingreport);
+
         return view(
             'breedingreport.form',
             [
-                'breedingreport' => $breedingreport
+                'breedingreport' => $breedingreport,
             ],
-            );
+        );
     }
 
     /**

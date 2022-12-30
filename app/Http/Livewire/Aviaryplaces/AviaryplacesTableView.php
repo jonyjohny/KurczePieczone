@@ -2,20 +2,21 @@
 
 namespace App\Http\Livewire\Aviaryplaces;
 
-use App\Models\Aviary;
-use WireUi\Traits\Actions;
-use App\Models\Aviaryplace;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
-use App\Http\Livewire\Aviaryplaces\Actions\EditAviaryplaceAction;
 use App\Http\Livewire\Aviaryplaces\Actions\AddAviarypReportAction;
+use App\Http\Livewire\Aviaryplaces\Actions\EditAviaryplaceAction;
 use App\Http\Livewire\Aviaryplaces\Actions\OpenAviaryReportAction;
 use App\Http\Livewire\Aviaryplaces\Actions\RestoreAviaryplaceAction;
 use App\Http\Livewire\Aviaryplaces\Actions\SoftDeleteAviaryplaceAction;
+use App\Models\Aviary;
+use App\Models\Aviaryplace;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class AviaryplacesTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -33,18 +34,17 @@ class AviaryplacesTableView extends TableView
     ];
 
     public function repository()
-    {   
-        if (!$this->aviary) {
+    {
+        if (! $this->aviary) {
             $this->aviary = request()->route('aviary.id');
         }
 
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return Aviaryplace::where('id_aviary', $this->aviary)->withTrashed();
         }
 
         return Aviaryplace::where('id_aviary', $this->aviary);
     }
-
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -53,7 +53,7 @@ class AviaryplacesTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
                 Header::title(__('translations.attributes.name'))->sortBy('name'),
                 __('translations.attributes.patroness'),
@@ -68,6 +68,7 @@ class AviaryplacesTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('translations.attributes.name'))->sortBy('name'),
             __('translations.attributes.patroness'),
@@ -89,7 +90,7 @@ class AviaryplacesTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
                 $model->name,
                 $model->users->name,
@@ -104,6 +105,7 @@ class AviaryplacesTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->name,
             $model->users->name,
@@ -120,18 +122,19 @@ class AviaryplacesTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
-                new AddAviarypReportAction('aviaryreport.create',__('translations.actions.addReport')),
-                new OpenAviaryReportAction('aviaryreport.index',__('translations.actions.openReport')),
+                new AddAviarypReportAction('aviaryreport.create', __('translations.actions.addReport')),
+                new OpenAviaryReportAction('aviaryreport.index', __('translations.actions.openReport')),
                 new EditAviaryplaceAction('aviaryplaces.edit', __('translations.actions.edit')),
                 new SoftDeleteAviaryplaceAction(),
                 new RestoreAviaryplaceAction(),
-            ];        
+            ];
         }
+
         return [
-            new AddAviarypReportAction('aviaryreport.create',__('translations.actions.addReport')),
-            new OpenAviaryReportAction('aviaryreport.index',__('translations.actions.openReport')),
+            new AddAviarypReportAction('aviaryreport.create', __('translations.actions.addReport')),
+            new OpenAviaryReportAction('aviaryreport.index', __('translations.actions.openReport')),
             new EditAviaryplaceAction('aviaryplaces.edit', __('translations.actions.edit')),
             new SoftDeleteAviaryplaceAction(),
         ];
@@ -144,9 +147,9 @@ class AviaryplacesTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('aviaryplaces.messages.successes.destroy', [
-                'name' => $aviaryplace->name
+                'name' => $aviaryplace->name,
             ])
-            );
+        );
     }
 
     public function restore(int $id)
@@ -156,7 +159,7 @@ class AviaryplacesTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.restore_title'),
             $description = __('aviaryplaces.messages.successes.restore', [
-                'name' => $aviaryplace->name
+                'name' => $aviaryplace->name,
             ])
         );
     }

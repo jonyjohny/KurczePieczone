@@ -12,7 +12,7 @@ return [
     'mainoffert2' => 'Pomůžeme s usazením ptáků v přirozeném prostředí bažantů a doručíme je v jakékoli sexuální konfiguraci do kterékoli evropské země. Zveme vás ke spolupráci.',
     'telephone' => 'Telefon:',
     'mail' => 'Pošta:',
-    'address' =>'Adresa:',
+    'address' => 'Adresa:',
     'country' => 'Polsko',
     'offert' => 'Nabídka',
     'contact' => 'Kontakt',

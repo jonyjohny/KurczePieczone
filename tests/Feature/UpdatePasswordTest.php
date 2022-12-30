@@ -2,24 +2,19 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\User;
-use Livewire\Livewire;
-use Spatie\Permission\Models\Role;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
+use Livewire\Livewire;
+use Tests\TestCase;
 
 class UpdatePasswordTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_password_can_be_updated()
     {
-        $admin = Role::create(['name' => config('auth.roles.admin')]);
-        $boss = Role::create(['name' => config('auth.roles.boss')]);
-        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
-        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $this->actingAs($user = User::factory()->create());
 
         Livewire::test(UpdatePasswordForm::class)
@@ -35,10 +30,6 @@ class UpdatePasswordTest extends TestCase
 
     public function test_current_password_must_be_correct()
     {
-        $admin = Role::create(['name' => config('auth.roles.admin')]);
-        $boss = Role::create(['name' => config('auth.roles.boss')]);
-        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
-        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $this->actingAs($user = User::factory()->create());
 
         Livewire::test(UpdatePasswordForm::class)
@@ -55,10 +46,6 @@ class UpdatePasswordTest extends TestCase
 
     public function test_new_passwords_must_match()
     {
-        $admin = Role::create(['name' => config('auth.roles.admin')]);
-        $boss = Role::create(['name' => config('auth.roles.boss')]);
-        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
-        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $this->actingAs($user = User::factory()->create());
 
         Livewire::test(UpdatePasswordForm::class)

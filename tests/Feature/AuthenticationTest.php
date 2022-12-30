@@ -2,15 +2,14 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_login_screen_can_be_rendered()
     {
@@ -21,10 +20,6 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen()
     {
-        $admin = Role::create(['name' => config('auth.roles.admin')]);
-        $boss = Role::create(['name' => config('auth.roles.boss')]);
-        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
-        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $user = User::factory()->create();
 
         $response = $this->post('/login', [
@@ -38,10 +33,6 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_not_authenticate_with_invalid_password()
     {
-        $admin = Role::create(['name' => config('auth.roles.admin')]);
-        $boss = Role::create(['name' => config('auth.roles.boss')]);
-        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
-        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $user = User::factory()->create();
 
         $this->post('/login', [

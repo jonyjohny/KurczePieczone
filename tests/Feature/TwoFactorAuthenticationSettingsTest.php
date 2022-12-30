@@ -2,27 +2,22 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\User;
-use Livewire\Livewire;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Fortify\Features;
-use Spatie\Permission\Models\Role;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
+use Livewire\Livewire;
+use Tests\TestCase;
 
 class TwoFactorAuthenticationSettingsTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_two_factor_authentication_can_be_enabled()
     {
         if (! Features::canManageTwoFactorAuthentication()) {
             return $this->markTestSkipped('Two factor authentication is not enabled.');
         }
-        $admin = Role::create(['name' => config('auth.roles.admin')]);
-        $boss = Role::create(['name' => config('auth.roles.boss')]);
-        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
-        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $this->actingAs($user = User::factory()->create());
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
@@ -41,10 +36,6 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
         if (! Features::canManageTwoFactorAuthentication()) {
             return $this->markTestSkipped('Two factor authentication is not enabled.');
         }
-        $admin = Role::create(['name' => config('auth.roles.admin')]);
-        $boss = Role::create(['name' => config('auth.roles.boss')]);
-        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
-        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $this->actingAs($user = User::factory()->create());
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
@@ -66,10 +57,6 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
         if (! Features::canManageTwoFactorAuthentication()) {
             return $this->markTestSkipped('Two factor authentication is not enabled.');
         }
-        $admin = Role::create(['name' => config('auth.roles.admin')]);
-        $boss = Role::create(['name' => config('auth.roles.boss')]);
-        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
-        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $this->actingAs($user = User::factory()->create());
 
         $this->withSession(['auth.password_confirmed_at' => time()]);

@@ -31,7 +31,7 @@
                 <label for="archived">{{ __('translations.attributes.archived') }}</label>
             </div>
             <div class="">
-                <x-toggle lg wire:model.defer="breeding.archived"/>4
+                <x-toggle lg wire:model.defer="breeding.archived"/>
             </div>
         </div>
         <hr class="my-2">

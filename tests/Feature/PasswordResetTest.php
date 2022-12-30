@@ -2,12 +2,13 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
 use App\Models\User;
+use Laravel\Fortify\Features;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Notification;
-use Laravel\Fortify\Features;
-use Tests\TestCase;
 
 class PasswordResetTest extends TestCase
 {
@@ -31,7 +32,10 @@ class PasswordResetTest extends TestCase
         }
 
         Notification::fake();
-
+        $admin = Role::create(['name' => config('auth.roles.admin')]);
+        $boss = Role::create(['name' => config('auth.roles.boss')]);
+        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
+        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $user = User::factory()->create();
 
         $response = $this->post('/forgot-password', [
@@ -48,7 +52,10 @@ class PasswordResetTest extends TestCase
         }
 
         Notification::fake();
-
+        $admin = Role::create(['name' => config('auth.roles.admin')]);
+        $boss = Role::create(['name' => config('auth.roles.boss')]);
+        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
+        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $user = User::factory()->create();
 
         $response = $this->post('/forgot-password', [
@@ -71,7 +78,10 @@ class PasswordResetTest extends TestCase
         }
 
         Notification::fake();
-
+        $admin = Role::create(['name' => config('auth.roles.admin')]);
+        $boss = Role::create(['name' => config('auth.roles.boss')]);
+        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
+        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $user = User::factory()->create();
 
         $response = $this->post('/forgot-password', [

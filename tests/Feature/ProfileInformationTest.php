@@ -2,11 +2,12 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
 use App\Models\User;
+use Livewire\Livewire;
+use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
-use Livewire\Livewire;
-use Tests\TestCase;
 
 class ProfileInformationTest extends TestCase
 {
@@ -14,6 +15,10 @@ class ProfileInformationTest extends TestCase
 
     public function test_current_profile_information_is_available()
     {
+        $admin = Role::create(['name' => config('auth.roles.admin')]);
+        $boss = Role::create(['name' => config('auth.roles.boss')]);
+        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
+        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $this->actingAs($user = User::factory()->create());
 
         $component = Livewire::test(UpdateProfileInformationForm::class);
@@ -24,6 +29,10 @@ class ProfileInformationTest extends TestCase
 
     public function test_profile_information_can_be_updated()
     {
+        $admin = Role::create(['name' => config('auth.roles.admin')]);
+        $boss = Role::create(['name' => config('auth.roles.boss')]);
+        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
+        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $this->actingAs($user = User::factory()->create());
 
         Livewire::test(UpdateProfileInformationForm::class)

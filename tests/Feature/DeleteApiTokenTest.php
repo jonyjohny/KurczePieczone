@@ -2,13 +2,14 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Spatie\Permission\Models\Role;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
-use Livewire\Livewire;
-use Tests\TestCase;
 
 class DeleteApiTokenTest extends TestCase
 {
@@ -19,7 +20,10 @@ class DeleteApiTokenTest extends TestCase
         if (! Features::hasApiFeatures()) {
             return $this->markTestSkipped('API support is not enabled.');
         }
-
+        $admin = Role::create(['name' => config('auth.roles.admin')]);
+        $boss = Role::create(['name' => config('auth.roles.boss')]);
+        $supervisor = Role::create(['name' => config('auth.roles.supervisor')]);
+        $worker = Role::create(['name' => config('auth.roles.worker')]);
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $token = $user->tokens()->create([

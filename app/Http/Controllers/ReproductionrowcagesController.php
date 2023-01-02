@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Reproductionrow;
 use App\Models\Reproductionrowcages;
-use App\Http\Requests\StoreReproductionrowcagesRequest;
-use App\Http\Requests\UpdateReproductionrowcagesRequest;
 
 class ReproductionrowcagesController extends Controller
 {
@@ -17,11 +15,11 @@ class ReproductionrowcagesController extends Controller
     public function index(Reproductionrow $reproductionrow)
     {
         $this->authorize('viewAny', Reproductionrowcages::class);
+
         return view(
-            'reproductionrowcages.index'
-        , [
-            'reproductionrow' => $reproductionrow
-        ]);
+            'reproductionrowcages.index', [
+                'reproductionrow' => $reproductionrow,
+            ]);
     }
 
     /**
@@ -32,10 +30,10 @@ class ReproductionrowcagesController extends Controller
     public function create(Reproductionrow $reproductionrow)
     {
         $this->authorize('create', Reproductionrowcages::class);
+
         return view(
-            'reproductionrowcages.form'
-            , [
-                'reproductionrow' => $reproductionrow
+            'reproductionrowcages.form', [
+                'reproductionrow' => $reproductionrow,
             ]);
     }
 
@@ -59,12 +57,13 @@ class ReproductionrowcagesController extends Controller
     public function edit(Reproductionrowcages $reproductionrowcage)
     {
         $this->authorize('update', $reproductionrowcage);
+
         return view(
             'reproductionrowcages.form',
             [
-                'reproductionrowcage' => $reproductionrowcage
+                'reproductionrowcage' => $reproductionrowcage,
             ],
-            );
+        );
     }
 
     /**

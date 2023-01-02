@@ -3,11 +3,11 @@
 namespace App\Http\Livewire\Aviaryplaces;
 
 use App\Models\Aviary;
+use App\Models\Aviaryplace;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use WireUi\Traits\Actions;
-use App\Models\Aviaryplace;
-use Illuminate\Support\Str;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AviaryplaceForm extends Component
 {
@@ -15,7 +15,9 @@ class AviaryplaceForm extends Component
     use AuthorizesRequests;
 
     public Aviary $aviary;
+
     public Aviaryplace $aviaryplace;
+
     public Bool $editMode;
 
     public function rules()
@@ -47,7 +49,8 @@ class AviaryplaceForm extends Component
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
@@ -60,12 +63,12 @@ class AviaryplaceForm extends Component
         ];
     }
 
-    public function mount(Aviary $aviary, Aviaryplace $aviaryplace, Bool $editMode)
+    public function mount(Aviary $aviary, Aviaryplace $aviaryplace, bool $editMode)
     {
-        if($aviary->id!=null){
-            $this->aviary=$aviary;
-        }else{
-            $this->aviary=$aviaryplace->aviary;
+        if ($aviary->id != null) {
+            $this->aviary = $aviary;
+        } else {
+            $this->aviary = $aviaryplace->aviary;
         }
         $this->aviaryplace = $aviaryplace;
         $this->editMode = $editMode;
@@ -76,19 +79,20 @@ class AviaryplaceForm extends Component
         return view('livewire.aviaryplaces.aviaryplace-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->aviaryplace);
         } else {
             $this->authorize('create', Aviaryplace::class);
         }
         $this->validate();
-        $this->aviaryplace->added = date("Y-m-d H:i:s", strtotime($this->aviaryplace->added));
+        $this->aviaryplace->added = date('Y-m-d H:i:s', strtotime($this->aviaryplace->added));
         $this->aviary->aviaryplace()->save($this->aviaryplace);
         $this->notification()->success(
             $title = $this->editMode
@@ -96,7 +100,7 @@ class AviaryplaceForm extends Component
             : __('aviaryplaces.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('aviaryplaces.messages.successes.updated', ['name' => $this->aviaryplace->name])
-            :__('aviaryplaces.messages.successes.stored', ['name' => $this->aviaryplace->name]),
+            : __('aviaryplaces.messages.successes.stored', ['name' => $this->aviaryplace->name]),
         );
         $this->editMode = true;
     }

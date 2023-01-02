@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Breeding\Actions;
 
-use LaravelViews\Views\View;
 use LaravelViews\Actions\RedirectAction;
+use LaravelViews\Views\View;
 
 class EditBreedingAction extends RedirectAction
 {
@@ -16,6 +16,4 @@ class EditBreedingAction extends RedirectAction
     {
         return request()->user()->can('delete', $model);
     }
-
-
 }

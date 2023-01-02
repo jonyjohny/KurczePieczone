@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PermissionSeeder extends Seeder
 {
@@ -24,7 +23,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'users.destroy']);
         Permission::create(['name' => 'users.change_role']);
         Permission::create(['name' => 'log-viewer']);
-        
+
         Permission::create(['name' => 'reproductions.index']);
         Permission::create(['name' => 'reproductions.store']);
         Permission::create(['name' => 'reproductions.destroy']);

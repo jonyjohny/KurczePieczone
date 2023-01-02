@@ -21,7 +21,8 @@
                                 <tr>
                                     <th class="border-r text-sm font-medium text-gray-900 px-6 py-4 text-left"></th>
                                     @for ($i = 1; $i <= $cages; $i++)
-                                        <th class="border-r border-l text-sm font-medium text-gray-900 px-6 py-4 text-left last:border-r-0">
+                                        <th
+                                            class="border-r border-l text-sm font-medium text-gray-900 px-6 py-4 text-center last:border-r-0">
                                             {{ $i }}</th>
                                     @endfor
                                 </tr>
@@ -29,12 +30,62 @@
                             <tbody>
                                 @foreach ($reproductionrows as $reproductionrow)
                                     <tr class="border-b text-center">
-                                        <td class="px-2 py-1 whitespace-nowrap text-sm font-medium text-left text-gray-900">
+                                        <td
+                                            class="px-2 py-1 whitespace-nowrap text-sm font-medium text-left text-gray-900">
                                             {{ $reproductionrow->name }}</td>
-                                        @for ($i = 1; $i <= $reproductionrow->cages; $i++)
-                                            <td class="border px-2 py-1 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                test</th>
-                                        @endfor
+                                        @foreach ($reproductionrow->reproductionrowcage as $cage)
+                                            @php
+                                                $bg = '';
+                                                $hens = 0;
+                                                $nicHens = 0;
+                                                $cannibalismHens = 0;
+                                                $debilityHens = 0;
+                                                $otherHens = 0;
+                                                $roosters = 0;
+                                                $nicRoosters = 0;
+                                                $cannibalismRoosters = 0;
+                                                $debilityRoosters = 0;
+                                                $otherRoosters = 0;
+                                                foreach ($cage->reproductionreport as $report) {
+                                                    $hens += $report->nicHens + $report->cannibalismHens + $report->debilityHens + $report->otherHens;
+                                                    $roosters += $report->nicRoosters + $report->cannibalismRoosters + $report->debilityRoosters + $report->otherRoosters;
+                                                    $nicHens += $report->nicHens;
+                                                    $cannibalismHens += $report->cannibalismHens;
+                                                    $debilityHens += $report->debilityHens;
+                                                    $otherHens += $report->otherHens;
+                                                    $nicRoosters += $report->nicRoosters;
+                                                    $cannibalismRoosters += $report->cannibalismRoosters;
+                                                    $debilityRoosters += $report->debilityRoosters;
+                                                    $otherRoosters += $report->otherRoosters;
+                                                }
+                                                $deadall = $hens + $roosters;
+                                                if ($deadall > 50) {
+                                                    $bg = 'bg-red-200';
+                                                } elseif ($deadall > 40) {
+                                                    $bg = 'bg-red-200';
+                                                } elseif ($deadall > 30) {
+                                                    $bg = 'bg-orange-200';
+                                                } elseif ($deadall > 20) {
+                                                    $bg = 'bg-orange-200';
+                                                } elseif ($deadall > 10) {
+                                                    $bg = 'bg-yellow-200';
+                                                } elseif ($deadall > 5) {
+                                                    $bg = 'bg-sky-200';
+                                                } else {
+                                                    //
+                                                }
+                                            @endphp
+                                            <td class="border px-2 py-1 whitespace-nowrap text-sm font-medium text-gray-900 {{ $bg }}">
+                                                <div class="flex justify-between mx-2">
+                                                    <div class="text-red-700"><abbr
+                                                            title="Kury-> Nicowanie: {{ $nicHens }}, Kanibalizm: {{ $cannibalismHens }}, Wycieńczenie: {{ $debilityHens }}, Inne: {{ $otherHens }}">{{ $hens }}</abbr>
+                                                    </div>
+                                                    <div class="text-sky-600"><abbr
+                                                            title="Koguty-> Nicowanie: {{ $nicRoosters }}, Kanibalizm: {{ $cannibalismRoosters }}, Wycieńczenie: {{ $debilityRoosters }}, Inne: {{ $otherRoosters }}">{{ $roosters }}</abbr>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        @endforeach
                                     </tr>
                                 @endforeach
                             </tbody>

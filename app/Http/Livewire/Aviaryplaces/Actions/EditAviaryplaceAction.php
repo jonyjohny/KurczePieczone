@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Aviaryplaces\Actions;
 
-use LaravelViews\Views\View;
 use LaravelViews\Actions\RedirectAction;
+use LaravelViews\Views\View;
 
 class EditAviaryplaceAction extends RedirectAction
 {
@@ -16,7 +16,4 @@ class EditAviaryplaceAction extends RedirectAction
     {
         return request()->user()->can('delete', $model);
     }
-
-
 }
-

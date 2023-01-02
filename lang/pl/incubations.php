@@ -5,8 +5,8 @@ return [
         'edit_form_title' => 'Edycja miejsca inkubacji',
         'create_form_title' => 'Tworzenie nowego miejsca inkubacji',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano miejsce inkubacji :name',
             'updated' => 'Zaktualizowano miejsce inkubacji :name',
             'destroy' => 'Usunięto miejsce inkubacji :name',

@@ -2,21 +2,19 @@
 
 namespace App\Http\Livewire\Incubationreport;
 
-use App\Models\User;
-use App\Models\Incubation;
-use WireUi\Traits\Actions;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
-use App\Models\Incubationincubator;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Incubationreport\Actions\EditIncubationreportAction;
 use App\Http\Livewire\Incubationreport\Actions\RestoreIncubationreportAction;
 use App\Http\Livewire\Incubationreport\Actions\SoftDeleteIncubationreportAction;
+use App\Models\Incubation;
 use App\Models\IncubationReport;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class IncubationreportTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -33,12 +31,12 @@ class IncubationreportTableView extends TableView
     ];
 
     public function repository()
-    {   
-        if (!$this->incubationincubator) {
+    {
+        if (! $this->incubationincubator) {
             $this->incubationincubator = request()->route('incubationincubator.id');
         }
 
-        if(request()->user()->can('viewAnyDeleted', Incubation::class )){
+        if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
             return IncubationReport::where('incubationincubator_id', $this->incubationincubator)->withTrashed();
         }
 
@@ -52,7 +50,7 @@ class IncubationreportTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Incubation::class )){
+        if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
             return [
                 Header::title(__('translations.attributes.impregnation'))->sortBy('impregnation'),
                 Header::title(__('translations.attributes.eggTest'))->sortBy('eggTest'),
@@ -63,6 +61,7 @@ class IncubationreportTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('translations.attributes.impregnation'))->sortBy('impregnation'),
             Header::title(__('translations.attributes.eggTest'))->sortBy('eggTest'),
@@ -73,7 +72,6 @@ class IncubationreportTableView extends TableView
         ];
     }
 
-    
     /**
      * Sets the data to every cell of a single row
      *
@@ -81,9 +79,9 @@ class IncubationreportTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Incubation::class )){
+        if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
             return [
-                $model->impregnation." %",
+                $model->impregnation.' %',
                 $model->eggTest,
                 $model->remarks,
                 $model->users->name,
@@ -92,8 +90,9 @@ class IncubationreportTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
-            $model->impregnation." %",
+            $model->impregnation.' %',
             $model->eggTest,
             $model->remarks,
             $model->users->name,
@@ -101,16 +100,17 @@ class IncubationreportTableView extends TableView
             $model->updated_at,
         ];
     }
-    
+
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Incubation::class )){
+        if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
             return [
                 new EditIncubationreportAction('incubationreport.edit', __('translations.actions.edit')),
                 new SoftDeleteIncubationreportAction(),
                 new RestoreIncubationreportAction(),
-            ];        
+            ];
         }
+
         return [
             new EditIncubationreportAction('incubationreport.edit', __('translations.actions.edit')),
             new SoftDeleteIncubationreportAction(),
@@ -124,7 +124,7 @@ class IncubationreportTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('incubationreport.messages.successes.destroy')
-            );
+        );
     }
 
     public function restore(int $id)

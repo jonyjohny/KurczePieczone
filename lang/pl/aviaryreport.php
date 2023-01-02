@@ -14,8 +14,8 @@ return [
         'remarksFalls' => 'Uwagi do upatków',
         'remarks' => 'Uwagi ogólne',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano raport',
             'updated' => 'Zaktualizowano raport',
             'destroy' => 'Usunięto raport',
@@ -44,8 +44,5 @@ return [
         'roostersFalls' => 'U kog',
         'remarksFalls' => 'Uwagi U',
         'remarks' => 'Uwagi',
-    ]
+    ],
 ];
-
-
-

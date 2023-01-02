@@ -15,11 +15,11 @@ class BreedingplaceController extends Controller
     public function index(Breeding $breeding)
     {
         $this->authorize('viewAny', Breedingplace::class);
+
         return view(
-            'breedingplaces.index'
-        , [
-            'breeding' => $breeding
-        ]);
+            'breedingplaces.index', [
+                'breeding' => $breeding,
+            ]);
     }
 
     /**
@@ -30,10 +30,10 @@ class BreedingplaceController extends Controller
     public function create(Breeding $breeding)
     {
         $this->authorize('create', Breedingplace::class);
+
         return view(
-            'breedingplaces.form'
-            , [
-                'breeding' => $breeding
+            'breedingplaces.form', [
+                'breeding' => $breeding,
             ]);
     }
 
@@ -57,12 +57,13 @@ class BreedingplaceController extends Controller
     public function edit(Breedingplace $breedingplace)
     {
         $this->authorize('update', $breedingplace);
+
         return view(
             'breedingplaces.form',
             [
-                'breedingplace' => $breedingplace
+                'breedingplace' => $breedingplace,
             ],
-            );
+        );
     }
 
     /**

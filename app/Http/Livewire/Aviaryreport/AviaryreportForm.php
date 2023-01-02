@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Aviaryreport;
 
-use Livewire\Component;
-use WireUi\Traits\Actions;
 use App\Models\Aviaryplace;
 use App\Models\AviaryReport;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+use WireUi\Traits\Actions;
 
 class AviaryreportForm extends Component
 {
@@ -16,8 +16,11 @@ class AviaryreportForm extends Component
     use AuthorizesRequests;
 
     public Aviaryplace $aviaryplace;
+
     public AviaryReport $aviaryreport;
+
     public Bool $editMode;
+
     public User $user;
 
     public function rules()
@@ -44,17 +47,18 @@ class AviaryreportForm extends Component
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
         ];
     }
 
-    public function mount(Aviaryplace $aviaryplace, AviaryReport $aviaryreport, Bool $editMode)
+    public function mount(Aviaryplace $aviaryplace, AviaryReport $aviaryreport, bool $editMode)
     {
-        if($aviaryplace->id!=null){
-            $this->aviaryplace=$aviaryplace;
-        }else{
-            $this->aviaryplace=$aviaryreport->aviaryplace;
+        if ($aviaryplace->id != null) {
+            $this->aviaryplace = $aviaryplace;
+        } else {
+            $this->aviaryplace = $aviaryreport->aviaryplace;
         }
         $this->aviaryreport = $aviaryreport;
         $this->editMode = $editMode;
@@ -66,14 +70,14 @@ class AviaryreportForm extends Component
         return view('livewire.aviaryreport.aviaryreport-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->aviaryreport);
         } else {
             $this->authorize('create', AviaryReport::class);
@@ -87,7 +91,7 @@ class AviaryreportForm extends Component
             : __('aviaryreport.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('aviaryreport.messages.successes.updated')
-            :__('aviaryreport.messages.successes.stored'),
+            : __('aviaryreport.messages.successes.stored'),
         );
         $this->editMode = true;
     }

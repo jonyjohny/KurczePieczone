@@ -70,7 +70,7 @@ class ReproductionReportPolicy
      */
     public function delete(User $user, ReproductionReport $reproductionReport)
     {
-        return $reproductionReport->deleted_at === null 
+        return $reproductionReport->deleted_at === null
         && $user->can('reproductions.store');
     }
 
@@ -83,7 +83,7 @@ class ReproductionReportPolicy
      */
     public function restore(User $user, ReproductionReport $reproductionReport)
     {
-        return $reproductionReport->deleted_at !== null 
+        return $reproductionReport->deleted_at !== null
         && $user->can('reproductions.destroy');
     }
 

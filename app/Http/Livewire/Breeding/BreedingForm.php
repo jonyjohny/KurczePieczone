@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Breeding;
 
-use Livewire\Component;
 use App\Models\Breeding;
-use WireUi\Traits\Actions;
-use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
+use Livewire\Component;
+use WireUi\Traits\Actions;
 
 class BreedingForm extends Component
 {
@@ -14,6 +14,7 @@ class BreedingForm extends Component
     use AuthorizesRequests;
 
     public Breeding $breeding;
+
     public Bool $editMode;
 
     public function rules()
@@ -22,7 +23,7 @@ class BreedingForm extends Component
             'breeding.name' => [
                 'required',
                 'string',
-                'min:3'
+                'min:3',
             ],
             'breeding.remarks' => [
             ],
@@ -33,20 +34,21 @@ class BreedingForm extends Component
             'breeding.archived' => [
                 'required',
                 'boolean',
-            ]
+            ],
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
             'closed' => Str::lower(__('translations.attributes.closed')),
-            'archived' => Str::lower(__('translations.attributes.archived'))
+            'archived' => Str::lower(__('translations.attributes.archived')),
         ];
     }
 
-    public function mount(Breeding $breeding, Bool $editMode)
+    public function mount(Breeding $breeding, bool $editMode)
     {
         $this->breeding = $breeding;
         $this->editMode = $editMode;
@@ -57,13 +59,14 @@ class BreedingForm extends Component
         return view('livewire.breeding.breeding-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->breeding);
         } else {
             $this->authorize('create', Breeding::class);
@@ -76,7 +79,7 @@ class BreedingForm extends Component
             : __('breeding.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('breeding.messages.successes.updated', ['name' => $this->breeding->name])
-            :__('breeding.messages.successes.stored', ['name' => $this->breeding->name]),
+            : __('breeding.messages.successes.stored', ['name' => $this->breeding->name]),
         );
         $this->editMode = true;
     }

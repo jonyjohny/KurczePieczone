@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\Models\Aviaryplace;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,8 +26,8 @@ class AviaryReportFactory extends Factory
             'hensExport' => $this->faker->randomNumber(3, false),
             'roostersExport' => $this->faker->randomNumber(3, false),
             'destination' => $this->faker->text,
-            'hensFalls' => $this->faker->randomNumber(2, false),
-            'roostersFalls' => $this->faker->randomNumber(2, false),
+            'hensFalls' => $this->faker->numberBetween(0, 3),
+            'roostersFalls' => $this->faker->numberBetween(0, 3),
             'remarksFalls' => $this->faker->text,
             'remarks' => $this->faker->word(15),
             'created_at' => $this->faker->dateTimeBetween(

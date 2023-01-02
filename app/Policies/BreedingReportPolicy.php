@@ -70,7 +70,7 @@ class BreedingReportPolicy
      */
     public function delete(User $user, BreedingReport $breedingReport)
     {
-        return $breedingReport->deleted_at === null 
+        return $breedingReport->deleted_at === null
         && $user->can('breeding.store');
     }
 
@@ -83,7 +83,7 @@ class BreedingReportPolicy
      */
     public function restore(User $user, BreedingReport $breedingReport)
     {
-        return $breedingReport->deleted_at !== null 
+        return $breedingReport->deleted_at !== null
         && $user->can('breeding.destroy');
     }
 

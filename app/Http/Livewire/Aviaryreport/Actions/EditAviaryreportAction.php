@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Aviaryreport\Actions;
 
-use LaravelViews\Views\View;
 use LaravelViews\Actions\RedirectAction;
+use LaravelViews\Views\View;
 
 class EditAviaryreportAction extends RedirectAction
 {
@@ -16,7 +16,4 @@ class EditAviaryreportAction extends RedirectAction
     {
         return request()->user()->can('delete', $model);
     }
-
-
 }
-

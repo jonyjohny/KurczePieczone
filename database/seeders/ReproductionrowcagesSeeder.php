@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Reproductionrowcages;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class ReproductionrowcagesSeeder extends Seeder
 {
@@ -15,6 +14,6 @@ class ReproductionrowcagesSeeder extends Seeder
      */
     public function run()
     {
-        Reproductionrowcages::factory(1000)->create();
+        Reproductionrowcages::factory(2000)->create();
     }
 }

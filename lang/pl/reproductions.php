@@ -5,8 +5,8 @@ return [
         'edit_form_title' => 'Edycja stada do reprodukcji',
         'create_form_title' => 'Tworzenie nowego stada do reprodukcji',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano stado :name',
             'updated' => 'Zaktualizowano stado :name',
             'destroy' => 'Usunięto stado :name',

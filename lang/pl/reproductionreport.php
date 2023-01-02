@@ -18,8 +18,8 @@ return [
         'exportEggs' => 'Export jaje',
         'prevention' => 'Profilaktyka',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano raport',
             'updated' => 'Zaktualizowano raport',
             'destroy' => 'Usunięto raport',

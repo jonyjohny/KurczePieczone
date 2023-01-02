@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Incubation;
-use App\Models\IncubationReport;
 use App\Models\Incubationincubator;
+use App\Models\IncubationReport;
 
 class IncubationReportController extends Controller
 {
@@ -16,21 +16,21 @@ class IncubationReportController extends Controller
     public function index(Incubationincubator $incubationincubator)
     {
         $this->authorize('viewAny', IncubationReport::class);
+
         return view(
-            'incubationreport.index'
-        , [
-            'incubationincubator' => $incubationincubator
-        ]);
+            'incubationreport.index', [
+                'incubationincubator' => $incubationincubator,
+            ]);
     }
 
     public function report(Incubation $incubation)
     {
         $this->authorize('viewAny', IncubationReport::class);
+
         return view(
-            'incubationreport.report'
-        , [
-            'incubation' => $incubation
-        ]);
+            'incubationreport.report', [
+                'incubation' => $incubation,
+            ]);
     }
 
     /**
@@ -41,10 +41,10 @@ class IncubationReportController extends Controller
     public function create(Incubationincubator $incubationincubator)
     {
         $this->authorize('create', IncubationReport::class);
+
         return view(
-            'incubationreport.form'
-            , [
-                'incubationincubator' => $incubationincubator
+            'incubationreport.form', [
+                'incubationincubator' => $incubationincubator,
             ]);
     }
 
@@ -68,12 +68,13 @@ class IncubationReportController extends Controller
     public function edit(IncubationReport $incubationreport)
     {
         $this->authorize('update', $incubationreport);
+
         return view(
             'incubationreport.form',
             [
-                'incubationreport' => $incubationreport
+                'incubationreport' => $incubationreport,
             ],
-            );
+        );
     }
 
     /**

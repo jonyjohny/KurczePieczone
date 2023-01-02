@@ -2,21 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\Reproduction;
-use App\Models\ReproductionReport;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reproductionrow extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
     protected $fillable = [
         'name',
-        'remarks'
+        'remarks',
     ];
 
     public function reproduction()
@@ -29,13 +26,13 @@ class Reproductionrow extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function reproductionreport() 
+    public function reproductionreport()
     {
-        return $this->hasMany(ReproductionReport::class,'reproductionrow_id');
+        return $this->hasMany(ReproductionReport::class, 'reproductionrow_id');
     }
 
-    public function reproductionrowcage() 
+    public function reproductionrowcage()
     {
-        return $this->hasMany(Reproductionrowcages::class,'reproductionrow_id');
+        return $this->hasMany(Reproductionrowcages::class, 'reproductionrow_id');
     }
 }

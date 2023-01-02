@@ -5,8 +5,8 @@ return [
         'edit_form_title' => 'Edycja stada do odchowu',
         'create_form_title' => 'Tworzenie nowego stada do odchowu',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano stado :name',
             'updated' => 'Zaktualizowano stado :name',
             'destroy' => 'Usunięto stado :name',

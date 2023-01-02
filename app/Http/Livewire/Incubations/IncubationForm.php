@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Incubations;
 
-use Livewire\Component;
 use App\Models\Incubation;
-use WireUi\Traits\Actions;
-use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
+use Livewire\Component;
+use WireUi\Traits\Actions;
 
 class IncubationForm extends Component
 {
@@ -14,6 +14,7 @@ class IncubationForm extends Component
     use AuthorizesRequests;
 
     public Incubation $incubation;
+
     public Bool $editMode;
 
     public function rules()
@@ -22,7 +23,7 @@ class IncubationForm extends Component
             'incubation.name' => [
                 'required',
                 'string',
-                'min:3'
+                'min:3',
             ],
             'incubation.remarks' => [
             ],
@@ -33,20 +34,21 @@ class IncubationForm extends Component
             'incubation.archived' => [
                 'required',
                 'boolean',
-            ]
+            ],
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
             'closed' => Str::lower(__('translations.attributes.closed')),
-            'archived' => Str::lower(__('translations.attributes.archived'))
+            'archived' => Str::lower(__('translations.attributes.archived')),
         ];
     }
 
-    public function mount(Incubation $incubation, Bool $editMode)
+    public function mount(Incubation $incubation, bool $editMode)
     {
         $this->incubation = $incubation;
         $this->editMode = $editMode;
@@ -57,13 +59,14 @@ class IncubationForm extends Component
         return view('livewire.incubations.incubation-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->incubation);
         } else {
             $this->authorize('create', Incubation::class);
@@ -76,7 +79,7 @@ class IncubationForm extends Component
             : __('incubations.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('incubations.messages.successes.updated', ['name' => $this->incubation->name])
-            :__('incubations.messages.successes.stored', ['name' => $this->incubation->name]),
+            : __('incubations.messages.successes.stored', ['name' => $this->incubation->name]),
         );
         $this->editMode = true;
     }

@@ -16,21 +16,21 @@ class AviaryReportController extends Controller
     public function index(Aviaryplace $aviaryplace)
     {
         $this->authorize('viewAny', AviaryReport::class);
+
         return view(
-            'aviaryreport.index'
-        , [
-            'aviaryplace' => $aviaryplace
-        ]);
+            'aviaryreport.index', [
+                'aviaryplace' => $aviaryplace,
+            ]);
     }
 
     public function report(Aviary $aviary)
     {
         $this->authorize('viewAny', AviaryReport::class);
+
         return view(
-            'aviaryreport.report'
-        , [
-            'aviary' => $aviary
-        ]);
+            'aviaryreport.report', [
+                'aviary' => $aviary,
+            ]);
     }
 
     /**
@@ -41,10 +41,10 @@ class AviaryReportController extends Controller
     public function create(Aviaryplace $aviaryplace)
     {
         $this->authorize('create', AviaryReport::class);
+
         return view(
-            'aviaryreport.form'
-            , [
-                'aviaryplace' => $aviaryplace
+            'aviaryreport.form', [
+                'aviaryplace' => $aviaryplace,
             ]);
     }
 
@@ -68,12 +68,13 @@ class AviaryReportController extends Controller
     public function edit(AviaryReport $aviaryreport)
     {
         $this->authorize('update', $aviaryreport);
+
         return view(
             'aviaryreport.form',
             [
-                'aviaryreport' => $aviaryreport
+                'aviaryreport' => $aviaryreport,
             ],
-            );
+        );
     }
 
     /**

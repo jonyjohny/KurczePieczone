@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Incubation extends Model
 {
@@ -13,10 +13,11 @@ class Incubation extends Model
 
     protected $fillable = [
         'name',
-        'remarks'
+        'remarks',
     ];
-    
-    public function incubationincubator() {
-        return $this->hasMany(Incubationincubator::class,'id_incubation');
+
+    public function incubationincubator()
+    {
+        return $this->hasMany(Incubationincubator::class, 'id_incubation');
     }
 }

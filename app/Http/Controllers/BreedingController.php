@@ -15,6 +15,7 @@ class BreedingController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Breeding::class);
+
         return view(
             'breeding.index'
         );
@@ -28,6 +29,7 @@ class BreedingController extends Controller
     public function create()
     {
         $this->authorize('create', Breeding::class);
+
         return view(
             'breeding.form'
         );
@@ -64,12 +66,13 @@ class BreedingController extends Controller
     public function edit(Breeding $breeding)
     {
         $this->authorize('update', $breeding);
+
         return view(
             'breeding.form',
             [
                 'breeding' => $breeding,
             ],
-            );
+        );
     }
 
     /**

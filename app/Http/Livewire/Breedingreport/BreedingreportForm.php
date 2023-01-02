@@ -2,14 +2,13 @@
 
 namespace App\Http\Livewire\Breedingreport;
 
-use App\Models\User;
-use Livewire\Component;
-use WireUi\Traits\Actions;
-use Illuminate\Support\Str;
 use App\Models\Breedingplace;
 use App\Models\BreedingReport;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+use WireUi\Traits\Actions;
 
 class BreedingreportForm extends Component
 {
@@ -17,8 +16,11 @@ class BreedingreportForm extends Component
     use AuthorizesRequests;
 
     public Breedingplace $breedingplace;
+
     public BreedingReport $breedingreport;
+
     public Bool $editMode;
+
     public User $user;
 
     public function rules()
@@ -53,17 +55,18 @@ class BreedingreportForm extends Component
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
         ];
     }
 
-    public function mount(Breedingplace $breedingplace, BreedingReport $breedingreport, Bool $editMode)
+    public function mount(Breedingplace $breedingplace, BreedingReport $breedingreport, bool $editMode)
     {
-        if($breedingplace->id!=null){
-            $this->breedingplace=$breedingplace;
-        }else{
-            $this->breedingplace=$breedingreport->breedingplace;
+        if ($breedingplace->id != null) {
+            $this->breedingplace = $breedingplace;
+        } else {
+            $this->breedingplace = $breedingreport->breedingplace;
         }
         $this->breedingreport = $breedingreport;
         $this->editMode = $editMode;
@@ -75,14 +78,14 @@ class BreedingreportForm extends Component
         return view('livewire.breedingreport.breedingreport-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->breedingreport);
         } else {
             $this->authorize('create', BreedingReport::class);
@@ -96,7 +99,7 @@ class BreedingreportForm extends Component
             : __('breedingreport.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('breedingreport.messages.successes.updated')
-            :__('breedingreport.messages.successes.stored'),
+            : __('breedingreport.messages.successes.stored'),
         );
         $this->editMode = true;
     }

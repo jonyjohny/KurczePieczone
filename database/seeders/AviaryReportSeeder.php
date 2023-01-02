@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\AviaryReport;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AviaryReportSeeder extends Seeder

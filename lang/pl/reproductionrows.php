@@ -7,8 +7,8 @@ return [
         'hens' => 'Kury',
         'roosters' => 'Koguty',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano rząd :name',
             'updated' => 'Zaktualizowano rząd :name',
             'destroy' => 'Usunięto rząd :name',

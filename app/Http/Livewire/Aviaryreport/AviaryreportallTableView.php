@@ -2,18 +2,19 @@
 
 namespace App\Http\Livewire\Aviaryreport;
 
-use App\Models\Aviary;
-use WireUi\Traits\Actions;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
 use App\Http\Livewire\Aviaryreport\Actions\EditAviaryreportAction;
 use App\Http\Livewire\Aviaryreport\Actions\RestoreAviaryreportAction;
 use App\Http\Livewire\Aviaryreport\Actions\SoftDeleteAviaryreportAction;
+use App\Models\Aviary;
 use App\Models\AviaryReport;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class AviaryreportallTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -37,21 +38,20 @@ class AviaryreportallTableView extends TableView
 
     public function repository()
     {
-        if (!$this->aviary) {
+        if (! $this->aviary) {
             $this->aviary = request()->route('aviary.id');
         }
 
         if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return AviaryReport::withTrashed()->wherehas('aviaryplace', function ($query) {
-                $query->where("id_aviary", $this->aviary);
+                $query->where('id_aviary', $this->aviary);
             });
         }
 
         return AviaryReport::wherehas('aviaryplace', function ($query) {
-            $query->where("id_aviary", $this->aviary);
+            $query->where('id_aviary', $this->aviary);
         });
     }
-
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -78,6 +78,7 @@ class AviaryreportallTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             __('translations.attributes.Aviary'),
             Header::title(__('aviaryreport.attributes.feeding'))->sortBy('feeding'),
@@ -120,6 +121,7 @@ class AviaryreportallTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->aviaryplace->name,
             $model->feeding,
@@ -146,6 +148,7 @@ class AviaryreportallTableView extends TableView
                 new RestoreAviaryreportAction(),
             ];
         }
+
         return [
             new EditAviaryreportAction('aviaryreport.edit', __('translations.actions.edit')),
             new SoftDeleteAviaryreportAction(),

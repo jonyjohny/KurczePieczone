@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\Breedingplaces;
 
-use Livewire\Component;
 use App\Models\Breeding;
-use WireUi\Traits\Actions;
-use Illuminate\Support\Str;
 use App\Models\Breedingplace;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
+use Livewire\Component;
+use WireUi\Traits\Actions;
 
 class BreedingplaceForm extends Component
 {
@@ -15,7 +15,9 @@ class BreedingplaceForm extends Component
     use AuthorizesRequests;
 
     public Breeding $breeding;
+
     public Breedingplace $breedingplace;
+
     public Bool $editMode;
 
     public function rules()
@@ -24,7 +26,7 @@ class BreedingplaceForm extends Component
             'breedingplace.name' => [
                 'required',
                 'string',
-                'min:3'
+                'min:3',
             ],
             'breedingplace.remarks' => [
             ],
@@ -42,7 +44,8 @@ class BreedingplaceForm extends Component
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
@@ -52,12 +55,12 @@ class BreedingplaceForm extends Component
         ];
     }
 
-    public function mount(Breeding $breeding, Breedingplace $breedingplace, Bool $editMode)
+    public function mount(Breeding $breeding, Breedingplace $breedingplace, bool $editMode)
     {
-        if($breeding->id!=null){
-            $this->breeding=$breeding;
-        }else{
-            $this->breeding=$breedingplace->breeding;
+        if ($breeding->id != null) {
+            $this->breeding = $breeding;
+        } else {
+            $this->breeding = $breedingplace->breeding;
         }
         $this->breedingplace = $breedingplace;
         $this->editMode = $editMode;
@@ -68,19 +71,20 @@ class BreedingplaceForm extends Component
         return view('livewire.breedingplaces.breedingplace-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->breedingplace);
         } else {
             $this->authorize('create', Breedingplace::class);
         }
         $this->validate();
-        $this->breedingplace->added = date("Y-m-d H:i:s", strtotime($this->breedingplace->added));
+        $this->breedingplace->added = date('Y-m-d H:i:s', strtotime($this->breedingplace->added));
         $this->breeding->breedingplace()->save($this->breedingplace);
         $this->notification()->success(
             $title = $this->editMode
@@ -88,7 +92,7 @@ class BreedingplaceForm extends Component
             : __('breedingplaces.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('breedingplaces.messages.successes.updated', ['name' => $this->breedingplace->name])
-            :__('breedingplaces.messages.successes.stored', ['name' => $this->breedingplace->name]),
+            : __('breedingplaces.messages.successes.stored', ['name' => $this->breedingplace->name]),
         );
         $this->editMode = true;
     }

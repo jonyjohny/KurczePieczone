@@ -58,7 +58,7 @@ class ReproductionPolicy
      */
     public function update(User $user, Reproduction $reproduction)
     {
-        return $reproduction->deleted_at === null 
+        return $reproduction->deleted_at === null
             && $user->can('reproductions.store');
     }
 
@@ -71,7 +71,7 @@ class ReproductionPolicy
      */
     public function delete(User $user, Reproduction $reproduction)
     {
-        return $reproduction->deleted_at === null 
+        return $reproduction->deleted_at === null
             && $user->can('reproductions.destroy');
     }
 
@@ -84,7 +84,7 @@ class ReproductionPolicy
      */
     public function restore(User $user, Reproduction $reproduction)
     {
-        return $reproduction->deleted_at !== null 
+        return $reproduction->deleted_at !== null
             && $user->can('reproductions.destroy');
     }
 

@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\AviaryReport;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Aviaryplace extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    
     protected $fillable = [
         'name',
-        'remarks'
+        'remarks',
     ];
 
     public function aviary()
@@ -28,8 +26,8 @@ class Aviaryplace extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function aviaryreport() 
+    public function aviaryreport()
     {
-        return $this->hasMany(AviaryReport::class,'aviaryplace_id');
+        return $this->hasMany(AviaryReport::class, 'aviaryplace_id');
     }
 }

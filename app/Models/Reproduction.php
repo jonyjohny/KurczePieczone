@@ -13,10 +13,11 @@ class Reproduction extends Model
 
     protected $fillable = [
         'name',
-        'remarks'
+        'remarks',
     ];
 
-    public function reporductionRow() {
-        return $this->hasMany(ReproductionRow::class,'id_reproduction');
+    public function reporductionRow()
+    {
+        return $this->hasMany(ReproductionRow::class, 'id_reproduction');
     }
 }

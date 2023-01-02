@@ -27,10 +27,10 @@ return [
         'users' => 'Użytkownicy',
         'log-viewer' => 'Logi',
         'profile' => 'Profil',
-        'settings' => 'Ustawienia'
+        'settings' => 'Ustawienia',
     ],
     'labels' => [
-        'select2-placeholder' => 'Wybierz opcję'
+        'select2-placeholder' => 'Wybierz opcję',
     ],
     'buttons' => [
         'cancel' => 'Anuluj',
@@ -38,7 +38,7 @@ return [
         'update' => 'Aktualizuj',
         'yes' => 'Tak',
         'no' => 'Nie',
-        'close' => 'Zamknij'
+        'close' => 'Zamknij',
     ],
     'attribute' => [
         'created_at' => 'utworzono',
@@ -77,8 +77,8 @@ return [
     'no' => 'Nie',
     'messages' => [
         'successes' => [
-        'stored_title' => 'Utworzono',
-        'updated_title' => 'Zaktualizowano',
+            'stored_title' => 'Utworzono',
+            'updated_title' => 'Zaktualizowano',
         ],
     ],
     'cancel' => 'Anuluj',

@@ -6,8 +6,8 @@ return [
         'create_form_title' => 'Tworzenie nowego inkubatora',
         'eggs' => 'Jajka',
     ],
-    'messages' => [ 
-        'successes' => [ 
+    'messages' => [
+        'successes' => [
             'stored' => 'Dodano inkubator :name',
             'updated' => 'Zaktualizowano inkubator :name',
             'destroy' => 'Usunięto inkubator :name',

@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\Incubationincubators;
 
-use Livewire\Component;
 use App\Models\Incubation;
-use WireUi\Traits\Actions;
-use Illuminate\Support\Str;
 use App\Models\Incubationincubator;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Str;
+use Livewire\Component;
+use WireUi\Traits\Actions;
 
 class IncubationincubatorForm extends Component
 {
@@ -15,7 +15,9 @@ class IncubationincubatorForm extends Component
     use AuthorizesRequests;
 
     public Incubation $incubation;
+
     public Incubationincubator $incubationincubator;
+
     public Bool $editMode;
 
     public function rules()
@@ -24,7 +26,7 @@ class IncubationincubatorForm extends Component
             'incubationincubator.name' => [
                 'required',
                 'string',
-                'min:3'
+                'min:3',
             ],
             'incubationincubator.remarks' => [
             ],
@@ -42,7 +44,8 @@ class IncubationincubatorForm extends Component
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
             'name' => Str::lower(__('translations.attributes.name')),
             'remarks' => Str::lower(__('translations.attributes.remarks')),
@@ -52,12 +55,12 @@ class IncubationincubatorForm extends Component
         ];
     }
 
-    public function mount(Incubation $incubation, Incubationincubator $incubationincubator, Bool $editMode)
+    public function mount(Incubation $incubation, Incubationincubator $incubationincubator, bool $editMode)
     {
-        if($incubation->id!=null){
-            $this->incubation=$incubation;
-        }else{
-            $this->incubation=$incubationincubator->incubation;
+        if ($incubation->id != null) {
+            $this->incubation = $incubation;
+        } else {
+            $this->incubation = $incubationincubator->incubation;
         }
         $this->incubationincubator = $incubationincubator;
         $this->editMode = $editMode;
@@ -68,19 +71,20 @@ class IncubationincubatorForm extends Component
         return view('livewire.incubationincubators.incubationincubator-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->incubationincubator);
         } else {
             $this->authorize('create', Incubationincubator::class);
         }
         $this->validate();
-        $this->incubationincubator->added = date("Y-m-d H:i:s", strtotime($this->incubationincubator->added));
+        $this->incubationincubator->added = date('Y-m-d H:i:s', strtotime($this->incubationincubator->added));
         $this->incubation->incubationincubator()->save($this->incubationincubator);
         $this->notification()->success(
             $title = $this->editMode
@@ -88,7 +92,7 @@ class IncubationincubatorForm extends Component
             : __('incubationincubators.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('incubationincubators.messages.successes.updated', ['name' => $this->incubationincubator->name])
-            :__('incubationincubators.messages.successes.stored', ['name' => $this->incubationincubator->name]),
+            : __('incubationincubators.messages.successes.stored', ['name' => $this->incubationincubator->name]),
         );
         $this->editMode = true;
     }

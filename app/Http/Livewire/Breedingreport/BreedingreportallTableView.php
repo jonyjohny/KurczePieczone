@@ -2,19 +2,19 @@
 
 namespace App\Http\Livewire\Breedingreport;
 
-use App\Models\Breeding;
-
-use WireUi\Traits\Actions;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
 use App\Http\Livewire\Breedingreport\Actions\EditBreedingreportAction;
 use App\Http\Livewire\Breedingreport\Actions\RestoreBreedingreportAction;
 use App\Http\Livewire\Breedingreport\Actions\SoftDeleteBreedingreportAction;
+use App\Models\Breeding;
 use App\Models\BreedingReport;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class BreedingreportallTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
@@ -42,21 +42,20 @@ class BreedingreportallTableView extends TableView
 
     public function repository()
     {
-        if (!$this->breeding) {
+        if (! $this->breeding) {
             $this->breeding = request()->route('breeding.id');
         }
 
         if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return BreedingReport::withTrashed()->wherehas('breedingplace', function ($query) {
-                $query->where("id_breeding", $this->breeding);
+                $query->where('id_breeding', $this->breeding);
             });
         }
 
         return BreedingReport::wherehas('breedingplace', function ($query) {
-            $query->where("id_breeding", $this->breeding);
+            $query->where('id_breeding', $this->breeding);
         });
     }
-
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -87,6 +86,7 @@ class BreedingreportallTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             __('translations.attributes.Place'),
             Header::title(__('breedingreport.attributes.falls'))->sortBy('falls'),
@@ -120,9 +120,9 @@ class BreedingreportallTableView extends TableView
                 $model->breedingplace->name,
                 $model->falls,
                 $model->selection,
-                $model->mainTemperature . " °C",
-                $model->hallTemperature . " °C",
-                $model->humidity . " %",
+                $model->mainTemperature.' °C',
+                $model->hallTemperature.' °C',
+                $model->humidity.' %',
                 $model->fodder,
                 $model->water,
                 $model->lighting,
@@ -137,13 +137,14 @@ class BreedingreportallTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->breedingplace->name,
             $model->falls,
             $model->selection,
-            $model->mainTemperature . " °C",
-            $model->hallTemperature . " °C",
-            $model->humidity . " %",
+            $model->mainTemperature.' °C',
+            $model->hallTemperature.' °C',
+            $model->humidity.' %',
             $model->fodder,
             $model->water,
             $model->lighting,
@@ -167,6 +168,7 @@ class BreedingreportallTableView extends TableView
                 new RestoreBreedingreportAction(),
             ];
         }
+
         return [
             new EditBreedingreportAction('breedingreport.edit', __('translations.actions.edit')),
             new SoftDeleteBreedingreportAction(),

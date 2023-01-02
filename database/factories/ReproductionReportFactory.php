@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\Models\Reproductionrow;
 use App\Models\Reproductionrowcages;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,14 +23,14 @@ class ReproductionReportFactory extends Factory
             'reproductionrow_id' => $this->faker->randomElement(Reproductionrow::pluck('id')),
             'reproductionrowcage_id' => $this->faker->randomElement(Reproductionrowcages::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
-            'nicHens' => $this->faker->randomNumber(2, false),
-            'nicRoosters' => $this->faker->randomNumber(2, false),
-            'cannibalismHens' => $this->faker->randomNumber(2, false),
-            'cannibalismRoosters' => $this->faker->randomNumber(2, false),
-            'debilityHens' => $this->faker->randomNumber(2, false),
-            'debilityRoosters' => $this->faker->randomNumber(2, false),
-            'otherHens' => $this->faker->randomNumber(2, false),
-            'otherRoosters' => $this->faker->randomNumber(2, false),
+            'nicHens' => $this->faker->numberBetween(0, 3),
+            'nicRoosters' => $this->faker->numberBetween(0, 3),
+            'cannibalismHens' => $this->faker->numberBetween(0, 3),
+            'cannibalismRoosters' => $this->faker->numberBetween(0, 3),
+            'debilityHens' => $this->faker->numberBetween(0, 3),
+            'debilityRoosters' => $this->faker->numberBetween(0, 3),
+            'otherHens' => $this->faker->numberBetween(0, 3),
+            'otherRoosters' => $this->faker->numberBetween(0, 3),
             'fallsRemarks' => $this->faker->word(15),
             'goodEggs' => $this->faker->randomNumber(2, false),
             'badEggs' => $this->faker->randomNumber(2, false),
@@ -46,12 +46,10 @@ class ReproductionReportFactory extends Factory
                 '- 1 weeks',
             ),
             'deleted_at' => rand(0, 10) === 0 ? $this->faker->dateTimeBetween(
-                    '- 1 weeks',
-                    '+ 2 weeks',
+                '- 1 weeks',
+                '+ 2 weeks',
             )
             : null,
         ];
     }
 }
-
-

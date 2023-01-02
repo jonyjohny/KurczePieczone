@@ -2,25 +2,25 @@
 
 namespace App\Http\Livewire\Reproductions;
 
-use WireUi\Traits\Actions;
-use App\Models\Reproduction;
-use LaravelViews\Facades\UI;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Reproductions\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Reproductions\Actions\EditReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\OpenReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\RestoreReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\SoftDeleteReproductionAction;
+use App\Http\Livewire\Reproductions\Filters\SoftDeleteFilter;
+use App\Models\Reproduction;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use LaravelViews\Facades\Header;
+use LaravelViews\Facades\UI;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class ReproductionsTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
-
     public $searchBy = [
         'name',
         'remarks',
@@ -33,9 +33,10 @@ class ReproductionsTableView extends TableView
 
     public function repository(): Builder
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return Reproduction::query()->withTrashed();
         }
+
         return Reproduction::query();
     }
 
@@ -46,7 +47,7 @@ class ReproductionsTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
                 Header::title(__('translations.attributes.name'))->sortBy('name'),
                 Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
@@ -57,6 +58,7 @@ class ReproductionsTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             Header::title(__('translations.attributes.name'))->sortBy('name'),
             Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
@@ -74,34 +76,36 @@ class ReproductionsTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
                 $model->name,
                 $model->remarks,
                 $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
-                $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+                $model->archived ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
                 $model->created_at,
                 $model->updated_at,
                 $model->deleted_at,
             ];
         }
+
         return [
             $model->name,
             $model->remarks,
             $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
-            $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+            $model->archived ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
             $model->created_at,
             $model->updated_at,
         ];
     }
-        
+
     protected function filters()
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
-                new SoftDeleteFilter,            
+                new SoftDeleteFilter,
             ];
         }
+
         return [
             //
         ];
@@ -109,16 +113,17 @@ class ReproductionsTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Reproduction::class )){
+        if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
-                new OpenReproductionAction('reproductionrows.index',__('translations.actions.open')),
+                new OpenReproductionAction('reproductionrows.index', __('translations.actions.open')),
                 new EditReproductionAction('reproductions.edit', __('translations.actions.edit')),
                 new SoftDeleteReproductionAction(),
                 new RestoreReproductionAction(),
-            ];        
+            ];
         }
+
         return [
-            new OpenReproductionAction('reproductionrows.index',__('translations.actions.open')),
+            new OpenReproductionAction('reproductionrows.index', __('translations.actions.open')),
             new EditReproductionAction('reproductions.edit', __('translations.actions.edit')),
         ];
     }
@@ -130,9 +135,9 @@ class ReproductionsTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('reproductions.messages.successes.destroy', [
-                'name' => $reproduction->name
+                'name' => $reproduction->name,
             ])
-            );
+        );
     }
 
     public function restore(int $id)
@@ -142,7 +147,7 @@ class ReproductionsTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.restore_title'),
             $description = __('reproductions.messages.successes.restore', [
-                'name' => $reproduction->name
+                'name' => $reproduction->name,
             ])
         );
     }

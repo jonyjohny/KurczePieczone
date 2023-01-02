@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire\Reproductionrows\Actions;
 
-use LaravelViews\Views\View;
-use LaravelViews\Actions\Action;
 use LaravelViews\Actions\RedirectAction;
-
+use LaravelViews\Views\View;
 
 class OpenReproductionrowcagesAction extends RedirectAction
 {
@@ -18,5 +16,4 @@ class OpenReproductionrowcagesAction extends RedirectAction
     {
         return request()->user()->can('delete', $model);
     }
-
 }

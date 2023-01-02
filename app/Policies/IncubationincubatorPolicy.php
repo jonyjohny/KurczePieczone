@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Incubationincubator;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class IncubationincubatorPolicy
@@ -24,7 +24,7 @@ class IncubationincubatorPolicy
     {
         return $user->can('incubations.destroy');
     }
-    
+
     public function create(User $user)
     {
         return $user->can('incubations.store');
@@ -37,13 +37,13 @@ class IncubationincubatorPolicy
 
     public function delete(User $user, Incubationincubator $incubationincubator)
     {
-        return $incubationincubator->deleted_at === null 
+        return $incubationincubator->deleted_at === null
         && $user->can('incubations.destroy');
     }
 
     public function restore(User $user, Incubationincubator $incubationincubator)
     {
-        return $incubationincubator->deleted_at !== null 
+        return $incubationincubator->deleted_at !== null
         && $user->can('incubations.destroy');
     }
 

@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\BreedingReport;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Breedingplace extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    
     protected $fillable = [
         'name',
-        'remarks'
+        'remarks',
     ];
-    
+
     public function breeding()
     {
         return $this->belongsTo(Breeding::class, 'id_breeding');
@@ -28,8 +26,8 @@ class Breedingplace extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function breedingreport() 
+    public function breedingreport()
     {
-        return $this->hasMany(BreedingReport::class,'breedingplace_id');
+        return $this->hasMany(BreedingReport::class, 'breedingplace_id');
     }
 }

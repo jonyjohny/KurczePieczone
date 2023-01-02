@@ -2,26 +2,26 @@
 
 namespace App\Http\Livewire\Users;
 
-use App\Models\User;
-use WireUi\Traits\Actions;
-use LaravelViews\Facades\UI;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
 use App\Http\Livewire\Users\Actions\EditUserAction;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Users\Filters\UsersRoleFilter;
-use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Users\Actions\RestoreUserAction;
-use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
 use App\Http\Livewire\Users\Actions\SoftDeleteUserAction;
+use App\Http\Livewire\Users\Filters\EmailVerifiedFilter;
+use App\Http\Livewire\Users\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Users\Filters\UsersRoleFilter;
+use App\Models\User;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use LaravelViews\Facades\Header;
+use LaravelViews\Facades\UI;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class UsersTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
-
     public $searchBy = [
         'name',
         'email',
@@ -33,9 +33,10 @@ class UsersTableView extends TableView
 
     public function repository(): Builder
     {
-        if(request()->user()->can('viewAnyDeleted', User::class )){
+        if (request()->user()->can('viewAnyDeleted', User::class)) {
             return User::query()->withTrashed();
         }
+
         return User::query();
     }
 
@@ -48,7 +49,7 @@ class UsersTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', User::class )){
+        if (request()->user()->can('viewAnyDeleted', User::class)) {
             return [
                 __('users.attributes.Avatar'),
                 Header::title(__('users.attributes.name'))->sortBy('name'),
@@ -59,6 +60,7 @@ class UsersTableView extends TableView
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
             ];
         }
+
         return [
             __('users.attributes.Avatar'),
             Header::title(__('users.attributes.name'))->sortBy('name'),
@@ -76,7 +78,7 @@ class UsersTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', User::class )){
+        if (request()->user()->can('viewAnyDeleted', User::class)) {
             return [
                 UI::avatar(asset($model->profile_photo_url)),
                 $model->name,
@@ -87,7 +89,9 @@ class UsersTableView extends TableView
                 $model->deleted_at,
             ];
         }
+
         return User::query();
+
         return [
             UI::avatar(asset($model->profile_photo_url)),
             $model->name,
@@ -100,14 +104,16 @@ class UsersTableView extends TableView
 
     protected function filters()
     {
-        if(request()->user()->can('viewAnyDeleted', User::class )){
+        if (request()->user()->can('viewAnyDeleted', User::class)) {
             return [
                 new UsersRoleFilter,
                 new EmailVerifiedFilter,
                 new SoftDeleteFilter,
             ];
         }
+
         return User::query();
+
         return [
             new UsersRoleFilter,
             new EmailVerifiedFilter,
@@ -116,14 +122,16 @@ class UsersTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', User::class )){
+        if (request()->user()->can('viewAnyDeleted', User::class)) {
             return [
                 new EditUserAction('users.edit', __('translations.actions.edit')),
                 new SoftDeleteUserAction(),
-                new RestoreUserAction()
+                new RestoreUserAction(),
             ];
         }
+
         return User::query();
+
         return [
             new EditUserAction('users.edit', __('translations.actions.edit')),
         ];
@@ -136,9 +144,9 @@ class UsersTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('users.messages.successes.destroy', [
-                'name' => $user->name
+                'name' => $user->name,
             ])
-            );
+        );
     }
 
     public function restore(int $id)
@@ -148,7 +156,7 @@ class UsersTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.restore_title'),
             $description = __('users.messages.successes.restore', [
-                'name' => $user->name
+                'name' => $user->name,
             ])
         );
     }

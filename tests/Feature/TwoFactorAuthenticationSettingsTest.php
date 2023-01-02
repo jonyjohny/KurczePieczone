@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
 use Livewire\Livewire;
@@ -11,14 +11,13 @@ use Tests\TestCase;
 
 class TwoFactorAuthenticationSettingsTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_two_factor_authentication_can_be_enabled()
     {
         if (! Features::canManageTwoFactorAuthentication()) {
             return $this->markTestSkipped('Two factor authentication is not enabled.');
         }
-
         $this->actingAs($user = User::factory()->create());
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
@@ -37,7 +36,6 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
         if (! Features::canManageTwoFactorAuthentication()) {
             return $this->markTestSkipped('Two factor authentication is not enabled.');
         }
-
         $this->actingAs($user = User::factory()->create());
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
@@ -59,7 +57,6 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
         if (! Features::canManageTwoFactorAuthentication()) {
             return $this->markTestSkipped('Two factor authentication is not enabled.');
         }
-
         $this->actingAs($user = User::factory()->create());
 
         $this->withSession(['auth.password_confirmed_at' => time()]);

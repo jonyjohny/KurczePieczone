@@ -57,7 +57,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $model->deleted_at === null 
+        return $model->deleted_at === null
             && $user->can('users.store');
     }
 
@@ -70,7 +70,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $model->deleted_at === null 
+        return $model->deleted_at === null
             && $user->can('users.destroy');
     }
 
@@ -83,7 +83,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model)
     {
-        return $model->deleted_at !== null 
+        return $model->deleted_at !== null
             && $user->can('users.destroy');
     }
 

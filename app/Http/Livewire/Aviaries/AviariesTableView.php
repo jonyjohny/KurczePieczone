@@ -2,25 +2,25 @@
 
 namespace App\Http\Livewire\Aviaries;
 
-use App\Models\Aviary;
-use WireUi\Traits\Actions;
-use LaravelViews\Facades\UI;
-use LaravelViews\Facades\Header;
-use LaravelViews\Views\TableView;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Aviaries\Actions\EditAviaryAction;
 use App\Http\Livewire\Aviaries\Actions\OpenAviaryAction;
-use App\Http\Livewire\Aviaries\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Aviaries\Actions\RestoreAviaryAction;
 use App\Http\Livewire\Aviaries\Actions\SoftDeleteAviaryAction;
+use App\Http\Livewire\Aviaries\Filters\SoftDeleteFilter;
+use App\Models\Aviary;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use LaravelViews\Facades\Header;
+use LaravelViews\Facades\UI;
+use LaravelViews\Views\TableView;
+use WireUi\Traits\Actions;
 
 class AviariesTableView extends TableView
 {
     use Actions;
+
     /**
      * Sets a model class to get the initial data
      */
-
     public $searchBy = [
         'name',
         'remarks',
@@ -33,11 +33,11 @@ class AviariesTableView extends TableView
 
     public function repository(): Builder
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return Aviary::query()->withTrashed();
         }
-        return Aviary::query();
 
+        return Aviary::query();
     }
 
     /**
@@ -47,7 +47,7 @@ class AviariesTableView extends TableView
      */
     public function headers(): array
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
                 Header::title(__('translations.attributes.name'))->sortBy('name'),
                 Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
@@ -56,8 +56,9 @@ class AviariesTableView extends TableView
                 Header::title(__('translations.attributes.created_at'))->sortBy('created_at'),
                 Header::title(__('translations.attributes.updated_at'))->sortBy('updated_at'),
                 Header::title(__('translations.attributes.deleted_at'))->sortBy('deleted_at'),
-            ]; 
+            ];
         }
+
         return [
             Header::title(__('translations.attributes.name'))->sortBy('name'),
             Header::title(__('translations.attributes.remarks'))->sortBy('remarks'),
@@ -75,34 +76,36 @@ class AviariesTableView extends TableView
      */
     public function row($model): array
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
                 $model->name,
                 $model->remarks,
                 $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
-                $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+                $model->archived ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
                 $model->created_at,
                 $model->updated_at,
                 $model->deleted_at,
-            ]; 
+            ];
         }
+
         return [
             $model->name,
             $model->remarks,
             $model->closed ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
-            $model->archived? UI::icon('check', 'success') : UI::icon('x', 'danger'),
+            $model->archived ? UI::icon('check', 'success') : UI::icon('x', 'danger'),
             $model->created_at,
             $model->updated_at,
         ];
     }
-        
+
     protected function filters()
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
                 new SoftDeleteFilter,
-            ]; 
+            ];
         }
+
         return [
             //
         ];
@@ -110,16 +113,17 @@ class AviariesTableView extends TableView
 
     protected function actionsByRow()
     {
-        if(request()->user()->can('viewAnyDeleted', Aviary::class )){
+        if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
-                new OpenAviaryAction('aviaryplaces.index',__('translations.actions.open')),
+                new OpenAviaryAction('aviaryplaces.index', __('translations.actions.open')),
                 new EditAviaryAction('aviaries.edit', __('translations.actions.edit')),
                 new SoftDeleteAviaryAction(),
-                new RestoreAviaryAction()
-            ]; 
+                new RestoreAviaryAction(),
+            ];
         }
+
         return [
-            new OpenAviaryAction('aviaryplaces.index',__('translations.actions.open')),
+            new OpenAviaryAction('aviaryplaces.index', __('translations.actions.open')),
             new EditAviaryAction('aviaries.edit', __('translations.actions.edit')),
         ];
     }
@@ -131,7 +135,7 @@ class AviariesTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.destroy_title'),
             $description = __('aviaries.messages.successes.destroy', [
-                'name' => $aviary->name
+                'name' => $aviary->name,
             ])
         );
     }
@@ -143,7 +147,7 @@ class AviariesTableView extends TableView
         $this->notification()->success(
             $title = __('translations.messages.successes.restore_title'),
             $description = __('aviaries.messages.successes.restore', [
-                'name' => $aviary->name
+                'name' => $aviary->name,
             ])
         );
     }

@@ -2,14 +2,13 @@
 
 namespace App\Http\Livewire\Reproductionreport;
 
-use App\Models\User;
-use Livewire\Component;
-use WireUi\Traits\Actions;
-use Illuminate\Support\Str;
 use App\Models\ReproductionReport;
 use App\Models\Reproductionrowcages;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+use WireUi\Traits\Actions;
 
 class ReproductionreportForm extends Component
 {
@@ -17,8 +16,11 @@ class ReproductionreportForm extends Component
     use AuthorizesRequests;
 
     public Reproductionrowcages $reproductionrowcage;
+
     public ReproductionReport $reproductionreport;
+
     public Bool $editMode;
+
     public User $user;
 
     public function rules()
@@ -55,17 +57,18 @@ class ReproductionreportForm extends Component
         ];
     }
 
-    public function validationAttributes(){
+    public function validationAttributes()
+    {
         return [
         ];
     }
 
-    public function mount(Reproductionrowcages $reproductionrowcage, ReproductionReport $reproductionreport, Bool $editMode)
+    public function mount(Reproductionrowcages $reproductionrowcage, ReproductionReport $reproductionreport, bool $editMode)
     {
-        if($reproductionrowcage->id!=null){
-            $this->reproductionrowcage=$reproductionrowcage;
-        }else{
-            $this->reproductionrowcage=$reproductionreport->reproductionrowcage;
+        if ($reproductionrowcage->id != null) {
+            $this->reproductionrowcage = $reproductionrowcage;
+        } else {
+            $this->reproductionrowcage = $reproductionreport->reproductionrowcage;
         }
         $this->reproductionreport = $reproductionreport;
         $this->editMode = $editMode;
@@ -77,14 +80,14 @@ class ReproductionreportForm extends Component
         return view('livewire.reproductionreport.reproductionreport-form');
     }
 
-    public function update($propertyName){
+    public function update($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
 
     public function save()
     {
-        
-        if($this->editMode){
+        if ($this->editMode) {
             $this->authorize('update', $this->reproductionreport);
         } else {
             $this->authorize('create', ReproductionReport::class);
@@ -99,7 +102,7 @@ class ReproductionreportForm extends Component
             : __('reproductionreport.messages.successes.stored_title'),
             $description = $this->editMode
             ? __('reproductionreport.messages.successes.updated')
-            :__('reproductionreport.messages.successes.stored'),
+            : __('reproductionreport.messages.successes.stored'),
         );
         $this->editMode = true;
     }

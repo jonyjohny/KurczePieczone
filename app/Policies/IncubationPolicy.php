@@ -88,6 +88,11 @@ class IncubationPolicy
             && $user->can('incubations.destroy');
     }
 
+    public function archive(User $user)
+    {
+        return $user->hasRole(['supervisor', 'boss', 'admin']);
+    }
+
     /**
      * Determine whether the user can permanently delete the model.
      *

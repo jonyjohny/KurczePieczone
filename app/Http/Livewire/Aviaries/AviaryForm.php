@@ -28,12 +28,8 @@ class aviaryForm extends Component
             'aviary.remarks' => [
             ],
             'aviary.closed' => [
-                'required',
-                'boolean',
             ],
             'aviary.archived' => [
-                'required',
-                'boolean',
             ],
         ];
     }
@@ -72,6 +68,8 @@ class aviaryForm extends Component
             $this->authorize('create', Aviary::class);
         }
         $this->validate();
+        if($this->aviary->closed==null) $this->aviary->closed = 0;
+        if($this->aviary->archived==null) $this->aviary->archived = 0;
         $this->aviary->save();
         $this->notification()->success(
             $title = $this->editMode

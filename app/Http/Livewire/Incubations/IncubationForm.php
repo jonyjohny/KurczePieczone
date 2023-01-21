@@ -28,12 +28,8 @@ class IncubationForm extends Component
             'incubation.remarks' => [
             ],
             'incubation.closed' => [
-                'required',
-                'boolean',
             ],
             'incubation.archived' => [
-                'required',
-                'boolean',
             ],
         ];
     }
@@ -72,6 +68,8 @@ class IncubationForm extends Component
             $this->authorize('create', Incubation::class);
         }
         $this->validate();
+        if($this->incubation->closed==null) $this->incubation->closed = 0;
+        if($this->incubation->archived==null) $this->incubation->archived = 0;
         $this->incubation->save();
         $this->notification()->success(
             $title = $this->editMode

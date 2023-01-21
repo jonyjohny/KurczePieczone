@@ -2,17 +2,18 @@
 
 namespace App\Http\Livewire\Aviaries;
 
+use App\Models\Aviary;
+use WireUi\Traits\Actions;
+use LaravelViews\Facades\UI;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Livewire\Aviaries\Filters\activeFilter;
 use App\Http\Livewire\Aviaries\Actions\EditAviaryAction;
 use App\Http\Livewire\Aviaries\Actions\OpenAviaryAction;
+use App\Http\Livewire\Aviaries\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Aviaries\Actions\RestoreAviaryAction;
 use App\Http\Livewire\Aviaries\Actions\SoftDeleteAviaryAction;
-use App\Http\Livewire\Aviaries\Filters\SoftDeleteFilter;
-use App\Models\Aviary;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use LaravelViews\Facades\Header;
-use LaravelViews\Facades\UI;
-use LaravelViews\Views\TableView;
-use WireUi\Traits\Actions;
 
 class AviariesTableView extends TableView
 {
@@ -102,12 +103,13 @@ class AviariesTableView extends TableView
     {
         if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
+                new activeFilter,
                 new SoftDeleteFilter,
             ];
         }
 
         return [
-            //
+            new activeFilter,
         ];
     }
 

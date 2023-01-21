@@ -2,17 +2,18 @@
 
 namespace App\Http\Livewire\Incubations;
 
+use App\Models\Incubation;
+use WireUi\Traits\Actions;
+use LaravelViews\Facades\UI;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Livewire\Incubations\Filters\activeFilter;
+use App\Http\Livewire\Incubations\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Incubations\Actions\EditIncubationAction;
 use App\Http\Livewire\Incubations\Actions\OpenIncubationAction;
 use App\Http\Livewire\Incubations\Actions\RestoreIncubationAction;
 use App\Http\Livewire\Incubations\Actions\SoftDeleteIncubationAction;
-use App\Http\Livewire\Incubations\Filters\SoftDeleteFilter;
-use App\Models\Incubation;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use LaravelViews\Facades\Header;
-use LaravelViews\Facades\UI;
-use LaravelViews\Views\TableView;
-use WireUi\Traits\Actions;
 
 class IncubationsTableView extends TableView
 {
@@ -102,12 +103,13 @@ class IncubationsTableView extends TableView
     {
         if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
             return [
+                new activeFilter,
                 new SoftDeleteFilter,
             ];
         }
 
         return [
-            //
+            new activeFilter,
         ];
     }
 
@@ -123,6 +125,7 @@ class IncubationsTableView extends TableView
         }
 
         return [
+            new OpenIncubationAction('incubationincubators.index', __('translations.actions.open')),
             new EditIncubationAction('incubations.edit', __('translations.actions.edit')),
         ];
     }

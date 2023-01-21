@@ -6,12 +6,12 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg" id="table-view-wrapper">
                 <div class="flex justify-end pt-2">
                     <div class="px-2">
                         <x-button dark label="{{ __('translations.actions.back') }}"
-                            href="{{ route('aviaries.index') }}" />
+                            href="{{ route('aviaries.index') }}?&filters[active-filter]=0" />
                     </div>
                     <div class="px-2">
                         <x-button primary label="{{ __('translations.actions.create') }}"

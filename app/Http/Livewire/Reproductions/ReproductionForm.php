@@ -28,12 +28,8 @@ class ReproductionForm extends Component
             'reproduction.remarks' => [
             ],
             'reproduction.closed' => [
-                'required',
-                'boolean',
             ],
             'reproduction.archived' => [
-                'required',
-                'boolean',
             ],
         ];
     }
@@ -72,6 +68,8 @@ class ReproductionForm extends Component
             $this->authorize('create', Reproduction::class);
         }
         $this->validate();
+        if($this->reproduction->closed==null) $this->reproduction->closed = 0;
+        if($this->reproduction->archived==null) $this->reproduction->archived = 0;
         $this->reproduction->save();
         $this->notification()->success(
             $title = $this->editMode

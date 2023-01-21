@@ -28,12 +28,8 @@ class BreedingForm extends Component
             'breeding.remarks' => [
             ],
             'breeding.closed' => [
-                'required',
-                'boolean',
             ],
             'breeding.archived' => [
-                'required',
-                'boolean',
             ],
         ];
     }
@@ -72,6 +68,8 @@ class BreedingForm extends Component
             $this->authorize('create', Breeding::class);
         }
         $this->validate();
+        if($this->breeding->closed==null) $this->breeding->closed = 0;
+        if($this->breeding->archived==null) $this->breeding->archived = 0;
         $this->breeding->save();
         $this->notification()->success(
             $title = $this->editMode

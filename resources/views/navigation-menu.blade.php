@@ -9,22 +9,22 @@
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
+                
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('translations.navigation.Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('reproductions.index') }}" :active="request()->routeIs('reproductions.index')">
+                    <x-jet-nav-link href="{{ route('reproductions.index') }}?&filters[active-filter]=0" :active="request()->routeIs('reproductions.index')">
                         {{ __('translations.navigation.Reproduction') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('incubations.index') }}" :active="request()->routeIs('incubations.index')">
+                    <x-jet-nav-link href="{{ route('incubations.index') }}?&filters[active-filter]=0" :active="request()->routeIs('incubations.index')">
                         {{ __('translations.navigation.Incubation') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('breeding.index') }}" :active="request()->routeIs('breeding.index')">
+                    <x-jet-nav-link href="{{ route('breeding.index') }}?&filters[active-filter]=0" :active="request()->routeIs('breeding.index')">
                         {{ __('translations.navigation.Breeding') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('aviaries.index') }}" :active="request()->routeIs('aviaries.index')">
+                    <x-jet-nav-link href="{{ route('aviaries.index') }}?&filters[active-filter]=0" :active="request()->routeIs('aviaries.index')">
                         {{ __('translations.navigation.Aviary') }}
                     </x-jet-nav-link>
                     @can('users.index')
@@ -162,16 +162,16 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('translations.navigation.Dashboard') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('reproductions.index') }}" :active="request()->routeIs('reproductions.index')">
+            <x-jet-responsive-nav-link href="{{ route('reproductions.index') }}?&filters[active-filter]=0" :active="request()->routeIs('reproductions.index')">
                 {{ __('translations.navigation.Reproduction') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('incubations.index') }}" :active="request()->routeIs('incubations.index')">
+            <x-jet-responsive-nav-link href="{{ route('incubations.index') }}?&filters[active-filter]=0" :active="request()->routeIs('incubations.index')">
                 {{ __('translations.navigation.Incubation') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('breeding.index') }}" :active="request()->routeIs('breeding.index')">
+            <x-jet-responsive-nav-link href="{{ route('breeding.index') }}?&filters[active-filter]=0" :active="request()->routeIs('breeding.index')">
                 {{ __('translations.navigation.Breeding') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('aviaries.index') }}" :active="request()->routeIs('aviaries.index')">
+            <x-jet-responsive-nav-link href="{{ route('aviaries.index') }}?&filters[active-filter]=0" :active="request()->routeIs('aviaries.index')">
                 {{ __('translations.navigation.Aviary') }}
             </x-jet-responsive-nav-link>
             @can('users.index')

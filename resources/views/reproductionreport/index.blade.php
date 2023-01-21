@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <div class="py-12">
-        <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg" id="table-view-wrapper">
                 <div class="flex justify-end pt-2">
                     <div class="px-2">

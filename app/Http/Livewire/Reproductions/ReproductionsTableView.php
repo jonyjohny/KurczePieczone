@@ -2,17 +2,18 @@
 
 namespace App\Http\Livewire\Reproductions;
 
+use WireUi\Traits\Actions;
+use App\Models\Reproduction;
+use LaravelViews\Facades\UI;
+use LaravelViews\Facades\Header;
+use LaravelViews\Views\TableView;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Http\Livewire\Reproductions\Filters\SoftDeleteFilter;
+use App\Http\Livewire\Reproductions\Filters\activeFilter;
 use App\Http\Livewire\Reproductions\Actions\EditReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\OpenReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\RestoreReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\SoftDeleteReproductionAction;
-use App\Http\Livewire\Reproductions\Filters\SoftDeleteFilter;
-use App\Models\Reproduction;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use LaravelViews\Facades\Header;
-use LaravelViews\Facades\UI;
-use LaravelViews\Views\TableView;
-use WireUi\Traits\Actions;
 
 class ReproductionsTableView extends TableView
 {
@@ -102,12 +103,13 @@ class ReproductionsTableView extends TableView
     {
         if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
+                new activeFilter,
                 new SoftDeleteFilter,
             ];
         }
 
         return [
-            //
+            new activeFilter,
         ];
     }
 

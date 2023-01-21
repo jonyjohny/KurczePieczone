@@ -21,6 +21,7 @@
             <div class="">
                 <x-input placeholder="{{ __('translations.enter') }}" wire:model="aviary.remarks" />
             </div>
+            @can('archive', $aviary)
             <div class="">
                 <label for="closed">{{ __('translations.attributes.closed') }}</label>
             </div>
@@ -33,10 +34,11 @@
             <div class="">
                 <x-toggle lg wire:model.defer="aviary.archived"/>
             </div>
+            @endcan
         </div>
         <hr class="my-2">
         <div class="flex justify-end pt-2">
-            <x-button href="{{ route('aviaries.index') }}" secondary class="mr-2"
+            <x-button href="{{ route('aviaries.index') }}?&filters[active-filter]=0" secondary class="mr-2"
                 label="{{ __('translations.back') }}" />
             <x-button type="submit" primary label="{{ __('translations.save') }}" spinner />
         </div>

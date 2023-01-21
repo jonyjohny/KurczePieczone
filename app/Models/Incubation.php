@@ -12,6 +12,8 @@ class Incubation extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'closed',
+        'archived',
         'name',
         'remarks',
     ];

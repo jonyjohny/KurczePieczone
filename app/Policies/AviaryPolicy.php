@@ -88,6 +88,11 @@ class AviaryPolicy
             && $user->can('aviaries.destroy');
     }
 
+    public function archive(User $user)
+    {
+        return $user->hasRole(['supervisor', 'boss', 'admin']);
+    }
+    
     /**
      * Determine whether the user can permanently delete the model.
      *

@@ -8,7 +8,7 @@ use LaravelViews\Facades\UI;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Aviaries\Filters\activeFilter;
+use App\Http\Livewire\Aviaries\Filters\ActiveFilter;
 use App\Http\Livewire\Aviaries\Actions\EditAviaryAction;
 use App\Http\Livewire\Aviaries\Actions\OpenAviaryAction;
 use App\Http\Livewire\Aviaries\Filters\SoftDeleteFilter;
@@ -103,13 +103,13 @@ class AviariesTableView extends TableView
     {
         if (request()->user()->can('viewAnyDeleted', Aviary::class)) {
             return [
-                new activeFilter,
+                new ActiveFilter,
                 new SoftDeleteFilter,
             ];
         }
 
         return [
-            new activeFilter,
+            new ActiveFilter,
         ];
     }
 

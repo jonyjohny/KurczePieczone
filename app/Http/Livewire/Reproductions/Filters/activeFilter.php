@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Reproductions\Filters;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Filters\Filter;
 
-class activeFilter extends Filter
+class ActiveFilter extends Filter
 {
     public $title = '';
 

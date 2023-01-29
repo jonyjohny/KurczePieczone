@@ -8,7 +8,7 @@ use LaravelViews\Facades\UI;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Incubations\Filters\activeFilter;
+use App\Http\Livewire\Incubations\Filters\ActiveFilter;
 use App\Http\Livewire\Incubations\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Incubations\Actions\EditIncubationAction;
 use App\Http\Livewire\Incubations\Actions\OpenIncubationAction;
@@ -103,13 +103,13 @@ class IncubationsTableView extends TableView
     {
         if (request()->user()->can('viewAnyDeleted', Incubation::class)) {
             return [
-                new activeFilter,
+                new ActiveFilter,
                 new SoftDeleteFilter,
             ];
         }
 
         return [
-            new activeFilter,
+            new ActiveFilter,
         ];
     }
 

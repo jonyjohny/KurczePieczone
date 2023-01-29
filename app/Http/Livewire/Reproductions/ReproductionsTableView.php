@@ -9,7 +9,7 @@ use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Livewire\Reproductions\Filters\SoftDeleteFilter;
-use App\Http\Livewire\Reproductions\Filters\activeFilter;
+use App\Http\Livewire\Reproductions\Filters\ActiveFilter;
 use App\Http\Livewire\Reproductions\Actions\EditReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\OpenReproductionAction;
 use App\Http\Livewire\Reproductions\Actions\RestoreReproductionAction;
@@ -103,13 +103,13 @@ class ReproductionsTableView extends TableView
     {
         if (request()->user()->can('viewAnyDeleted', Reproduction::class)) {
             return [
-                new activeFilter,
+                new ActiveFilter,
                 new SoftDeleteFilter,
             ];
         }
 
         return [
-            new activeFilter,
+            new ActiveFilter,
         ];
     }
 

@@ -8,7 +8,7 @@ use LaravelViews\Facades\UI;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Http\Livewire\Breeding\Filters\activeFilter;
+use App\Http\Livewire\Breeding\Filters\ActiveFilter;
 use App\Http\Livewire\Breeding\Filters\SoftDeleteFilter;
 use App\Http\Livewire\Breeding\Actions\EditBreedingAction;
 use App\Http\Livewire\Breeding\Actions\OpenBreedingAction;
@@ -103,13 +103,13 @@ class BreedingTableView extends TableView
     {
         if (request()->user()->can('viewAnyDeleted', Breeding::class)) {
             return [
-                new activeFilter,
+                new ActiveFilter,
                 new SoftDeleteFilter,
             ];
         }
 
         return [
-            new activeFilter,
+            new ActiveFilter,
         ];
     }
 
